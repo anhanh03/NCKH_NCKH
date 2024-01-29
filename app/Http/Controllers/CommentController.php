@@ -7,7 +7,7 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
     //
-    public function upcomment(Request $request)
+    public function upComment(Request $request)
     {
         // Lấy dữ liệu từ request
         $comment = $request->input('comment');

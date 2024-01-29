@@ -4,8 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DocumentsController;
 use App\Models\HomeController as ModelsHomeController;
 use App\Models\User;
+
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -65,9 +67,13 @@ Route::get("/postcontent",[PostController::class,'displayPost'])->name("displayP
 
 Route::get("/updateuser",[HomeController::class,'displayInfor'])->name("displayInfor");
 
- Route::get("/comment",[CommentController::class,'commentshow'])->name('commentshow');
+Route::get("/comment",[CommentController::class,'commentshow'])->name('commentshow');
 
-Route::get('/upcomment',[CommentController::class,'upcomment'])->name('upcomment');
+Route::get('/upcomment',[CommentController::class,'upComment'])->name('upcomment');
+
+Route::get('/createdocument',[DocumentsController::class,'showCreate'])->name('showCreateDocument');
+
+
 
 
 Route::get('chinh-sach-rieng-tu',function(){
