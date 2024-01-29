@@ -7,6 +7,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DocumentsController;
 use App\Models\HomeController as ModelsHomeController;
 use App\Models\User;
+use App\Models\Topic;
+use Illuminate\Http\Request;
+
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -73,7 +76,12 @@ Route::get('/upcomment',[CommentController::class,'upComment'])->name('upcomment
 
 Route::get('/createdocument',[DocumentsController::class,'showCreate'])->name('showCreateDocument');
 
+Route::get('/topic-suggestions', function (Request $request) {
+    $query = $request->input('query');
+    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('TopicName');
 
+    return response()->json($topics);
+});
 
 
 Route::get('chinh-sach-rieng-tu',function(){
