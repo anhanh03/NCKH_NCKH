@@ -35,14 +35,14 @@
                     <div class="row ">
                         <div class="col-12 col-sm-3 border-end  m-0 p-0">
                             <div class="list-group p-0 m-0 ">
-                                <button type="button" onclick="onclickTitle()"
-                                    class="list-group-item list-group-item-action bg-warning border-0" aria-current="true">
-                                    Tổng quan
-                                </button>
                                 <button type="button" id="btn-inforuser" onclick="return onclickinfor()"
-                                    class="list-group-item list-group-item-action border-0 ms-0    ">Thông tin</button>
+                                class="list-group-item list-group-item-action border-0 ms-0    ">Thông tin</button>
                                 <button type="button" id="btn-updateuser" onclick="return onclickupdate()"
-                                    class="list-group-item list-group-item-action border-0">Chỉnh sửa</button>
+                                class="list-group-item list-group-item-action border-0">Chỉnh sửa</button>
+                                <a href="{{ route('logout') }}"  
+                                    class="list-group-item list-group-item-action bg-warning border-0">
+                                    Đăng xuất
+                                </a>
                             </div>
                         </div>
                         <div class="col-8 col-sm-9">

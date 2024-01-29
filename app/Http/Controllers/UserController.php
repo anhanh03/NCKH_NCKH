@@ -62,4 +62,11 @@ class UserController extends Controller
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect('/login')->with('success', 'Đăng ký thành công');
     }
+
+    public function logout()
+    {
+        Session::forget('username'); // Xóa biến session 'username'
+
+        return redirect('/home');
+    }
 }

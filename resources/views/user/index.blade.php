@@ -29,11 +29,11 @@
 
             <p class="social-text">Or Sign in with social platforms</p>
             <div class="social-media">
-              <a href="#" class="social-icon">
+              <a href="{{ route('fblogin') }}" class="social-icon">
                 <i class="fab fa-facebook-f"></i>
               </a>
               
-              <a href="#" class="social-icon">
+              <a href="{{ route('gglogin') }}" class="social-icon">
                 <i class="fab fa-google"></i>
               </a>
               

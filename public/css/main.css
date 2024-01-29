@@ -2400,3 +2400,9 @@ input[type="radio"] {
     text-align: center;
 }
 /* ///////////////// */
+.dropmenu-user{
+    display: none;
+}
+a:hover .user-name{
+    display: block !important;
+}
