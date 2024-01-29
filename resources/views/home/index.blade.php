@@ -1,0 +1,102 @@
+@extends('layouts.app')
+@section('content')
+    <!--======= welcome section on top background=====-->
+ 
+
+    <section class="main-content920">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="main">
+                        <input id="tab1" type="radio" name="tabs" checked>
+                        <label for="tab1">Chủ đề</label>
+                        <input id="tab2" type="radio" name="tabs">
+                        <label for="tab2">Tài liệu</label>
+                        {{-- <input id="tab3" type="radio" name="tabs">
+                        <label for="tab3">Recently Answered</label>
+                        <input id="tab4" type="radio" name="tabs">
+                        <label for="tab4">No Answer</label>
+                        <input id="tab5" type="radio" name="tabs">
+                        <label for="tab5">Recent Post</label> --}}
+
+
+                        <section id="content1">
+                            <!--Recent Question Content Section -->
+                            @foreach($topics as $topic)
+                                <div class="question-type2033">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="left-user12923 left-user12923-repeat">
+                                                <a href="#"><img src="img/images.png" alt="image"> </a> <a href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="right-description893">
+                                                <div id="que-hedder2983">
+                                                    {{-- Title --}}
+                                                    <h3><a href="{{ route('displayTitlePost', ['id' => $topic->ID]) }}" target="_blank">{{ $topic->TopicName }}</a></h3>
+                                                </div>
+                                                <div class="ques-details10018">
+                                                    {{-- Description --}}
+                                                    <p>{{ $topic->Description }}</p>
+                                                </div>
+                                                <hr>
+                                                <div class="ques-icon-info3293">
+                                                    <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i> </a>
+                                                    <a href="#"><i class="fa fa-folder" aria-hidden="true"> wordpress</i></a>
+                                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min ago</i></a>
+                                                    <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"> Question</i></a>
+                                                    <a href="#"><i class="fa fa-bug" aria-hidden="true"> Report</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="ques-type302">
+                                                <a href="#">
+                                                    <button type="button" class="q-type238"><i class="fa fa-comment" aria-hidden="true"> 333335 answer</i></button>
+                                                </a>
+                                                <a href="#">
+                                                    <button type="button" class="q-type23 button-ques2973"> <i class="fa fa-user-circle-o" aria-hidden="true"> 70 view</i></button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            
+
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li>
+                                        <a href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </section>
+
+
+                    </div>
+                </div>
+                <!--end of col-md-9 -->
+                @include('layouts.sidebar')
+            
+    </section>
+
+
+
+
+    
+@endsection
