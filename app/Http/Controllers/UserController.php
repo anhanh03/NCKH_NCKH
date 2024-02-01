@@ -69,4 +69,8 @@ class UserController extends Controller
 
         return redirect('/home');
     }
+
+    public function manage(){
+        return view("user.manage");
+    }
 }

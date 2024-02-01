@@ -40,4 +40,9 @@ class PostController extends Controller
             return 'null';
         }
     }
+
+
+    public function displayAddPost(){
+        return view("post.addPost");
+    }
 }

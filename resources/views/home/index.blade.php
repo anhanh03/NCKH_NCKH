@@ -124,7 +124,43 @@
                                 </div>
                             </div>
                         </section>
-
+                        <section id="content2">
+                            <div class="question-type2033">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="right-description893">
+                                            <div id="que-hedder2983">
+                                                {{-- Title --}}
+                                                <h3><a href="{{route('showDocument')}}">Tên tiêu đề</a></h3>
+                                            </div>
+                                            <div class="ques-details10018">
+                                                {{-- Description --}}
+                                                <p>Mô tả</p>
+                                            </div>
+                                            <hr>
+                                            <div class="ques-icon-info3293">
+                                                <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i> </a>
+                                                {{-- <a href="#"><i class="fa fa-folder" aria-hidden="true"> wordpress</i></a> --}}
+                                                <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min ago</i></a>
+                                                <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"> Question</i></a>
+                                                <a href="#"><i class="fa fa-bug" aria-hidden="true"> Report</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ques-type302">
+                                            <a href="#">
+                                                <button type="button" class="q-type238"><i class="fa fa-download" aria-hidden="true"> 333335 dowload</i></button>
+                                            </a>
+                                            <a href="#">
+                                                <button type="button" class="q-type23 button-ques2973"> <i class="fa fa-user-circle-o" aria-hidden="true"> 70 view</i></button>
+                                            </a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
                 <!--end of col-md-9 -->

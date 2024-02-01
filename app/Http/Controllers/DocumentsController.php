@@ -48,7 +48,10 @@ class DocumentsController extends Controller
 
         return response()->json(['message' => 'Không tìm thấy tệp tin'], 400);
     }
-
+    public function showDocument()
+    {
+        return view('document.showDocument');
+    }
     public function updateDocument(Request $request, $documentId)
     {
         $data = $request->all();
