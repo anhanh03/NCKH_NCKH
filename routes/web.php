@@ -42,6 +42,9 @@ Route::get("/signup", [UserController::class,"signup"])->name("signup");
 
 Route::get("/logout", [UserController::class,"logout"])->name("logout");
 
+//Hiển thị trang quản lý bài đăng cho người dùng đăng bài
+Route::get("/displayManage", [UserController::class,"manage"])->name("manage");
+
 Route::get("/auth/facebook/callback",function(){
     return "callback login fb";
 });
@@ -68,6 +71,9 @@ Route::get("/tpost",[PostController::class,'displayTitlePost'])->name("displayTi
 
 Route::get("/postcontent",[PostController::class,'displayPost'])->name("displayPost");
 
+//Hiển thị form thêm bài đăng
+Route::get("/displayAddPosst",[PostController::class,'displayAddPost'])->name("displayAddPost");
+
 Route::get("/updateuser",[HomeController::class,'displayInfor'])->name("displayInfor");
 
 Route::get("/comment",[CommentController::class,'commentshow'])->name('commentshow');
@@ -75,6 +81,9 @@ Route::get("/comment",[CommentController::class,'commentshow'])->name('commentsh
 Route::get('/upcomment',[CommentController::class,'upComment'])->name('upcomment');
 
 Route::get('/createdocument',[DocumentsController::class,'showCreate'])->name('showCreateDocument');
+
+//trang tải tài liệu
+Route::get('/ShowDocument',[DocumentsController::class,'showDocument'])->name('showDocument');
 
 Route::get('/topic-suggestions', function (Request $request) {
     $query = $request->input('query');
