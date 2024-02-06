@@ -30,6 +30,10 @@ Route::fallback(function () {
 });
 
 // đăng ký đăng nhập
+Route::get("/displayForgotPass", [UserController::class,"displayFogot"])->name("displayFogot");
+
+Route::get("/displayUpdatePass", [UserController::class,"displayUpdatePass"])->name("displayUpdatePass");
+
 Route::get('/signinorsignup', [UserController::class, 'index'])->name('signinorsignup');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
