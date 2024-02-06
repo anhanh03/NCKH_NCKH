@@ -62,6 +62,12 @@ class UserController extends Controller
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect('/login')->with('success', 'Đăng ký thành công');
     }
+    public function displayFogot(){
+        return view('user.fogotPass');
+    }
+    public function displayUpdatePass(){
+        return view('user.updatePass');
+    }
 
     public function logout()
     {

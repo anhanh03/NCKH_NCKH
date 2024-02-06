@@ -41,7 +41,8 @@
         <div class="row mt-5">
             <div class="col-sm-3 col-1"></div>
             <div class="col-sm-6 col-10 shadow p-3 mb-5 bg-body-tertiary rounded">
-                <h3 class="text-center" style="color: blue">Fogot Password</h3>
+                {{-- <a class=" text-center" href="#"><img src="img/logo.png" alt="Logo"></a> --}}
+                <h3 class="text-center" style="color: rgb(0, 0, 0)"> <img src="img/logo.png" alt="Logo"> <br>Fogot Password</h3>
                 <form action="">
                     <div id="email">
                         <div class="mb-3">
