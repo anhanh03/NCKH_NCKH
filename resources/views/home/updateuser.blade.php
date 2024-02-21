@@ -49,58 +49,58 @@
                             <div id="displayinfor" class="inforuser w-100">
                                 <table class="table">
                                     <tr>
-                                        <th>Username: </th>
-                                        <td>Họ và tên user</td>
+                                        <th>Fullname: </th>
+                                        <td>{{ $full_name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Gender: </th>
-                                        <td>Giới tính user</td>
+                                        <td>{{ $sex }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email: </th>
-                                        <td>Email user</td>
+                                        <td>{{ $email }}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th>Phone: </th>
-                                        <td>Số điện thoại user</td>
-                                    </tr>
+                                        <td>{{ $phone }}</td>
+                                    </tr> --}}
                                     <tr>
                                         <th>Address: </th>
-                                        <td>Địa chỉ user</td>
+                                        <td>{{ $address }}</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="updateuser" id="updateuser">
-                                <form action="" method="get">
+                                <form action="{{ route("updateInforUser") }}" method="get">
                                     <table class="table">
                                         <tr>
-                                            <th><label for="username">Username:</label></th>
-                                            <td><input type="text" class="input-field" value="Họ tên" name="Username"
-                                                    id="username" placeholder="Họ và tên"></td>
+                                            <th><label for="Fullname">Fullname:</label></th>
+                                            <td><input type="text" class="input-field" value="{{ $full_name }}" name="Fullname"
+                                                    id="username" placeholder="{{ $full_name }}"></td>
                                         </tr>
                                         <tr>
                                             <th><label for="gender">Gender:</label></th>
                                             <td>
-                                                <input type="radio" name="Gender" value="nam" id="gender-male">
+                                                <input type="radio" name="Sex" value="nam" id="gender-male">
                                                 <label for="gender-male">Nam</label>
-                                                <input type="radio" name="Gender" value="nu" id="gender-female">
+                                                <input type="radio" name="Sex" value="nu" id="gender-female">
                                                 <label for="gender-female">Nữ</label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th><label for="email">Email:</label></th>
-                                            <td><input type="email" name="Email" id="email" value="Email"
-                                                    placeholder="Email" class="input-field"></td>
+                                            <td><input type="email" name="Email" id="email" value="{{ $email }}"
+                                                    placeholder="{{ $email }}" class="input-field"></td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <th><label for="phone">Phone:</label></th>
                                             <td><input type="text" name="Phone" id="phone" value="phone"
                                                     placeholder="Số điện thoại" class="input-field"></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <th><label for="address">Address:</label></th>
-                                            <td><input type="text" name="Address" id="address" value="Address"
-                                                    placeholder="Địa chỉ" class="input-field"></td>
+                                            <td><input type="text" name="Address" id="address" value="{{ $address }}"
+                                                    placeholder="{{ $address }}" class="input-field"></td>
                                         </tr>
                                         <tr>
                                             <td></td>

@@ -90,4 +90,38 @@ class UserController extends Controller
         // Người dùng chưa đăng nhập
         return false;
     }
+
+
+    // public function showInforUser(Request $request)
+    // {
+        
+    // }
+    
+    public function updateInforUser(Request $request)
+    {
+        // Lấy thông tin từ biểu mẫu
+        $fullname = $request->input('Fullname');
+        $sex = $request->input('Sex');
+        $email = $request->input('Email');
+        $address = $request->input('Address');
+
+        // Cập nhật thông tin người dùng trong cơ sở dữ liệu
+        $username = $request->session()->get('username'); // Lấy giá trị 'username' từ session
+
+        // Tìm người dùng theo tên người dùng
+        $user = User::where('Username', $username)->first(); 
+        if ($user) {
+            if($user->update([
+                'full_name' => $fullname,
+                'sex' => $sex,
+                'email' => $email,
+                'address' => $address,
+            ])){
+                //return back();
+                return "Cập nhật thông tin người dùng thành công. {{$user}}";
+            }  
+        } else {
+            return "Người dùng không tồn tại.";
+        }
+    }
 }

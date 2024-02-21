@@ -75,6 +75,7 @@ Route::get('/postcontent', [PostController::class, 'displayPost'])->name('displa
 Route::get('/displayAddPosst', [PostController::class, 'displayAddPost'])->name('displayAddPost');
 //cập nhật hồ sơ người dùng
 Route::get('/updateuser', [HomeController::class, 'displayInfor'])->name('displayInfor');
+Route::get('/updateInforUser',[UserController::class,'updateInforUser'])->name('updateInforUser');
 // show comment
 Route::get('/comment', [CommentController::class, 'commentshow'])->name('commentshow');
 // đăng coment
