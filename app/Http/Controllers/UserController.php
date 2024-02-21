@@ -79,4 +79,15 @@ class UserController extends Controller
     public function manage(){
         return view("user.manage");
     }
+    public function isLoggedIn()
+    {
+        // Kiểm tra xem biến session 'username' đã tồn tại hay không
+        if (Session::has('username')) {
+            // Người dùng đã đăng nhập
+            return true;
+        }
+
+        // Người dùng chưa đăng nhập
+        return false;
+    }
 }

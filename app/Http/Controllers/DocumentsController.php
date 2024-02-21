@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Documents;
 use app\Models\Topic;
+use App\Http\Controllers\UserController;
 
 class DocumentsController extends Controller
 {
+
+    protected $userController;
+    public function __construct(UserController $userController)
+    {
+        $this->userController = $userController;
+    }
+
     public function getByTopicId($topicId)
     {
         $documents = Documents::getByTopicId($topicId);
@@ -22,7 +30,8 @@ class DocumentsController extends Controller
 
     public function createDocument(Request $request)
     {
-        // Kiểm tra xem tệp tin đã được gửi lên chưa
+        if ($this->userController->isLoggedIn()) {
+            // Kiểm tra xem tệp tin đã được gửi lên chưa
         if ($request->hasFile('document_file')) {
             // Lấy thông tin về tệp tin
             $file = $request->file('document_file');
@@ -47,7 +56,13 @@ class DocumentsController extends Controller
         }
 
         return response()->json(['message' => 'Không tìm thấy tệp tin'], 400);
+        } else {
+           return view('user.index');
+        }
+        
+
     }
+
     public function showDocument()
     {
         return view('document.showDocument');

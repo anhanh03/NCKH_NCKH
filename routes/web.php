@@ -64,6 +64,7 @@ Route::get('/auth/facebook/callback', function () {
 
 // trang chủ
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/', [HomeController::class, 'index']);
 // hiển thị các bài viết trong chủ đề
 Route::get('/tpost', [PostController::class, 'displayTitlePost'])->name('displayTitlePost');
