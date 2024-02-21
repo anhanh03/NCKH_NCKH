@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class Post extends Model
 {
     use HasFactory;
     protected $table = 'post';
     protected $primaryKey = 'ID';
-    protected $fillable = ['ID_user', 'ID_topic', 'title', 'content', 'create_date', 'count_view'];
-
+    protected $fillable = ['ID_user', 'ID_topic', 'title', 'content',  'create_date', 'count_view'];
+    public $timestamps = false;
     public function user()
     {
         return $this->belongsTo(User::class, 'ID_user', 'ID');
@@ -54,6 +56,11 @@ class Post extends Model
     public function deletePost()
     {
         return $this->delete();
+    }
+
+    public static function statement($query)
+    {
+        DB::statement($query);
     }
     
 }

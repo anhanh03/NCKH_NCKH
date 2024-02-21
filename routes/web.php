@@ -42,8 +42,6 @@ Route::get('/signup', [UserController::class, 'signup'])->name('signup');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-//Hiển thị trang quản lý bài đăng cho người dùng đăng bài
-Route::get('/displayManage', [UserController::class, 'manage'])->name('manage');
 
 // đăng nhập đăng ký FB, Google
 Route::get('/auth/facebook/callback', function () {
@@ -71,7 +69,10 @@ Route::get('/tpost', [PostController::class, 'displayTitlePost'])->name('display
 //bài viết
 Route::get('/postcontent', [PostController::class, 'displayPost'])->name('displayPost');
 
+//Hiển thị trang quản lý bài đăng cho người dùng đăng bài
+Route::get('/displayManage', [UserController::class, 'manage'])->name('manage');
 //Hiển thị form thêm bài đăng
+Route::get('/addPost', [PostController::class, 'addPost'])->name('addPost');
 Route::get('/displayAddPosst', [PostController::class, 'displayAddPost'])->name('displayAddPost');
 //cập nhật hồ sơ người dùng
 Route::get('/updateuser', [HomeController::class, 'displayInfor'])->name('displayInfor');
@@ -90,7 +91,7 @@ Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name(
 // gợi ý chủ đề
 Route::get('/topic-suggestions', function (Request $request) {
     $query = $request->input('query');
-    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('TopicName');
+    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('TopicName', 'ID');;
 
     return response()->json($topics);
 });

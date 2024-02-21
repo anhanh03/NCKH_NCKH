@@ -53,7 +53,7 @@
                     <ul class="nav navbar-nav"> </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ route('home') }}">Trang chủ</a></li>
-                        <li><a href="#">Chủ đề</a></li>
+                        <li><a href="{{ route('manage') }}">Quản lý</a></li>
                         <li><a href="#">Tài liệu</a></li>
                         <li><a href="#">Giới thiệu</a></li>
                     </ul>

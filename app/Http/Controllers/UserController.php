@@ -26,11 +26,15 @@ class UserController extends Controller
             // Kiểm tra loại tài khoản
             if ($user->ID_role == 0) {
                 // Tài khoản loại 0, chuyển về /home
-                Session::put('username', $username); // Lưu thông tin $username vào biến session
+                Session::put('username', $username);
+                // Session::put('user_id', $user->id);
+                 // Lưu thông tin vào biến session
                 return redirect('/home');
             } elseif ($user->ID_role == 1) {
                 // Tài khoản loại 1, chuyển về /admin
-                Session::put('username', $username); // Lưu thông tin full_name vào biến session
+                Session::put('username', $username);
+                // Session::put('user_id', $user->id); 
+                // Lưu thông tin  vào biến session
                 return redirect('/admin');
             }
         }

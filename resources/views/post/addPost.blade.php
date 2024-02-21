@@ -3,17 +3,18 @@
 <div class="container">
     <h2>Đăng bài</h2>
 
-    <form action="" method="POST" >
+    <form action="{{ route('addPost') }}" method="GET" >
         @csrf
 
 
         <div class="form-group row">
             <label for="ID_topic" class="col-sm-2 col-form-label">Chủ đề:</label>
             <div class="col-sm-10">
-                <input type="text" id="query" class="form-control" placeholder="Enter a query">
+                <input type="text" id="query" class="form-control"  placeholder="Enter a topic">
                 <ul id="suggestions" class="list-group">
                 </ul>
             </div>
+            <input id="ID_topic" type="hidden" name="ID_topic" value="">
         </div>
 
         <div class="form-group row">
@@ -49,6 +50,7 @@
     // Lắng nghe sự kiện nhập vào input
     document.getElementById('query').addEventListener('input', function() {
         var query = this.value;
+        
         document.getElementById('suggestions').style.display = 'block';
 
         // Gửi yêu cầu Ajax đến tệp route xử lý
@@ -58,12 +60,16 @@
             }
         })
         .then(function(response) {
-            var suggestions = response.data;
+            console.log(response.data);
+            var suggestions = Object.values(response.data); // Chỉ lấy 5 bản gợi ý đầu tiên
             var suggestionsList = '';
-
+           
             // Tạo danh sách gợi ý chủ đề
-            suggestions.forEach(function(topic) {
-                suggestionsList += '<li class="list-group-item" >' + topic + '</li>';
+            suggestions.forEach(function(topicName, topicId) {
+            var $topicID = topicId;
+            var $topicName = topicName;
+            suggestionsList += '<li class="list-group-item" data-topic-id="' + $topicID + '">' + $topicName + '</li>';
+            console.log(topicName);
             });
 
             // Hiển thị danh sách gợi ý chủ đề
@@ -74,16 +80,23 @@
         });
     });
 
-
     // Lắng nghe sự kiện khi click vào một gợi ý
-  document.getElementById('suggestions').addEventListener('click', function (event) {
+document.getElementById('suggestions').addEventListener('click', function(event) {
     // Kiểm tra xem phần tử được nhấp vào có là thẻ <li> không
     if (event.target.tagName === 'LI') {
-      // Lấy giá trị của gợi ý và cập nhật vào thẻ input
-      document.getElementById('query').value = event.target.textContent;
-      document.getElementById('suggestions').style.display = 'none';
+        // Lấy giá trị của gợi ý và cập nhật vào thẻ input
+        document.getElementById('query').value = event.target.textContent;
+
+        // Lấy giá trị ID_topic từ thuộc tính dữ liệu
+        var topicId = event.target.getAttribute('data-topic-id');
+
+        // Gán giá trị ID_topic vào trường ẩn
+        document.getElementById('ID_topic').value = topicId;
+
+        document.getElementById('suggestions').style.display = 'none';
     }
-  });
+});
+       
 </script>
 
 @endsection
