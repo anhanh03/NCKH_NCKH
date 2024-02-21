@@ -73,6 +73,7 @@
                             <div class="updateuser" id="updateuser">
                                 <form action="{{ route("updateInforUser") }}" method="get">
                                     <table class="table">
+                                        
                                         <tr>
                                             <th><label for="Fullname">Fullname:</label></th>
                                             <td><input type="text" class="input-field" value="{{ $full_name }}" name="Fullname"

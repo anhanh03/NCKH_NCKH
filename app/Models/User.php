@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class User extends Authenticatable
 {
@@ -22,9 +25,9 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'address',
         'full_name',
-        'sex',
+        'sex', 
+        'address',
     ];
 
     /**
@@ -53,6 +56,13 @@ class User extends Authenticatable
         $this->fill($data);
         $this->save();
     }
+
+    public static function statement($query)
+    {
+        DB::statement($query);
+    }
+   
+
 
 
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
+
 class UserController extends Controller
 {
     //
@@ -108,20 +111,18 @@ class UserController extends Controller
         // Cập nhật thông tin người dùng trong cơ sở dữ liệu
         $username = $request->session()->get('username'); // Lấy giá trị 'username' từ session
 
-        // Tìm người dùng theo tên người dùng
-        $user = User::where('Username', $username)->first(); 
-        if ($user) {
-            if($user->update([
-                'full_name' => $fullname,
-                'sex' => $sex,
-                'email' => $email,
-                'address' => $address,
-            ])){
-                //return back();
-                return "Cập nhật thông tin người dùng thành công. {{$user}}";
-            }  
-        } else {
-            return "Người dùng không tồn tại.";
+        try {
+            $query = "UPDATE users SET full_name = '$fullname', sex = '$sex', Email = '$email', address = '$address' WHERE Username = '$username'";
+        
+            User::statement($query);
+            
+            // Cập nhật thành công
+            echo "Cập nhật thông tin người dùng thành công.";
+            return back();
+        } catch (QueryException $e) {
+            // Xử lý ngoại lệ
+            echo "Lỗi: " . $e->getMessage();
         }
+        
     }
 }
