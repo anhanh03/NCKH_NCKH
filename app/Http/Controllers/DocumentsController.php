@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Documents;
 use app\Models\Topic;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\DB;
 
 class DocumentsController extends Controller
 {
@@ -23,45 +24,48 @@ class DocumentsController extends Controller
     }
     public function showCreate()
     {
-        return view('document.create');
+        return view('document.createDocument');
     }
 
     
 
     public function createDocument(Request $request)
-    {
-        if ($this->userController->isLoggedIn()) {
-            // Kiểm tra xem tệp tin đã được gửi lên chưa
-        if ($request->hasFile('document_file')) {
-            // Lấy thông tin về tệp tin
-            $file = $request->file('document_file');
+{
+    $request->validate([
+        'document_file' => 'required|mimes:pdf,docx,txt|max:1024',
+        'ID_topic' => 'required',
+        'Document_Name' => 'required',
+        'Description' => 'required',
+        'Author' => 'required',
+    ]);
 
-            // Kiểm tra loại tệp tin
-            $allowedTypes = ['docx', 'pdf', 'txt'];
-            $extension = $file->getClientOriginalExtension();
-            if (!in_array($extension, $allowedTypes)) {
-                return response()->json(['message' => 'Chỉ chấp nhận tệp tin định dạng docx, pdf, txt'], 400);
-            }
+    // Lưu trữ tệp tin
+    $file = $request->file('document_file');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $file->move('storage/uploads/documents', $filename);
+    
+    // Lấy kích thước tệp tin
+    $documentSize = $file->getSize();
+    //$documentSize = "";
 
-            // Xử lý tên tệp tin
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move('documents', $filename);
+    // Lưu thông tin tài liệu vào cơ sở dữ liệu
+    $document = [
+        'ID_topic' => $request->ID_topic,
+        'Document_Name' => $request->Document_Name,
+        'Document_Type' => $file->getClientOriginalExtension(),
+        'Document_Size' => $documentSize,
+        'Description' => $request->Description,
+        'Author' => $request->Author,
+        'Storage_Path' => 'storage/uploads/documents/' . $filename,
+        'Download_Path' => 'storage/uploads/documents/' . $filename,
+        'create_date' => now(),
+        'update_date' => now()
+    ];
 
-            // Lưu thông tin tài liệu vào cơ sở dữ liệu
-            $data = $request->all();
-            $data['file_path'] = 'documents/' . $filename;
-            $document = Documents::create($data);
+    DB::table('documents')->insert($document);
 
-            return response()->json($document, 201);
-        }
-
-        return response()->json(['message' => 'Không tìm thấy tệp tin'], 400);
-        } else {
-           return view('user.index');
-        }
-        
-
-    }
+    return back();
+}
 
     public function showDocument()
     {

@@ -85,6 +85,8 @@ Route::get('/upcomment', [CommentController::class, 'upComment'])->name('upcomme
 // Tạo rài liệu
 Route::get('/createdocument', [DocumentsController::class, 'showCreate'])->name('showCreateDocument');
 
+Route::post('/addDocument', [DocumentsController::class, 'createDocument'])->name('addDocument');
+
 //trang tải tài liệu
 Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name('showDocument');
 

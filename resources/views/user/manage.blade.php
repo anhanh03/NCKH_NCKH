@@ -39,10 +39,10 @@
                                 class="list-group-item list-group-item-action border-0 ms-0    ">Danh sách tệp đã tải lên</button>
                                 <button type="button" id="btn-updateuser" onclick="return onclickupdate()"
                                 class="list-group-item list-group-item-action border-0">Danh sách bài viết</button>
-                                <a href="{{ route('logout') }}"  
+                                {{-- <a href="{{ route('logout') }}"  
                                     class="list-group-item list-group-item-action bg-warning border-0">
                                     Đăng xuất
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <div class="col-8 col-sm-9">

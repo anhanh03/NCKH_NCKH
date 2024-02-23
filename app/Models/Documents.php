@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Documents extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'ID_topic',
+        'Document_Name',
+        'Document_Type',
+        'Document_Size',
+        'Description',
+        'Author',
+        'Storage_Path',
+        'Download_Path',
+        'create_date',
+        'update_date',
+    ];
 
 
     public static function getByTopicId($topicId)
