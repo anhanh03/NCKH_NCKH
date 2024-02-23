@@ -47,58 +47,58 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    // Lắng nghe sự kiện nhập vào input
-    // Lắng nghe sự kiện nhập vào input
-document.getElementById('query').addEventListener('input', function() {
-    var query = this.value;
     
-    document.getElementById('suggestions').style.display = 'block';
+    // Lắng nghe sự kiện nhập vào input
+    document.getElementById('query').addEventListener('input', function() {
+        var query = this.value;
+        
+        document.getElementById('suggestions').style.display = 'block';
 
-    // Gửi yêu cầu Ajax đến tệp route xử lý
-    axios.get('/topic-suggestions', {
-        params: {
-            query: query
-        }
-    })
-    .then(function(response) {
-        console.log(response.data);
-        var suggestions = response.data; // Không cần sử dụng Object.values() nữa
-        var suggestionsList = '';
-       
-        // Tạo danh sách gợi ý chủ đề
-        Object.entries(suggestions).forEach(function([topicName, topicId]) {
-            var $topicID = topicId;
-            var $topicName = topicName;
-            suggestionsList += '<li class="list-group-item" data-topic-id="' + $topicID + '">' + $topicName + '</li>';
-            console.log($topicID);
+        // Gửi yêu cầu Ajax đến tệp route xử lý
+        axios.get('/topic-suggestions', {
+            params: {
+                query: query
+            }
+        })
+        .then(function(response) {
+            console.log(response.data);
+            var suggestions = response.data; // Không cần sử dụng Object.values() nữa
+            var suggestionsList = '';
+        
+            // Tạo danh sách gợi ý chủ đề
+            Object.entries(suggestions).forEach(function([topicName, topicId]) {
+                var $topicID = topicId;
+                var $topicName = topicName;
+                suggestionsList += '<li class="list-group-item" data-topic-id="' + $topicID + '">' + $topicName + '</li>';
+                console.log($topicID);
+            });
+
+            // Hiển thị danh sách gợi ý chủ đề
+            document.getElementById('suggestions').innerHTML = suggestionsList;
+        })
+        .catch(function(error) {
+            console.error(error);
         });
-
-        // Hiển thị danh sách gợi ý chủ đề
-        document.getElementById('suggestions').innerHTML = suggestionsList;
-    })
-    .catch(function(error) {
-        console.error(error);
     });
-});
 
-// Lắng nghe sự kiện khi click vào một gợi ý
-document.getElementById('suggestions').addEventListener('click', function(event) {
-    // Kiểm tra xem phần tử được nhấp vào có là thẻ <li> không
-    if (event.target.tagName === 'LI') {
-        // Lấy giá trị của gợi ý và cập nhật vào thẻ input
-        document.getElementById('query').value = event.target.textContent;
+    // Lắng nghe sự kiện khi click vào một gợi ý
+    document.getElementById('suggestions').addEventListener('click', function(event) {
+        // Kiểm tra xem phần tử được nhấp vào có là thẻ <li> không
+        if (event.target.tagName === 'LI') {
+            // Lấy giá trị của gợi ý và cập nhật vào thẻ input
+            document.getElementById('query').value = event.target.textContent;
 
-        // Lấy giá trị ID_topic từ thuộc tính dữ liệu
-        var topicId = event.target.getAttribute('data-topic-id');
-        console.log(topicId);
+            // Lấy giá trị ID_topic từ thuộc tính dữ liệu
+            var topicId = event.target.getAttribute('data-topic-id');
+            console.log(topicId);
 
-        // Gán giá trị ID_topic vào trường ẩn
-        document.getElementById('ID_topic').value = topicId;
+            // Gán giá trị ID_topic vào trường ẩn
+            document.getElementById('ID_topic').value = topicId;
 
-        document.getElementById('suggestions').style.display = 'none';
-    }
+            document.getElementById('suggestions').style.display = 'none';
+        }
 
-});
+    });
        
 </script>
 

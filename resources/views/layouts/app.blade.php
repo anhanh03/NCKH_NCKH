@@ -11,7 +11,8 @@
     <meta name="robots" content="index, nofollow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
-    <title>Ask Me</title>
+    <link rel="icon" href="img/logoo.png" type="image/x-icon">
+    <title>Dien dan  IT</title>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <!-- <link href="css/animate.css" rel="stylesheet" type="text/css"> -->

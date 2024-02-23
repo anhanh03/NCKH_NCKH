@@ -30,9 +30,9 @@ Route::fallback(function () {
 });
 
 // đăng ký đăng nhập
-Route::get("/displayForgotPass", [UserController::class,"displayFogot"])->name("displayFogot");
+Route::get('/displayForgotPass', [UserController::class, 'displayFogot'])->name('displayFogot');
 
-Route::get("/displayUpdatePass", [UserController::class,"displayUpdatePass"])->name("displayUpdatePass");
+Route::get('/displayUpdatePass', [UserController::class, 'displayUpdatePass'])->name('displayUpdatePass');
 
 Route::get('/signinorsignup', [UserController::class, 'index'])->name('signinorsignup');
 
@@ -41,7 +41,6 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, 'signup'])->name('signup');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
 
 // đăng nhập đăng ký FB, Google
 Route::get('/auth/facebook/callback', function () {
@@ -62,6 +61,9 @@ Route::get('/auth/facebook/callback', function () {
 
 // trang chủ
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+//cập nhật hồ sơ người dùng
+Route::get('/updateuser', [HomeController::class, 'displayInfor'])->name('displayInfor');
+Route::get('/updateInforUser', [UserController::class, 'updateInforUser'])->name('updateInforUser');
 
 Route::get('/', [HomeController::class, 'index']);
 // hiển thị các bài viết trong chủ đề
@@ -74,9 +76,6 @@ Route::get('/displayManage', [UserController::class, 'manage'])->name('manage');
 //Hiển thị form thêm bài đăng
 Route::get('/addPost', [PostController::class, 'addPost'])->name('addPost');
 Route::get('/displayAddPosst', [PostController::class, 'displayAddPost'])->name('displayAddPost');
-//cập nhật hồ sơ người dùng
-Route::get('/updateuser', [HomeController::class, 'displayInfor'])->name('displayInfor');
-Route::get('/updateInforUser',[UserController::class,'updateInforUser'])->name('updateInforUser');
 // show comment
 Route::get('/comment', [CommentController::class, 'commentshow'])->name('commentshow');
 // đăng coment
@@ -93,7 +92,7 @@ Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name(
 // gợi ý chủ đề
 Route::get('/topic-suggestions', function (Request $request) {
     $query = $request->input('query');
-    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('ID','TopicName');;
+    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('ID', 'TopicName');
 
     return response()->json($topics);
 });
