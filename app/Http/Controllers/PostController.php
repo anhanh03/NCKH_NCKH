@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 class PostController extends Controller
 {
+    protected $userController;
+    public function __construct(UserController $userController)
+    {
+        $this->userController = $userController;
+    }
+
     public function displayTitlePost()
     {
         $ID_topic= request("id");

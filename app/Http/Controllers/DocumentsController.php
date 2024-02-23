@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 class DocumentsController extends Controller
 {
 
+    
+
     protected $userController;
     public function __construct(UserController $userController)
     {

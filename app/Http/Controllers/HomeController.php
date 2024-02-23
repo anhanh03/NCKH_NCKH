@@ -7,7 +7,12 @@ use App\Models\Topic;
 use App\Models\User;
 class HomeController extends Controller
 {
-   
+    protected $userController;
+    public function __construct(UserController $userController)
+    {
+        $this->userController = $userController;
+    }
+
 
     public  function displayInfor(Request $request){
         $username = $request->session()->get('username'); // Lấy giá trị 'username' từ session

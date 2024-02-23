@@ -9,6 +9,8 @@ use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
+    
+
     //
     public function index(){
         return view("user.index");
