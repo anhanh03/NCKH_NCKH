@@ -91,7 +91,7 @@ Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name(
 // gợi ý chủ đề
 Route::get('/topic-suggestions', function (Request $request) {
     $query = $request->input('query');
-    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('TopicName', 'ID');;
+    $topics = Topic::where('TopicName', 'like', '%' . $query . '%')->pluck('ID','TopicName');;
 
     return response()->json($topics);
 });
