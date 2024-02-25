@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use app\Models\Documents;
 class Comment extends Model
 {
     use HasFactory;
@@ -27,9 +28,9 @@ class Comment extends Model
     }
 
     // Một comment thuộc về một document
-    public function document()
+    public static function document($id)
     {
-        return $this->belongsTo(Document::class, 'ID_document');
+        return Comment::find($id);
     }
     public static function getCommentById($commentId)
     {

@@ -27,6 +27,10 @@ class Documents extends Model
         return self::where('ID_topic', $topicId)->get();
     }
 
+    public static function getDocumentById($documentsId)
+    {
+        return self::find($documentsId);
+    }
     /**
      * Tạo một tài liệu mới
      *
@@ -73,6 +77,11 @@ class Documents extends Model
 
         $document->delete();
         return true;
+    }
+
+    public static function getAllDocuments()
+    {
+        return self::all();
     }
 
 }

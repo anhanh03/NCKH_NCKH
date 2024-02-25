@@ -2405,4 +2405,8 @@ input[type="radio"] {
 }
 a:hover .user-name{
     display: block !important;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
 }

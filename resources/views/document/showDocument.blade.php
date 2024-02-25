@@ -16,8 +16,8 @@
         
         <div class="row" >
             <div class="col-md-3" style="overflow: auto; height: 600px; margin-top: 80px">
-                    <h3 class="fw-bold" style="color: blue"><ins>Information</ins></h3>
-                    <b >Tài liệu abc(full)</b>
+                    <h3 class="fw-bold" style="color: blue"><b>Information</b></h3>
+                    <b >{{ $document->Document_Name}}</b>
                     <table class="table">
                         <tr>
                             <td>
@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="left-user12923 left-user12923-repeat">
-                                            <a href="#"><img src="img/images.png" alt="image"></a><a href="#">Tên người đăng</a>
+                                            <a href="#"><img src="img/images.png" alt="image"></a><b><a href="#" style="padding-left: 5px; "> {{ $document ->uploaded_by }} </a></b>
                                         </div>
                                     </div>
                                 </div>
@@ -56,24 +56,30 @@
                         <tr>
                             <td>
                                 Comment:
+                                @foreach ($comment as $item)                                   
                                 <div class="row" style="margin: 10px 0">
                                     <div class="row">
                                         <div class="col-md-12" style="background: white">
                                             <div class="left-user12923 left-user12923-repeat">
-                                                <a href="#"><img src="img/images.png" alt="image"></a><a href="#">Tên người cmt</a><br>
-                                                <ul >
-                                                    akjsdhakjs
+                                                {{-- Tên người comment --}}
+                                                <a href="#"><img src="img/images.png" alt="image"></a><a href="#">{{ $comment->user_name }}</a><br> 
+                                                <ul>
+                                                    {{ $comment ->Content }}
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+                                @endforeach
                                 <div class="write-cmt">
-                                    <form action="">
+                                    <form action="{{ route('upcomment') }}">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="text" class="form-control" name="" id="" placeholder="Viết đánh giá">
+                                                <input type="hidden" name="user_id" value="{{ $document->id_user }}">
+                                                <input type="hidden" name="post_id" value="">
+                                                <input type="hidden" name="document_id" value="{{ $document->ID }}">
+                                                <input type="text" class="form-control" name="comment" id="comment" placeholder="Viết đánh giá">
                                             </div>
                                             <div class="col-md-12 text-right" style="margin: 10px 0">
                                                 <input class="btn btn-default" type="submit" value="Submit">

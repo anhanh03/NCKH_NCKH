@@ -18,10 +18,8 @@ class CommentController extends Controller
     //
     public function upComment(Request $request)
     {
-
         if ($this->userController->isLoggedIn()) {
             // Người dùng đã đăng nhập
-            // Thực hiện các tác vụ cho người dùng đã đăng nhập
             // Lấy dữ liệu từ request
             $comment = $request->input('comment');
             $userID = $request->input('user_id');
@@ -41,14 +39,22 @@ class CommentController extends Controller
             // return redirect()->refresh();
             return back();
         } else {
-           return view('user.index');
+            return view('user.index');
         }
-        
-
     }
 
+    public function showComment($id)
+    {
+        // Lấy bài viết hoặc nguồn dữ liệu dựa trên $id
+        $data = Comment::find($id);
+        
+        if (!$data) {
+            // Xử lý khi không tìm thấy bài viết hoặc nguồn dữ liệu
+            return 'Không tìm thấy bài viết hoặc nguồn dữ liệu';
+        }
+        // Lấy các comment liên quan đến bài viết hoặc nguồn dữ liệu
+        $comments = $data->comments;
 
-    
-
-
+        return $comments;
+    }
 }

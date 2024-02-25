@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\User;
+use App\Models\Documents;
 class HomeController extends Controller
 {
     protected $userController;
@@ -33,7 +34,11 @@ class HomeController extends Controller
     //
     public function index(){
         $topics = Topic::getAllTopics();
-        return view('home.index', ['topics' => $topics]);
+        $documents=Documents::getAllDocuments();
+        return view('home.index', [
+            'topics' => $topics,
+            'documents' => $documents,
+        ]);
         
     }
     

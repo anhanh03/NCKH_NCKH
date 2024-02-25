@@ -7,6 +7,9 @@ use App\Models\Documents;
 use app\Models\Topic;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\CommentController;
+use App\Models\Comment;
+use app\Models\User;
 
 class DocumentsController extends Controller
 {
@@ -39,7 +42,10 @@ class DocumentsController extends Controller
         'Document_Name' => 'required',
         'Description' => 'required',
         'Author' => 'required',
+        
     ]);
+
+
 
     // Lưu trữ tệp tin
     $file = $request->file('document_file');
@@ -47,12 +53,17 @@ class DocumentsController extends Controller
     $file->move('storage/uploads/documents', $filename);
     
     // Lấy kích thước tệp tin
-    $documentSize = $file->getSize();
-    //$documentSize = "";
+    //$documentSize = $file->getSize();
+    $documentSize = "";
+    $username = $request->session()->get('username');
+    $id_user = DB::table('users')
+    ->where('Username', $username)
+    ->value('id');
 
     // Lưu thông tin tài liệu vào cơ sở dữ liệu
     $document = [
         'ID_topic' => $request->ID_topic,
+        'id_user' => $id_user,
         'Document_Name' => $request->Document_Name,
         'Document_Type' => $file->getClientOriginalExtension(),
         'Document_Size' => $documentSize,
@@ -61,7 +72,8 @@ class DocumentsController extends Controller
         'Storage_Path' => 'storage/uploads/documents/' . $filename,
         'Download_Path' => 'storage/uploads/documents/' . $filename,
         'create_date' => now(),
-        'update_date' => now()
+        'update_date' => now(),
+        
     ];
 
     DB::table('documents')->insert($document);
@@ -69,10 +81,34 @@ class DocumentsController extends Controller
     return back();
 }
 
-    public function showDocument()
-    {
-        return view('document.showDocument');
+public function showDocument()
+{
+    $ID_document = request("id");
+    $document = Documents::getDocumentById($ID_document);
+    // $comments = new Comment();
+    $comments = Comment::document($ID_document);
+    if ($comments === null) {
+        $comments = [];
     }
+    
+    // Lấy thông tin người dùng cho mỗi comment
+    foreach ($comments as $comment) {
+        $id_user = $comment->ID_user;
+        $user = User::find($id_user);
+
+        $comment->user_name = $user->name;
+    }
+    
+    if ($document) {
+        return view('document.showDocument', [
+            'document' => $document,
+            'comment' => $comments,
+        ]);
+    } else {
+        return "null";
+    }
+}
+
     public function updateDocument(Request $request, $documentId)
     {
         $data = $request->all();

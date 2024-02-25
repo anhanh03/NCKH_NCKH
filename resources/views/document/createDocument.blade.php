@@ -5,7 +5,7 @@
 
     <form action="{{ route('addDocument') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
+        
         <div class="form-group row">
             <label for="document_file" class="col-sm-2 col-form-label">Chọn tệp tin:</label>
             <div class="col-sm-10">
