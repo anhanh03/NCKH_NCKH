@@ -56,15 +56,15 @@
                         <tr>
                             <td>
                                 Comment:
-                                @foreach ($comment as $item)                                   
+                                @foreach ($comment as $comment)                                   
                                 <div class="row" style="margin: 10px 0">
                                     <div class="row">
                                         <div class="col-md-12" style="background: white">
                                             <div class="left-user12923 left-user12923-repeat">
                                                 {{-- Tên người comment --}}
-                                                <a href="#"><img src="img/images.png" alt="image"></a><a href="#">{{ $comment->user_name }}</a><br> 
+                                                <a href="#"><img src="img/images.png" alt="image"></a><a style="padding-left: 5px; " href="#">{{ $comment->user_name }}</a><br> 
                                                 <ul>
-                                                    {{ $comment ->Content }}
+                                                    {{ $comment->Content }}
                                                 </ul>
                                             </div>
                                         </div>
@@ -124,21 +124,42 @@
                         </ul>
                     </div>
                 </div>
+
+                {{-- Hiển thị view --}}
                 <div class="row">
-                    <div class="col-md-12" style="overflow: auto; height: 600px;" >
-                        <table class="table">
-                            <tr >
-                                <div class="col-md-12">
-                                    <img src="img/images.png" alt="image" style="width: 100%;">
-                                </div>
-                                <div class="col-md-12">
-                                    <img src="img/images.png" alt="image" style="width: 100%;">
-                                </div>
-                                   
-                            </tr>
-                            
-                    </table>
-                    </div>
+                    @if ($document->Document_Type === 'pdf')
+                        <iframe src="{{ $document->Storage_Path }}" width="100%" height="600px"></iframe>
+                    @elseif ($document->Document_Type === 'docx')
+                        <iframe id="docxIframe" width="100%" height="600px"></iframe>
+                        <script src="{{ asset('js/mammoth.browser.min.js') }}"></script>
+                        <script>
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("GET", "{{ $document->Storage_Path }}", true);
+                            xhr.responseType = "arraybuffer";
+                            xhr.onload = function(e) {
+                                var arrayBufferView = new Uint8Array(this.response);
+                                var docxFile = new Blob([arrayBufferView], {
+                                    type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                });
+                
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    var arrayBuffer = e.target.result;
+                                    var options = { arrayBuffer: arrayBuffer };
+                
+                                    var result = Mammoth.convertToHtml(options).then(function(result) {
+                                        var html = result.value;
+                                        var iframe = document.getElementById("docxIframe");
+                                        iframe.contentDocument.open();
+                                        iframe.contentDocument.write(html);
+                                        iframe.contentDocument.close();
+                                    });
+                                };
+                                reader.readAsArrayBuffer(docxFile);
+                            };
+                            xhr.send();
+                        </script>
+                    @endif
                 </div>
             </div>
             

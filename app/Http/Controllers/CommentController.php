@@ -38,6 +38,7 @@ class CommentController extends Controller
             // Redirect hoặc trả về view phù hợp
             // return redirect()->refresh();
             return back();
+            //return $newComment;
         } else {
             return view('user.index');
         }

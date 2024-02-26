@@ -30,7 +30,7 @@ class Comment extends Model
     // Một comment thuộc về một document
     public static function document($id)
     {
-        return Comment::find($id);
+        return Comment::where('ID_document',$id)->get();
     }
     public static function getCommentById($commentId)
     {

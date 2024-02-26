@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CommentController;
 use App\Models\Comment;
-use app\Models\User;
+use App\Models\User;
 
 class DocumentsController extends Controller
 {
@@ -85,6 +85,12 @@ public function showDocument()
 {
     $ID_document = request("id");
     $document = Documents::getDocumentById($ID_document);
+    if($document) {
+        $id_username = $document->id_user;
+        $user = User::find($id_username);
+
+        $document->uploaded_by = $user->Username;
+    }
     // $comments = new Comment();
     $comments = Comment::document($ID_document);
     if ($comments === null) {
@@ -95,8 +101,7 @@ public function showDocument()
     foreach ($comments as $comment) {
         $id_user = $comment->ID_user;
         $user = User::find($id_user);
-
-        $comment->user_name = $user->name;
+        $comment->user_name = $user->Username;
     }
     
     if ($document) {
@@ -104,6 +109,8 @@ public function showDocument()
             'document' => $document,
             'comment' => $comments,
         ]);
+        // return $document;
+
     } else {
         return "null";
     }
