@@ -109,6 +109,10 @@ Route::get('chinh-sach-rieng-tu', function () {
 });
 
 
-Route::get('/spp',function(Request $request){
+Route::get('/contact',function(Request $request){
     return view('help.contact');
+});
+
+Route::get('/spp',function(Request $request){
+    return view('help.suppost');
 });

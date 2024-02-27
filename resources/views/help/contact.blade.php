@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
     
-bhsagfhasgvdsa
+dijr mej thang quang
 
 @endsection
