@@ -128,14 +128,27 @@ public function showDocument()
         }
     }
 
-    public function deleteDocument($documentId)
-    {
-        $result = Documents::deleteDocument($documentId);
+    // hàm xóa chính
+    // public function deleteDocument($documentId)
+    // {
+    //     $result = Documents::deleteDocument($documentId);
 
-        if ($result) {
-            return response()->json(['message' => 'Tài liệu đã được xóa']);
-        } else {
-            return response()->json(['message' => 'Không tìm thấy tài liệu hoặc xóa không thành công'], 404);
-        }
+    //     if ($result) {
+    //         return response()->json(['message' => 'Tài liệu đã được xóa']);
+    //     } else {
+    //         return response()->json(['message' => 'Không tìm thấy tài liệu hoặc xóa không thành công'], 404);
+    //     }
+    // }
+
+
+    // Cần sửa lại hàm này
+    public function editDocument(Request $request)
+    {
+        return back();
+    }
+
+    public function deleteDocument(Request $request)
+    {
+        return back();
     }
 }

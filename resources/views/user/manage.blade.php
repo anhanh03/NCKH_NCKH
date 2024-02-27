@@ -50,25 +50,37 @@
                                 <a href="{{route('showCreateDocument')}}"><button type="button" class="q-type238">Add<i class="fa fa-plus" aria-hidden="true"></i></button></a>
                                 <table class="table">
                                     <tr>
-                                        <td>tên tệp(.zip, .exe....)</td>
-                                        <td><i>title của tệp</i></td>
-                                        <td><button type="button" class="btn btn-info">Sửa</button></td>
-                                        <td><button type="button" class="btn btn-danger">Xóa</button></td>
+                                        <th>Tên tài liệu</th>
+                                        <th>Tác giả</th>
+                                        <th >Thao tác</th>
                                     </tr>
+                                    @foreach ($documents as $document)    
                                     
+                                    <tr>
+                                        <td>{{ $document->Document_Name }} ({{ $document->Document_Type }})</td>
+                                        <td><i>{{ $document->Author}}</i></td>
+                                        <td><a href="{{ route('editDocument', ['id' => $document->ID]) }}" class="btn btn-info" >Sửa</a> <a href="{{ route('deleteDocument', ['id' => $document->ID]) }}" class="btn btn-danger">Xóa</a></td>
+                                        
+                                    </tr>
+                                    @endforeach
                                 </table>
                             </div>
                             <div class="updateuser" id="updateuser">
                                 <a href="{{route('displayAddPost')}}"><button type="button" class="q-type238">Add<i class="fa fa-plus" aria-hidden="true"></i></button></a>
                                 <form action="" method="get">
                                     <table class="table">
-                                        <tr>
-                                            <td>tên bài đăng</td>
-                                            <td><i>title của bài đăng</i></td>
-                                            <td><button type="button" class="btn btn-info">Sửa</button></td>
-                                            <td><button type="button" class="btn btn-danger">Xóa</button></td>
+                                        <tr> 
+                                            <th>Tên bài viết</th>
+                                            <th>Ngày tạo</th>
+                                            <th >Thao tác</th>
                                         </tr>
-                                        
+                                        @foreach ($posts as $post)    
+                                        <tr>
+                                            <td>{{ $post->title }} </td>
+                                            <td><i style="max-width: 2ch;">{{ $post->create_date}}</i></td>
+                                            <td><a href="{{ route('editDocument', ['id' => $post->ID]) }}" class="btn btn-info" >Sửa</a> <a  href="{{ route('deleteDocument', ['id' => $post->ID]) }}" class="btn btn-danger">Xóa</a></td>
+                                        </tr>
+                                        @endforeach
                                     </table>
                                 </form>
                             </div>

@@ -2410,3 +2410,7 @@ a:hover .user-name{
 a{
     text-decoration: none;
 }
+
+.spaceLeft{
+    margin-left: 5px;
+}

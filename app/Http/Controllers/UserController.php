@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use App\Models\Documents;
+use App\Models\Post;
 
 class UserController extends Controller
 {
@@ -85,8 +87,19 @@ class UserController extends Controller
         return redirect('/home');
     }
 
-    public function manage(){
-        return view("user.manage");
+    public function manage(Request $request){
+        $username = $request->session()->get('username');
+        $user = User::where('Username', $username)->first();
+        $id_user=$user->ID;
+
+        $document= Documents::getByUserId($id_user);
+        $post=Post::getPostsByUser($id_user);
+
+
+        return view("user.manage",[
+            'documents'=>$document,
+            'posts'=>$post,
+            ]);
     }
     public function isLoggedIn()
     {

@@ -27,6 +27,11 @@ class Documents extends Model
         return self::where('ID_topic', $topicId)->get();
     }
 
+    public static function getByUserId($Id)
+    {
+        return self::where('id_user', $Id)->get();
+    }
+
     public static function getDocumentById($documentsId)
     {
         return self::find($documentsId);

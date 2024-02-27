@@ -18,12 +18,12 @@ class PostController extends Controller
 
     public function displayTitlePost()
     {
-        $ID_topic= request("id");
+        $ID_topic = request('id');
         $posts = Post::getPostsByTopic($ID_topic);
-        if($posts){
-        return view('post.posttitle', ['posts' => $posts]);
-        }else{
-            return "null";
+        if ($posts) {
+            return view('post.posttitle', ['posts' => $posts]);
+        } else {
+            return 'null';
         }
     }
 
@@ -33,7 +33,7 @@ class PostController extends Controller
         $post = Post::getPostById($ID);
 
         $comments = Comment::getCommentByPostId($ID);
-         $commentsWithUsernames = [];
+        $commentsWithUsernames = [];
 
         foreach ($comments as $comment) {
             $commentWithUsername = $comment;
@@ -49,35 +49,35 @@ class PostController extends Controller
         }
     }
 
-
-    public function displayAddPost(){
-        return view("post.addPost");
+    public function displayAddPost()
+    {
+        return view('post.addPost');
     }
 
-//     public function addPost(Request $request)
-// {
-//     // Lấy dữ liệu từ request
-//     $title = $request->input('Document_Name');
-//     $content = $request->input('Description');
-//     $topicId = $request->input('ID_topic');
-    
-//     // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
-//     $userId = auth()->user()->id;
+    //     public function addPost(Request $request)
+    // {
+    //     // Lấy dữ liệu từ request
+    //     $title = $request->input('Document_Name');
+    //     $content = $request->input('Description');
+    //     $topicId = $request->input('ID_topic');
 
-//     try {
-//         $query = "INSERT INTO post (ID_user, ID_topic, title, content, create_date, count_view) VALUES ('$userId', '$topicId', '$title', '$content', NOW(), 0)";
-        
-//         Post::statement($query);
-        
-//         // Thêm bài viết thành công
-//         return $userId;
-//     } catch (QueryException $e) {
-//         // Xử lý ngoại lệ
-//         echo "Lỗi: " . $e->getMessage();
-//     }
-// }
+    //     // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
+    //     $userId = auth()->user()->id;
 
-public function addPost(Request $request)
+    //     try {
+    //         $query = "INSERT INTO post (ID_user, ID_topic, title, content, create_date, count_view) VALUES ('$userId', '$topicId', '$title', '$content', NOW(), 0)";
+
+    //         Post::statement($query);
+
+    //         // Thêm bài viết thành công
+    //         return $userId;
+    //     } catch (QueryException $e) {
+    //         // Xử lý ngoại lệ
+    //         echo "Lỗi: " . $e->getMessage();
+    //     }
+    // }
+
+    public function addPost(Request $request)
     {
         // Lấy dữ liệu từ request
         $title = $request->input('Document_Name');
@@ -101,11 +101,15 @@ public function addPost(Request $request)
         $post->save();
 
         // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
-        return  back();
+        return back();
     }
 
 
-
-
-
+    public function editPost(Request $request){
+        return back();
+    }
+    
+    public function deletePost(Request $request){
+        return back();
+    }
 }

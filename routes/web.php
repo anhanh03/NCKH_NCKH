@@ -71,6 +71,10 @@ Route::get('/tpost', [PostController::class, 'displayTitlePost'])->name('display
 //bài viết
 Route::get('/postcontent', [PostController::class, 'displayPost'])->name('displayPost');
 
+Route::get('/editPost', [PostController::class, 'editPost'])->name('editPost');
+
+Route::get('/deletePost', [PostController::class, 'deletePost'])->name('deletePost');
+
 //Hiển thị trang quản lý bài đăng cho người dùng đăng bài
 Route::get('/displayManage', [UserController::class, 'manage'])->name('manage');
 //Hiển thị form thêm bài đăng
@@ -89,6 +93,9 @@ Route::post('/addDocument', [DocumentsController::class, 'createDocument'])->nam
 //trang tải tài liệu
 Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name('showDocument');
 
+Route::get('/editDocument', [DocumentsController::class, 'editDocument'])->name('editDocument');
+
+Route::get('/deleteDocument', [DocumentsController::class, 'deleteDocument'])->name('deleteDocument');
 // gợi ý chủ đề
 Route::get('/topic-suggestions', function (Request $request) {
     $query = $request->input('query');

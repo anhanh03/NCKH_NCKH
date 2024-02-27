@@ -41,6 +41,11 @@ class Post extends Model
     {
         return self::find($postId);
     }
+    
+    public static function getPostsByUser($ID)
+    {
+        return self::where('ID_user', $ID)->get();
+    }
 
     public static function getPostsByTopic($ID_topic)
     {
