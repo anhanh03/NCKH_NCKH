@@ -100,3 +100,8 @@ Route::get('/topic-suggestions', function (Request $request) {
 Route::get('chinh-sach-rieng-tu', function () {
     return '<h1>Chinh sach rieng tu</h1>';
 });
+
+
+Route::get('/spp',function(Request $request){
+    return view('help.contact');
+});
