@@ -12,8 +12,16 @@ class Post extends Model
     use HasFactory;
     protected $table = 'post';
     protected $primaryKey = 'ID';
-    protected $fillable = ['ID_user', 'ID_topic', 'title', 'content',  'create_date', 'count_view'];
     public $timestamps = false;
+
+    protected $fillable = [
+        'ID_user',
+        'ID_topic',
+        'title',
+        'content',
+        'create_date',
+        'count_view',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class, 'ID_user', 'ID');

@@ -14,32 +14,37 @@ class HomeController extends Controller
         $this->userController = $userController;
     }
 
-
-    public  function displayInfor(Request $request){
+    public function displayInfor(Request $request)
+    {
         $username = $request->session()->get('username'); // Lấy giá trị 'username' từ session
         $user = User::where('Username', $username)->first();
 
         if ($user) {
-            return view("home.updateuser", [
+            return view('home.updateuser', [
                 'full_name' => $user->full_name,
                 'sex' => $user->sex,
                 'email' => $user->Email,
                 'address' => $user->address,
             ]);
         } else {
-            return "Người dùng không tồn tại.";
+            return 'Người dùng không tồn tại.';
         }
-        return view('home.updateuser');
     }
     //
-    public function index(){
-        $topics = Topic::getAllTopics();
-        $documents=Documents::getAllDocuments();
+    public function index()
+    {
+        $topics = Topic::paginate(10); // Thay thế getAllTopics() bằng paginate(10)
+
         return view('home.index', [
             'topics' => $topics,
+        ]);
+    }
+
+    public function indexD()
+    {
+        $documents = Documents::paginate(10); // Thay thế getAllDocuments() bằng paginate(10)
+        return view('home.indexdoc', [
             'documents' => $documents,
         ]);
-        
     }
-    
 }

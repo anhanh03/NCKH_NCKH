@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CommentController;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class DocumentsController extends Controller
 {
@@ -71,6 +72,7 @@ class DocumentsController extends Controller
         'Author' => $request->Author,
         'Storage_Path' => 'storage/uploads/documents/' . $filename,
         'Download_Path' => 'storage/uploads/documents/' . $filename,
+        'count_view'=> 0,
         'create_date' => now(),
         'update_date' => now(),
         
@@ -85,17 +87,20 @@ public function showDocument()
 {
     $ID_document = request("id");
     $document = Documents::getDocumentById($ID_document);
+
     if($document) {
+        // Tăng giá trị của count_view lên 1 và lưu vào cơ sở dữ liệu
+        $document->count_view += 1;
+        $document->save();
+
         $id_username = $document->id_user;
         $user = User::find($id_username);
-
+        // Lấy tên người dùng
         $document->uploaded_by = $user->Username;
     }
-    // $comments = new Comment();
-    $comments = Comment::document($ID_document);
-    if ($comments === null) {
-        $comments = [];
-    }
+
+    // Sử dụng Query Builder để lấy các comment và sắp xếp chúng theo thứ tự giảm dần của create_date
+    $comments = Comment::where('ID_document', $ID_document)->orderBy('create_date', 'desc')->take(5)->get();
     
     // Lấy thông tin người dùng cho mỗi comment
     foreach ($comments as $comment) {
@@ -107,10 +112,8 @@ public function showDocument()
     if ($document) {
         return view('document.showDocument', [
             'document' => $document,
-            'comment' => $comments,
+            'comment' => $comments, // Sửa từ 'comment' thành 'comments'
         ]);
-        // return $document;
-
     } else {
         return "null";
     }
@@ -151,4 +154,12 @@ public function showDocument()
     {
         return back();
     }
+
+
+    public function getDocuments()
+    {
+        $documents = Documents::paginate(10);
+        return response()->json($documents);
+    }
+
 }

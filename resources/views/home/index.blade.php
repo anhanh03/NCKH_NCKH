@@ -9,9 +9,9 @@
                 <div class="col-md-9">
                     <div id="main">
                         <input id="tab1" type="radio" name="tabs" checked>
-                        <label for="tab1">Chủ đề</label>
-                        <input id="tab2" type="radio" name="tabs">
-                        <label for="tab2">Tài liệu</label>
+                            <label for="tab1">Chủ đề</label>
+                            <input id="tab2" type="radio" name="tabs" >
+                            <label for="tab2"><a href="{{ route('homeD') }}">Tài liệu</a></label>
                         {{-- <input id="tab3" type="radio" name="tabs">
                         <label for="tab3">Recently Answered</label>
                         <input id="tab4" type="radio" name="tabs">
@@ -20,7 +20,7 @@
                         <label for="tab5">Recent Post</label> --}}
 
 
-                        <section id="content1">
+                        <section style="display: block;" id="content1">
                             <!--Recent Question Content Section -->
                             @foreach ($topics as $topic)
                                 <div class="question-type2033">
@@ -58,15 +58,15 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="ques-type302">
-                                                <a href="#">
+                                                {{-- <a href="#">
                                                     <button type="button" class="q-type238"><i class="fa fa-comment"
-                                                            aria-hidden="true"> 333335 answer</i></button>
-                                                </a>
-                                                <a href="#">
+                                                            aria-hidden="true">  Bài viết</i></button>
+                                                </a> --}}
+                                                {{-- <a href="#">
                                                     <button type="button" class="q-type23 button-ques2973"> <i
-                                                            class="fa fa-user-circle-o" aria-hidden="true"> 70
-                                                            view</i></button>
-                                                </a>
+                                                            class="fa fa-user-circle-o" aria-hidden="true"> {{ $topic->count_view }}
+                                                            lượt xem</i></button>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -75,77 +75,34 @@
 
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
+                                    <!-- Liên kết trang trước -->
                                     <li>
-                                        <a href="#" aria-label="Previous">
+                                        <a href="{{ $topics->previousPageUrl() }}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
+
+                                    <!-- Liên kết của từng trang -->
+                                    @for ($i = 1; $i <= $topics->lastPage(); $i++)
+                                        <li class="{{ $topics->currentPage() == $i ? 'active' : '' }}">
+                                            <a href="{{ $topics->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+
+                                    <!-- Liên kết trang tiếp theo -->
                                     <li>
-                                        <a href="#" aria-label="Next">
+                                        <a href="{{ $topics->nextPageUrl() }}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
+
                         </section>
 
                         {{-- Document --}}
 
-                        <section style="padding-top: 20px; border-top: 1px solid #ddd;" id="content2">
-                            @foreach ($documents as $document)
-                            <div class="question-type2033">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="right-description893">
-                                                <div id="que-hedder2983">
-                                                    {{-- Title --}}
-                                                    <h3><a
-                                                            href="{{ route('showDocument', ['id' => $document->ID]) }}">{{ $document->Document_Name }}</a>
-                                                    </h3>
-                                                </div>
-                                                <div class="ques-details10018">
-                                                    {{-- Description --}}
-                                                    <p>{{ $document->Description }}</p>
-                                                </div>
-                                                <hr>
-                                                <div class="ques-icon-info3293">
-                                                    <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i></a>
-                                                    {{-- <a href="#"><i class="fa fa-folder" aria-hidden="true"> wordpress</i></a> --}}
-                                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
-                                                            ago</i></a>
-                                                    <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
-                                                            Question</i></a>
-                                                    <a href="#"><i class="fa fa-bug" aria-hidden="true">
-                                                            Report</i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="ques-type302">
-                                                <a href="#">
-                                                    <button type="button" class="q-type238">
-                                                        <i class="fa fa-download"
-                                                            aria-hidden="true">{{ $document->count_dowload }} download</i>
-                                                    </button>
-                                                </a>
-                                                <a href="#">
-                                                    <button type="button" class="q-type23 button-ques2973">
-                                                        <i class="fa fa-user-circle-o"
-                                                            aria-hidden="true">{{ $document->count_view }} view</i>
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            @endforeach
-                            
-                        </section>
+                       
 
                     </div>
                 </div>
@@ -154,3 +111,4 @@
 
     </section>
 @endsection
+

@@ -8,8 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    protected $table = 'topic'; // Tên bảng trong cơ sở dữ liệu
+    protected $table = 'topic';
+    protected $primaryKey = 'ID';
+    public $timestamps = false;
 
+    protected $fillable = [
+        'TopicName',
+        'Description',
+    ];
     // Hàm để thêm mới một bản ghi
     public static function createTopic($data)
     {

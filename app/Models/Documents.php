@@ -8,17 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Documents extends Model
 {
     use HasFactory;
+    protected $table = 'documents';
+    protected $primaryKey = 'ID';
+    public $timestamps = false;
+
     protected $fillable = [
+        'id_user',
         'ID_topic',
         'Document_Name',
         'Document_Type',
         'Document_Size',
         'Description',
         'Author',
-        'Storage_Path',
-        'Download_Path',
         'create_date',
         'update_date',
+        'count_dowload',
+        'count_view',
+        'Storage_Path',
+        'Download_Path',
     ];
 
 

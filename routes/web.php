@@ -61,6 +61,12 @@ Route::get('/auth/facebook/callback', function () {
 
 // trang chủ
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/home-D', [HomeController::class, 'indexD'])->name('homeD');
+
+
+
+
 //cập nhật hồ sơ người dùng
 Route::get('/updateuser', [HomeController::class, 'displayInfor'])->name('displayInfor');
 Route::get('/updateInforUser', [UserController::class, 'updateInforUser'])->name('updateInforUser');

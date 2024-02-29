@@ -12,6 +12,14 @@ class Comment extends Model
     protected $table = 'comments';
     protected $primaryKey = 'ID';
     public $timestamps = false;
+
+    protected $fillable = [
+        'ID_user',
+        'ID_post',
+        'ID_document',
+        'Content',
+        'create_date',
+    ];
     
     // Các trường khác trong bảng comments
 
