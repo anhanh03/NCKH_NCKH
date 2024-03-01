@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\ErrorController;
 use App\Models\HomeController as ModelsHomeController;
 use App\Models\User;
 use App\Models\Topic;
@@ -29,7 +30,7 @@ use Laravel\Socialite\Facades\Socialite;
 Route::fallback(function () {
     return redirect('/');
 });
-
+Route::get('/error/{errorCode}/{errorMessage}', [ErrorController::class, 'showError'])->name('error');
 // đăng ký đăng nhập
 Route::get('/displayForgotPass', [UserController::class, 'displayFogot'])->name('displayFogot');
 
@@ -144,3 +145,4 @@ Route::get('/spp',function(Request $request){
 
 
 Route::get('/homeAdmin', [AdminController::class, 'index'])->name('homeAdmin');
+

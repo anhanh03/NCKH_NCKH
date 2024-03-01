@@ -20,6 +20,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        
         $username = $request->input('username');
         $password = $request->input('password');
 
@@ -39,11 +40,12 @@ class UserController extends Controller
                 Session::put('username', $username);
                 // Session::put('user_id', $user->id); 
                 // Lưu thông tin  vào biến session
-                return redirect('/admin');
+                return redirect('/homeAdmin');
             }
         }
         // Đăng nhập thất bại
         return redirect()->back()->withInput()->withErrors('Đăng nhập không thành công');
+    
     }
 
     public function signup(Request $request)
