@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
@@ -122,3 +123,24 @@ Route::get('/contact',function(Request $request){
 Route::get('/spp',function(Request $request){
     return view('help.suppost');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------  ADMIN Route ----------------------------------------------
+
+
+Route::get('/homeAdmin', [AdminController::class, 'index'])->name('homeAdmin');
