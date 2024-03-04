@@ -32,6 +32,8 @@ class Post extends Model
         return $this->belongsTo(Topic::class, 'ID_topic', 'ID');
     }
 
+
+    
     // Phương thức tạo mới một bài viết
     public static function createPost($data)
     {

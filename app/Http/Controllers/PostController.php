@@ -104,12 +104,25 @@ class PostController extends Controller
         return back();
     }
 
-
-    public function editPost(Request $request){
+    public function editPost(Request $request)
+    {
         return back();
     }
-    
-    public function deletePost(Request $request){
-        return back();
+
+    public function deletePost(Request $request)
+    {
+        $postId = $request->id;
+
+        // Xóa các bản ghi con trong bảng comments
+        DB::table('comments')->where('ID_post', $postId)->delete();
+
+        // Tiếp tục xóa bản ghi cha trong bảng post
+        $result = DB::table('post')->where('ID', $postId)->delete();
+
+        if ($result) {
+            return back()->with('success', 'Bài viết đã được xóa');
+        } else {
+            return back()->withErrors('Xóa bài viết không thành công');
+        }
     }
 }

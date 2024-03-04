@@ -27,7 +27,20 @@ class Documents extends Model
         'Storage_Path',
         'Download_Path',
     ];
+    
+    public function user() {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 
+    public function topic() {
+        return $this->belongsTo(Topic::class, 'ID_topic');
+    }
+
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'ID_document', 'ID');
+    }
 
     public static function getByTopicId($topicId)
     {

@@ -21,6 +21,13 @@
 
 <body>
     @include('layouts.header')
+    {{-- Thông báo --}}
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+
+
     @yield('content')
     {{-- @include('layouts.sidebar') --}}
     @include('layouts.footer')
@@ -29,6 +36,8 @@
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/npm.js"></script>
+
+    {{-- <script src="js/main.js"></script> --}}
 </body>
 
 </html>

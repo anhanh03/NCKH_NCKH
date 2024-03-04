@@ -1,5 +1,21 @@
 @extends('layouts.app')
 @section('content')
+
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
+
+    
     <!--======= welcome section on top background=====-->
 
 
@@ -9,9 +25,9 @@
                 <div class="col-md-9">
                     <div id="main">
                         <input id="tab1" type="radio" name="tabs" checked>
-                            <label for="tab1">Chủ đề</label>
-                            <input id="tab2" type="radio" name="tabs" >
-                            <label for="tab2"><a href="{{ route('homeD') }}">Tài liệu</a></label>
+                        <label for="tab1">Chủ đề</label>
+                        <input id="tab2" type="radio" name="tabs">
+                        <label for="tab2"><a href="{{ route('homeD') }}">Tài liệu</a></label>
                         {{-- <input id="tab3" type="radio" name="tabs">
                         <label for="tab3">Recently Answered</label>
                         <input id="tab4" type="radio" name="tabs">
@@ -102,7 +118,7 @@
 
                         {{-- Document --}}
 
-                       
+
 
                     </div>
                 </div>
@@ -111,4 +127,3 @@
 
     </section>
 @endsection
-

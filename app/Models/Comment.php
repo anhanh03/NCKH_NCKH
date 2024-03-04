@@ -34,12 +34,12 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class, 'ID_post');
     }
+    public function document() {
+        return $this->belongsTo(Documents::class, 'ID_document');
+    }
 
     // Một comment thuộc về một document
-    public static function document($id)
-    {
-        return Comment::where('ID_document',$id)->get();
-    }
+    
     public static function getCommentById($commentId)
     {
         return Comment::find($commentId);

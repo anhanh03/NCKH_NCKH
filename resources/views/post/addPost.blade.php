@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+@endif
+
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
 <div class="container">
     <h2>Đăng bài</h2>
 

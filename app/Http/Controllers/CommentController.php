@@ -37,10 +37,11 @@ class CommentController extends Controller
 
             // Redirect hoặc trả về view phù hợp
             // return redirect()->refresh();
-            return back();
+            return back()->with('success','Thêm bình luận thành công');
             //return $newComment;
         } else {
-            return view('user.index');
+            return view('user.index')->with('error', 'Bạn chưa đăng nhập');
+
         }
     }
 

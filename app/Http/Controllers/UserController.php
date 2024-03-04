@@ -90,6 +90,8 @@ class UserController extends Controller
     }
 
     public function manage(Request $request){
+
+        if ($this->isLoggedIn()) {
         $username = $request->session()->get('username');
         $user = User::where('Username', $username)->first();
         $id_user=$user->ID;
@@ -102,6 +104,11 @@ class UserController extends Controller
             'documents'=>$document,
             'posts'=>$post,
             ]);
+
+        } else {
+            return view('user.index')->with('');
+        }
+
     }
     public function isLoggedIn()
     {

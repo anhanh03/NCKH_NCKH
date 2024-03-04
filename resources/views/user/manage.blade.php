@@ -1,5 +1,18 @@
 @extends('layouts.app')
 @section('content')
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    @foreach ($errors->all() as $error)
+        {{ $error }}<br>
+    @endforeach
+</div>
+@endif
     <script>
         function onclickinfor() {
             document.getElementById('updateuser').style.display = "none";
@@ -24,6 +37,7 @@
             document.getElementById('displayinfor').style.display = "none";
         }
     </script>
+
     <section class="main-content920">
         <div class="container">
             <div class="row mt-5 pt-5">
@@ -36,9 +50,10 @@
                         <div class="col-12 col-sm-3 border-end  m-0 p-0">
                             <div class="list-group p-0 m-0 ">
                                 <button type="button" id="btn-inforuser" onclick="return onclickinfor()"
-                                class="list-group-item list-group-item-action border-0 ms-0    ">Danh sách tệp đã tải lên</button>
+                                    class="list-group-item list-group-item-action border-0 ms-0    ">Danh sách tệp đã tải
+                                    lên</button>
                                 <button type="button" id="btn-updateuser" onclick="return onclickupdate()"
-                                class="list-group-item list-group-item-action border-0">Danh sách bài viết</button>
+                                    class="list-group-item list-group-item-action border-0">Danh sách bài viết</button>
                                 {{-- <a href="{{ route('logout') }}"  
                                     class="list-group-item list-group-item-action bg-warning border-0">
                                     Đăng xuất
@@ -47,39 +62,46 @@
                         </div>
                         <div class="col-8 col-sm-9">
                             <div id="displayinfor" class="inforuser w-100">
-                                <a href="{{route('showCreateDocument')}}"><button type="button" class="q-type238">Add<i class="fa fa-plus" aria-hidden="true"></i></button></a>
+                                <a href="{{ route('showCreateDocument') }}"><button type="button" class="q-type238">Add<i
+                                            class="fa fa-plus" aria-hidden="true"></i></button></a>
                                 <table class="table">
                                     <tr>
                                         <th>Tên tài liệu</th>
                                         <th>Tác giả</th>
-                                        <th >Thao tác</th>
+                                        <th>Thao tác</th>
                                     </tr>
-                                    @foreach ($documents as $document)    
-                                    
-                                    <tr>
-                                        <td>{{ $document->Document_Name }} ({{ $document->Document_Type }})</td>
-                                        <td><i>{{ $document->Author}}</i></td>
-                                        <td><a href="{{ route('editDocument', ['id' => $document->ID]) }}" class="btn btn-info" >Sửa</a> <a href="{{ route('deleteDocument', ['id' => $document->ID]) }}" class="btn btn-danger">Xóa</a></td>
-                                        
-                                    </tr>
+                                    @foreach ($documents as $document)
+                                        <tr>
+                                            <td>{{ $document->Document_Name }} ({{ $document->Document_Type }})</td>
+                                            <td><i>{{ $document->Author }}</i></td>
+                                            <td><a href="{{ route('editDocument', ['id' => $document->ID]) }}"
+                                                    class="btn btn-info">Sửa</a> <a
+                                                    href="{{ route('deleteDocument', ['id' => $document->ID]) }}"
+                                                    class="btn btn-danger">Xóa</a></td>
+
+                                        </tr>
                                     @endforeach
                                 </table>
                             </div>
                             <div class="updateuser" id="updateuser">
-                                <a href="{{route('displayAddPost')}}"><button type="button" class="q-type238">Add<i class="fa fa-plus" aria-hidden="true"></i></button></a>
+                                <a href="{{ route('displayAddPost') }}"><button type="button" class="q-type238">Add<i
+                                            class="fa fa-plus" aria-hidden="true"></i></button></a>
                                 <form action="" method="get">
                                     <table class="table">
-                                        <tr> 
+                                        <tr>
                                             <th>Tên bài viết</th>
                                             <th>Ngày tạo</th>
-                                            <th >Thao tác</th>
+                                            <th>Thao tác</th>
                                         </tr>
-                                        @foreach ($posts as $post)    
-                                        <tr>
-                                            <td>{{ $post->title }} </td>
-                                            <td><i style="max-width: 2ch;">{{ $post->create_date}}</i></td>
-                                            <td><a href="{{ route('editDocument', ['id' => $post->ID]) }}" class="btn btn-info" >Sửa</a> <a  href="{{ route('deleteDocument', ['id' => $post->ID]) }}" class="btn btn-danger">Xóa</a></td>
-                                        </tr>
+                                        @foreach ($posts as $post)
+                                            <tr>
+                                                <td>{{ $post->title }} </td>
+                                                <td><i style="max-width: 2ch;">{{ $post->create_date }}</i></td>
+                                                <td><a href="{{ route('editPost', ['id' => $post->ID]) }}"
+                                                        class="btn btn-info">Sửa</a> <a
+                                                        href="{{ route('deletePost', ['id' => $post->ID]) }}"
+                                                        class="btn btn-danger">Xóa</a></td>
+                                            </tr>
                                         @endforeach
                                     </table>
                                 </form>

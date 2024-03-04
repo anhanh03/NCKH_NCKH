@@ -37,7 +37,7 @@ class HomeController extends Controller
 
         return view('home.index', [
             'topics' => $topics,
-        ]);
+        ])->with('success','Teest thoio');
     }
 
     public function indexD()
