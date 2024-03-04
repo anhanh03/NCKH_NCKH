@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\VerifyPassword;
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +13,9 @@ use App\Models\Post;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Auth;
+use Mail;
 class UserController extends Controller
 {
     //
@@ -75,14 +79,43 @@ class UserController extends Controller
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect('/login')->with('success', 'Đăng ký thành công');
     }
+    // Quên Mật khẩu
     public function displayFogot()
     {
         return view('user.fogotPass');
     }
+// Đổi mật khẩu
     public function displayUpdatePass()
     {
         return view('user.updatePass');
     }
+
+    
+
+    public function updatePass(Request $request){
+        // Validate form data
+        $request->validate([
+            'new_password' => 'required|min:8', // New password is required and must be at least 8 characters long
+            'confirm_password' => 'required|same:new_password', // Confirm password must match new password
+        ]);
+
+        $username = $request->session()->get('username');
+        $user = User::where('Username', $username)->first();
+
+        // Hash the new password
+        $user->Password = bcrypt($request->new_password);
+        try {
+            // Save the updated password to the database
+            $user->save();
+            
+            return redirect()->back()->with('success', 'Password updated successfully.');
+        } catch (QueryException $e) {
+            
+            return redirect()->back()->withErrors('Lỗi chưa thể cập nhật mật khẩu lúc này.');
+        }
+
+    }
+
 
     public function logout()
     {
@@ -159,12 +192,8 @@ class UserController extends Controller
             return redirect()->back()->withEErrors( 'Email không tồn tại');
             //return $user.'loio';
         }
-
         // Tạo mã code ngẫu nhiên
         $code = Str::random(6);
-
-        
-
         // Tạo nội dung email
         $mail = new PHPMailer(true);
         $mail->isSMTP();
@@ -175,7 +204,7 @@ class UserController extends Controller
         $mail->SMTPSecure = env('MAIL_ENCRYPTION');
         $mail->Port = env('MAIL_PORT');
         // $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-        $mail->setFrom('anhanhvodoi03@gmail.com', 'quanganh');
+        $mail->setFrom('21111065662@hunre.edu.vn', '21111065662@hunre.edu.vn');
         $mail->addAddress($user->Email);
         $mail->isHTML(true);
         $mail->Subject = 'Quên mật khẩu';
@@ -196,4 +225,16 @@ class UserController extends Controller
                 ->withErrors('Có lỗi xảy ra khi gửi email: ' . $mail->ErrorInfo);
         }
     }
+
+    // public function sendResetCodeEmail(Request $request){
+    //     $user = User::where('Email', $request->email)->first();
+        
+    //         Mail::to($user->Email)->send(new VerifyPassword($user));
+    //         return back();
+
+        
+
+    // }
+
+
 }

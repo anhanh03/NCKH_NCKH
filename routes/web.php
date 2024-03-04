@@ -36,6 +36,8 @@ Route::get('/displayForgotPass', [UserController::class, 'displayFogot'])->name(
 
 Route::get('/displayUpdatePass', [UserController::class, 'displayUpdatePass'])->name('displayUpdatePass');
 
+Route::get('/updatePassword', [UserController::class, 'updatePass'])->name('updatePassword');
+
 
 Route::get('/displayVerify', [UserController::class, 'sendResetCodeEmail'])->name('displayVerify');
 

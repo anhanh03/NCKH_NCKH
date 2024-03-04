@@ -13,6 +13,19 @@
 <body class="bg-primary-subtle">
 
     <div class="contaner">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
         <div class="container">
             <div class="row mt-5">
                 <div class="col-sm-3 col-1"></div>
@@ -20,18 +33,19 @@
                     <h3 class="text-center" style="color: rgb(5, 5, 5)"><img src="img/logo.png" alt="Logo">
                         <br>Update Password
                     </h3>
-                    <form>
+                    <form method="GET" action="{{ route('updatePassword') }}">
+                        @csrf <!-- CSRF protection -->
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
+                            <label for="new_password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Confirm</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <label for="confirm_password" class="form-label">Confirm</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
+                    
                 </div>
                 <div class="col-sm-3 col-1"></div>
             </div>

@@ -28,6 +28,10 @@
                                     class="list-group-item list-group-item-action border-0 ms-0    ">Thông tin</button>
                                 <button type="button" id="btn-updateuser" onclick="return onclickupdate()"
                                     class="list-group-item list-group-item-action border-0">Chỉnh sửa</button>
+                                <a href="{{ route('displayUpdatePass') }}"
+                                    class="list-group-item list-group-item-action bg-warning border-0">
+                                    Đổi mật khẩu
+                                </a>
                                 <a href="{{ route('logout') }}"
                                     class="list-group-item list-group-item-action bg-warning border-0">
                                     Đăng xuất
