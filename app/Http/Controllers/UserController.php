@@ -108,7 +108,7 @@ class UserController extends Controller
             // Save the updated password to the database
             $user->save();
             
-            return redirect()->back()->with('success', 'Password updated successfully.');
+            return redirect('/')->with('success', 'Password updated successfully.');
         } catch (QueryException $e) {
             
             return redirect()->back()->withErrors('Lỗi chưa thể cập nhật mật khẩu lúc này.');
