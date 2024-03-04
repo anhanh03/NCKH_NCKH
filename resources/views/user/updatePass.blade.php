@@ -10,17 +10,16 @@
     <title>Update Password</title>
 </head>
 
-{{-- ll? --}}
-
 <body class="bg-primary-subtle">
-    
+
     <div class="contaner">
         <div class="container">
             <div class="row mt-5">
                 <div class="col-sm-3 col-1"></div>
                 <div class="col-sm-6 col-10 shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h3 class="text-center" style="color: rgb(5, 5, 5)"><img src="img/logo.png" alt="Logo">
-                        <br>Update Password</h3>
+                        <br>Update Password
+                    </h3>
                     <form>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">New Password</label>

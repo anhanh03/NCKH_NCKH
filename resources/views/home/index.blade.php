@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-@if (session('success'))
+    @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    
+
     <!--======= welcome section on top background=====-->
 
 

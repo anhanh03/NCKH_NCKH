@@ -36,6 +36,9 @@ Route::get('/displayForgotPass', [UserController::class, 'displayFogot'])->name(
 
 Route::get('/displayUpdatePass', [UserController::class, 'displayUpdatePass'])->name('displayUpdatePass');
 
+
+Route::get('/displayVerify', [UserController::class, 'sendResetCodeEmail'])->name('displayVerify');
+
 Route::get('/signinorsignup', [UserController::class, 'index'])->name('signinorsignup');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
@@ -72,6 +75,7 @@ Route::get('/home-D', [HomeController::class, 'indexD'])->name('homeD');
 //cập nhật hồ sơ người dùng
 Route::get('/updateuser', [HomeController::class, 'displayInfor'])->name('displayInfor');
 Route::get('/updateInforUser', [UserController::class, 'updateInforUser'])->name('updateInforUser');
+
 
 Route::get('/', [HomeController::class, 'index']);
 // hiển thị các bài viết trong chủ đề

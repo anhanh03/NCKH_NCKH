@@ -1,18 +1,18 @@
 @extends('layouts.app')
 @section('content')
-@if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    @foreach ($errors->all() as $error)
-        {{ $error }}<br>
-    @endforeach
-</div>
-@endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
     <!--======= welcome section on top background=====-->
 
 

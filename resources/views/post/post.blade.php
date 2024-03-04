@@ -1,18 +1,18 @@
 @extends('layouts.app')
 @section('content')
-@if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    @foreach ($errors->all() as $error)
-        {{ $error }}<br>
-    @endforeach
-</div>
-@endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
     <section class="header-descriptin329">
         <div class="container">
             <h3>Post Details</h3>
@@ -68,9 +68,9 @@
                         </div>
                     </div>
                     <!-- <div class="share-tags-page-content12092">
-                        <div class="l-share2093"> <i class="fa fa-share" aria-hidden="true"> Share</i> </div>
-                        <div class="R-tags309"> <i class="fa fa-tags" aria-hidden="true"> Wordpress, Question, Developer</i> </div>
-                    </div> -->
+                            <div class="l-share2093"> <i class="fa fa-share" aria-hidden="true"> Share</i> </div>
+                            <div class="R-tags309"> <i class="fa fa-tags" aria-hidden="true"> Wordpress, Question, Developer</i> </div>
+                        </div> -->
                     {{-- <div class="author-details8392">
                     <div class="author-img202l" style="max-height: 70px"> <img src="img/images.png" alt="image">
                         <div class="au-image-overlay text-center"> <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a> </div>

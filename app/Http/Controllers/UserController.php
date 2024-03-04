@@ -8,19 +8,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Models\Documents;
 use App\Models\Post;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    
-
     //
-    public function index(){
-        return view("user.index");
+    public function index()
+    {
+        return view('user.index');
     }
 
     public function login(Request $request)
     {
-        
         $username = $request->input('username');
         $password = $request->input('password');
 
@@ -33,19 +34,18 @@ class UserController extends Controller
                 // Tài khoản loại 0, chuyển về /home
                 Session::put('username', $username);
                 // Session::put('user_id', $user->id);
-                 // Lưu thông tin vào biến session
+                // Lưu thông tin vào biến session
                 return redirect('/home');
             } elseif ($user->ID_role == 1) {
                 // Tài khoản loại 1, chuyển về /admin
                 Session::put('username', $username);
-                // Session::put('user_id', $user->id); 
+                // Session::put('user_id', $user->id);
                 // Lưu thông tin  vào biến session
                 return redirect('/homeAdmin');
             }
         }
         // Đăng nhập thất bại
         return redirect()->back()->withInput()->withErrors('Đăng nhập không thành công');
-    
     }
 
     public function signup(Request $request)
@@ -75,10 +75,12 @@ class UserController extends Controller
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect('/login')->with('success', 'Đăng ký thành công');
     }
-    public function displayFogot(){
+    public function displayFogot()
+    {
         return view('user.fogotPass');
     }
-    public function displayUpdatePass(){
+    public function displayUpdatePass()
+    {
         return view('user.updatePass');
     }
 
@@ -89,26 +91,23 @@ class UserController extends Controller
         return redirect('/home');
     }
 
-    public function manage(Request $request){
-
+    public function manage(Request $request)
+    {
         if ($this->isLoggedIn()) {
-        $username = $request->session()->get('username');
-        $user = User::where('Username', $username)->first();
-        $id_user=$user->ID;
+            $username = $request->session()->get('username');
+            $user = User::where('Username', $username)->first();
+            $id_user = $user->ID;
 
-        $document= Documents::getByUserId($id_user);
-        $post=Post::getPostsByUser($id_user);
+            $document = Documents::getByUserId($id_user);
+            $post = Post::getPostsByUser($id_user);
 
-
-        return view("user.manage",[
-            'documents'=>$document,
-            'posts'=>$post,
+            return view('user.manage', [
+                'documents' => $document,
+                'posts' => $post,
             ]);
-
         } else {
             return view('user.index')->with('');
         }
-
     }
     public function isLoggedIn()
     {
@@ -122,12 +121,11 @@ class UserController extends Controller
         return false;
     }
 
-
     // public function showInforUser(Request $request)
     // {
-        
+
     // }
-    
+
     public function updateInforUser(Request $request)
     {
         // Lấy thông tin từ biểu mẫu
@@ -141,16 +139,61 @@ class UserController extends Controller
 
         try {
             $query = "UPDATE users SET full_name = '$fullname', sex = '$sex', Email = '$email', address = '$address' WHERE Username = '$username'";
-        
+
             User::statement($query);
-            
+
             // Cập nhật thành công
-            echo "Cập nhật thông tin người dùng thành công.";
+            echo 'Cập nhật thông tin người dùng thành công.';
             return back();
         } catch (QueryException $e) {
             // Xử lý ngoại lệ
-            echo "Lỗi: " . $e->getMessage();
+            echo 'Lỗi: ' . $e->getMessage();
         }
+    }
+
+    public function sendResetCodeEmail(Request $request)
+    {
+        $user = User::where('Email', $request->email)->first();
+
+        if (!$user) {
+            return redirect()->back()->withEErrors( 'Email không tồn tại');
+            //return $user.'loio';
+        }
+
+        // Tạo mã code ngẫu nhiên
+        $code = Str::random(6);
+
         
+
+        // Tạo nội dung email
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = env('MAIL_HOST');
+        $mail->SMTPAuth = true;
+        $mail->Username = env('MAIL_USERNAME');
+        $mail->Password = env('MAIL_PASSWORD');
+        $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+        $mail->Port = env('MAIL_PORT');
+        // $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        $mail->setFrom('anhanhvodoi03@gmail.com', 'quanganh');
+        $mail->addAddress($user->Email);
+        $mail->isHTML(true);
+        $mail->Subject = 'Quên mật khẩu';
+        $mail->Body = 'Đây là mã dùng một lần. Bạn vui lòng không cung cấp cho bất kì ai mã này. Mã của bạn: ' . $code;
+
+        try {
+            $mail->send();
+            // Lưu mã vào cơ sở dữ liệu
+            DB::table('password_resets')->insert([
+                'email' => $user->Email,
+                'token' => $code,
+                'created_at' => now(),
+            ]);
+            return view('user.verify',['email'=>$request->email,])->with('success', 'Email đã được gửi để đặt lại mật khẩu');
+        } catch (Exception $e) {
+            return redirect()
+                ->back()
+                ->withErrors('Có lỗi xảy ra khi gửi email: ' . $mail->ErrorInfo);
+        }
     }
 }

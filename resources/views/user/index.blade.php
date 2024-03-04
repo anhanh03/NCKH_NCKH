@@ -23,9 +23,9 @@
             @endforeach
         </div>
     @endif
-    
 
-    @endif
+
+
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
@@ -40,7 +40,7 @@
                         <input type="password" placeholder="Password" name="password" />
                     </div>
                     <input type="submit" value="Login" class="btn solid" />
-                    <a class="forgotpwd" href="#">Quên mật khẩu ?</a>
+                    <a class="forgotpwd" href="{{ route('displayFogot') }}">Quên mật khẩu ?</a>
 
                     <p class="social-text">Or Sign in with social platforms</p>
                     <div class="social-media">
