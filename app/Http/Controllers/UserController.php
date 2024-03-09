@@ -42,7 +42,7 @@ class UserController extends Controller
                 return redirect('/home');
             } elseif ($user->ID_role == 1) {
                 // Tài khoản loại 1, chuyển về /admin
-                Session::put('username', $username);
+                Session::put('usernameAdmin', $username);
                 // Session::put('user_id', $user->id);
                 // Lưu thông tin  vào biến session
                 return redirect('/homeAdmin');
@@ -54,6 +54,20 @@ class UserController extends Controller
 
     public function signup(Request $request)
     {
+        $request->validate([
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ], [
+            'username.required' => 'Vui lòng nhập tên người dùng',
+            'username.unique' => 'Tên người dùng đã được sử dụng',
+            'email.required' => 'Vui lòng nhập địa chỉ email',
+            'email.email' => 'Địa chỉ email không hợp lệ',
+            'email.unique' => 'Địa chỉ email đã được sử dụng',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
+        ]);
+
         $username = $request->input('username');
         $email = $request->input('email');
         $password = $request->input('password');
