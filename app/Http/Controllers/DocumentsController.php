@@ -25,11 +25,13 @@ class DocumentsController extends Controller
         $documents = Documents::getByTopicId($topicId);
         return response()->json($documents);
     }
+
     public function showCreate()
     {
         return view('document.createDocument');
     }
 
+    
     public function createDocument(Request $request)
     {
         if($this->userController->isLoggedIn()){
