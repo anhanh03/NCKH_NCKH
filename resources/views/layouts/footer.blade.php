@@ -30,7 +30,7 @@
                  </div>
              </div>
              <div class="col-md-3">
-                 <div class="info-part-two320">
+                 <div class="info-part-two320 text-center">
                      <h4>Quick Links</h4>
                      <a href="#">
                          <p>-Home</p>
