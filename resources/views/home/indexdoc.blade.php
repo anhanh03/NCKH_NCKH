@@ -64,8 +64,19 @@
                                                         <a href="#"><i class="fa fa-question-circle-o"
                                                                 aria-hidden="true">
                                                                 Question</i></a>
-                                                        <a href="#"><i class="fa fa-bug" aria-hidden="true">
-                                                                Report</i></a>
+                                                                <a id="reportLink-{{ $document->ID }}" class="reportLink" href="#">
+                                                                    <i class="fa fa-bug" aria-hidden="true"></i> Report
+                                                                </a>
+                                                            
+                                                                <form id="reportForm-{{ $document->ID }}" class="reportForm" action="{{ route('report') }}" method="GET"
+                                                                    style="display: none;">
+                                                                    @csrf
+                                                                    <input type="hidden" name="document_id" value="{{ $document->ID }}">
+                                                                    <label for="reason">Lý do báo cáo:</label>
+                                                                    <textarea name="reason" id="reason" cols="30" rows="5"></textarea>
+                                                                    <input type="submit" value="Gửi báo cáo">
+                                                                </form>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,3 +136,21 @@
 
     </section>
 @endsection
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const reportLinks = document.querySelectorAll('.reportLink');
+
+    reportLinks.forEach(function(reportLink) {
+        reportLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const document_id = this.id.split('-')[1];
+            const reportForm = document.getElementById(`reportForm-${document_id}`);
+            if (reportForm) {
+                reportForm.style.display = 'block';
+            }
+        });
+    });
+});
+
+
+</script>

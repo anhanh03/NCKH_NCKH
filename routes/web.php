@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\ErrorController;
+use App\Http\Controllers\TopicController;
 use App\Models\HomeController as ModelsHomeController;
 use App\Models\User;
 use App\Models\Topic;
@@ -131,6 +132,7 @@ Route::get('/spp',function(Request $request){
     return view('help.suppost');
 })->name('suppost');
 
+Route::get('/report', [DocumentsController::class, 'report'])->name('report');
 
 
 

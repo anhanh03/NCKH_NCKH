@@ -68,8 +68,14 @@
                                                             ago</i></a>
                                                     <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
                                                             Question</i></a>
-                                                    <a href="#"><i class="fa fa-bug" aria-hidden="true">
-                                                            Report</i></a>
+                                                    {{-- <a id="reportLink" href="#">
+                                                        <i class="fa fa-bug" aria-hidden="true"></i> Report
+                                                    </a> --}}
+
+                                                    
+
+
+
                                                 </div>
                                             </div>
                                         </div>

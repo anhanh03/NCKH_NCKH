@@ -44,8 +44,33 @@
                                                         class="fa fa-folder" aria-hidden="true"> wordpress</i></a> <a
                                                     href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
                                                         ago</i></a> <a href="#"><i class="fa fa-question-circle-o"
-                                                        aria-hidden="true"> Question</i></a> <a href="#"><i
-                                                        class="fa fa-bug" aria-hidden="true"> Report</i></a> </div>
+                                                        aria-hidden="true"> Question</i></a> 
+                                                        <a id="reportLink" href="#">
+                                                            <i class="fa fa-bug" aria-hidden="true"></i> Report
+                                                        </a>
+
+                                                        <form id="reportForm" action="{{ route('report') }}" method="POST"
+                                                            style="display: none;">
+                                                            @csrf
+                                                            <input type="hidden" name="topic_id"
+                                                                value="">
+                                                            <label for="reason">Lý do báo cáo:</label>
+                                                            <textarea name="reason" id="reason" cols="30" rows="5"></textarea>
+                                                            <input type="submit" value="Gửi báo cáo">
+                                                        </form>
+                                                        <script>
+                                                            document.addEventListener('DOMContentLoaded', function() {
+                                                                const reportLink = document.querySelector('#reportLink');
+                                                                const reportForm = document.querySelector('#reportForm');
+
+                                                                reportLink.addEventListener('click', function(event) {
+                                                                    event.preventDefault();
+                                                                    reportForm.style.display = 'block'; // Hiển thị form khi nhấp vào liên kết
+                                                                });
+                                                            });
+                                                        </script>
+                                                    
+                                                    </div>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
