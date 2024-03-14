@@ -2423,3 +2423,17 @@ a:hover{
 .spaceLeft{
     margin-left: 5px;
 }
+
+.quick-chat{
+    display: flex;
+    background-color: #0077B5;
+    width: auto;
+    height: 21px;
+    padding: 3px;
+    border-radius: 3px;
+    align-items: center;
+}
+.quick-chat> a{
+    color: #fff;
+    align-items: center;
+}

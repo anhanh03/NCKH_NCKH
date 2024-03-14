@@ -5,8 +5,8 @@
                 <div class="col-md-6">
                     <div class="navbar-menu-left-side239">
                         <ul>
-                            <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>Liên hệ</a></li>
-                            <li><a href="#"><i class="fa fa-headphones" aria-hidden="true"></i>Hỗ trợ</a></li>
+                            <li><a href="{{ route('contact') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i>Liên hệ</a></li>
+                            <li><a href="{{ route('suppost') }}"><i class="fa fa-headphones" aria-hidden="true"></i>Hỗ trợ</a></li>
                             @if (session()->has('username'))
                                 <li><a href="{{ route('displayInfor') }}"><i class="fa fa-user"
                                             aria-hidden="true"></i>{{ session('username') }}</a></li>
