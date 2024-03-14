@@ -125,24 +125,11 @@ Route::get('chinh-sach-rieng-tu', function () {
 
 Route::get('/contact',function(Request $request){
     return view('help.contact');
-});
+})->name('contact');
 
 Route::get('/spp',function(Request $request){
     return view('help.suppost');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
+})->name('suppost');
 
 
 
