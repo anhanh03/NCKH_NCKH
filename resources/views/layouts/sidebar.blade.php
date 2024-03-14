@@ -1,5 +1,13 @@
 <!--strart col-md-3 (side bar)-->
 <aside class="col-md-3 sidebar97239">
+    <div class="categori-part329">
+        <h4>Lối tắt</h4>
+        <ul>
+            <li><a href="{{route('displayAddPost')}}">Tạo bài đăng</a></li>
+            <li><a href="{{route('showCreateDocument')}}">Up tài liệu</a></li>
+            
+        </ul>
+    </div>
     <div class="status-part3821">
         <h4>Thống kê</h4> <a href="#"><i class="fa fa-question-circle" aria-hidden="true">
                 Câu hỏi (20)</i></a> <i class="fa fa-comment" aria-hidden="true"> Trả lời (50)</i>
