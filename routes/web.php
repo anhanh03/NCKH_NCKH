@@ -140,4 +140,9 @@ Route::get('/report', [DocumentsController::class, 'report'])->name('report');
 
 
 Route::get('/homeAdmin', [AdminController::class, 'index'])->name('homeAdmin');
-
+Route::get('/homeAdmin{type}',[AdminController::class, 'manageAdmin'])->name('manageAmin');
+Route::get('/updateTitle',[AdminController::class, 'dpTitleUpdate'])->name('dpTitleUpdate');
+Route::get('/updatePost',[AdminController::class, 'dpPostUpdate'])->name('dpPostUpdate');
+Route::get('/updateDocument',[AdminController::class, 'dpDocumentUpdate'])->name('dpDocumentUpdate');
+Route::get('/updateMember',[AdminController::class, 'dpMemberUpdate'])->name('dpMemberUpdate');
+Route::get('/addTitle',[AdminController::class, 'dpTitleAdd'])->name('dpTitleAdd');

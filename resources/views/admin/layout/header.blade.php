@@ -2,18 +2,17 @@
     <div class="col-12 m-0 p-0">
         <nav class="navbar navbar-dark bg-dark sticky-top ">
             <div class="container-fluid">
-
-                <a class="navbar-brand" href="#">Admin</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                    aria-label="Toggle navigation">
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#">Admin</a>
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-start text-bg-dark " tabindex="-1" id="offcanvasDarkNavbar"
                     aria-labelledby="offcanvasDarkNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-                            <img src="" alt="avata">Ten Admin
+                            <img src="" alt="avata">Tên Admin
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
@@ -24,20 +23,20 @@
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
+                                <a class="nav-link" href="{{ route('manageAmin', ['type'=>"member"]) }}">Thành viên</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
+                                    Quản lý
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark ">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
+                                    <li><a class="dropdown-item" href="{{ route('manageAmin', ['type'=>"post"]) }}">Bài viết</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('manageAmin', ['type'=>"title"]) }}">Tiêu đề</a></li>
+                                    {{-- <li>
                                         <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </li> --}}
+                                    <li><a class="dropdown-item" href="{{ route('manageAmin', ['type'=>"document"]) }}">Tài liệu</a></li>
                                 </ul>
                             </li>
                         </ul>
