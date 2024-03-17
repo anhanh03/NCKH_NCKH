@@ -52,6 +52,11 @@ class Documents extends Model
         return self::where('id_user', $Id)->get();
     }
 
+    public static function getTotalCountDocument()
+    {
+        return self::count(); // Lấy tổng số bản ghi của bảng post
+    }
+
     public static function getDocumentById($documentsId)
     {
         return self::find($documentsId);

@@ -71,6 +71,11 @@ class User extends Authenticatable
     {
         DB::statement($query);
     }
+
+    public static function getTotalCountUser()
+    {
+        return self::count(); // Lấy tổng số bản ghi của bảng post
+    }
    
 
 

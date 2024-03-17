@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Mail\VerifyPassword;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
@@ -34,16 +35,16 @@ class UserController extends Controller
 
         if ($user && password_verify($password, $user->password)) {
             // Kiểm tra loại tài khoản
-            if ($user->ID_role == 0) {
+            if ($user->ID_role == 2) {
                 // Tài khoản loại 0, chuyển về /home
                 Session::put('username', $username);
-                // Session::put('user_id', $user->id);
+                //Session::put('user_id', $user->id);
                 // Lưu thông tin vào biến session
                 return redirect('/home');
             } elseif ($user->ID_role == 1) {
                 // Tài khoản loại 1, chuyển về /admin
                 Session::put('usernameAdmin', $username);
-                // Session::put('user_id', $user->id);
+                //Session::put('user_id', $user->id);
                 // Lưu thông tin  vào biến session
                 return redirect('/homeAdmin');
             }
@@ -84,6 +85,7 @@ class UserController extends Controller
         $user = new User();
         $user->Username = $username;
         $user->Email = $email;
+        $user->ID_role=2;
         $user->Password = bcrypt($password); // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
         // Set các thuộc tính khác của người dùng (FullName, DateOfBirth, Address, Gender, UserType, JoinDate, vv.)
         $user->JoinDate = date('Y-m-d H:i:s');

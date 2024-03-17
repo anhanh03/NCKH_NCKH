@@ -32,6 +32,10 @@ class Post extends Model
         return $this->belongsTo(Topic::class, 'ID_topic', 'ID');
     }
 
+    public static function getTotalCountPost()
+    {
+        return self::count(); // Lấy tổng số bản ghi của bảng post
+    }
 
     
     // Phương thức tạo mới một bài viết

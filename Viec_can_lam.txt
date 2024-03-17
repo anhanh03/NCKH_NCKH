@@ -3,3 +3,4 @@ ADMIN:
  quản lý tài liệu
  quản lý chủ đề
  quản lý TK Admin
+ // quanr lý report nữa nhé 
