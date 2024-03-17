@@ -1,6 +1,6 @@
 <!--strart col-md-3 (side bar)-->
 <aside class="col-md-3 sidebar97239">
-    <div class="categori-part329">
+    <div class="categori-part329" style="margin-bottom: 35px">
         <h4>Lối tắt</h4>
         <ul>
             <li><a href="{{route('displayAddPost')}}">Tạo bài đăng</a></li>
