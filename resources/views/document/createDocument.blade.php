@@ -1,6 +1,20 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
     <h2>Tải lên tài liệu</h2>
 
     <form action="{{ route('addDocument') }}" method="POST" enctype="multipart/form-data">

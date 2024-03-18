@@ -39,7 +39,7 @@ class DocumentsController extends Controller
 
         
         $request->validate([
-            'document_file' => 'required|mimes:pdf,docx,txt|max:1024',
+            'document_file' => 'required|mimes:pdf|max:1024',
             'ID_topic' => 'required',
             'Document_Name' => 'required',
             'Description' => 'required',

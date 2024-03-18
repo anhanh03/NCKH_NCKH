@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    @foreach ($errors->all() as $error)
+        {{ $error }}<br>
+    @endforeach
+</div>
+@endif
+
 <section class="header-descriptin329" >
     <div class="container">
         <h3>Document</h3>
@@ -117,7 +132,7 @@
                 <div class="row" style="margin: 20px 0;">
                     <div class="col-md-12" style="">
                         <ul style="float: left;">
-                            <button type="button" class="btn btn-success" style="margin: 0 8px;"><i class="fa fa-download" aria-hidden="true" ></i>Download</button>
+                            <a type="button" href="{{ $document->Storage_Path }}" class="btn btn-success" style="margin: 0 8px;"><i class="fa fa-download" aria-hidden="true" ></i>Download</a>
                             <a href="" style="margin: 0 8px;"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</a>
                             <a href="" style="margin: 0 8px;"><i class="fa fa-save" aria-hidden="true"></i>Save</a>
                             <a href="" style="margin: 0 8px;"><i class="fa fa-share" aria-hidden="true"></i>Share</a>
