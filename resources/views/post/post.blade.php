@@ -48,8 +48,7 @@
 
                             <hr>
                             <div class="post-footer29032">
-                                <div class="l-side2023"> <i class="fa fa-check check2" aria-hidden="true"> kiểm tra đã trả
-                                        lời chưa(kiểm duyệt)</i> <a href="#"><i class="fa fa-star star2"
+                                <div class="l-side2023"> <i class="fa fa-check check2" aria-hidden="true"> (kiểm duyệt)</i> <a href="#"><i class="fa fa-star star2"
                                             aria-hidden="true"> 5</i></a> <i class="fa fa-folder folder2"
                                         aria-hidden="true"> wordpress</i> <i class="fa fa-clock-o clock2"
                                         aria-hidden="true"> Thời gian đăng</i> <a href="#"><i

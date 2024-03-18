@@ -22,6 +22,7 @@ class UserController extends Controller
     //
     public function index()
     {
+        
         return view('user.index');
     }
 
@@ -36,8 +37,10 @@ class UserController extends Controller
         if ($user && password_verify($password, $user->password)) {
             // Kiểm tra loại tài khoản
             if ($user->ID_role == 2) {
-                // Tài khoản loại 0, chuyển về /home
+                // Tài khoản loại 2, chuyển về /home
                 Session::put('username', $username);
+                $user->count_active_user= 1;
+                $user->save();
                 //Session::put('user_id', $user->id);
                 // Lưu thông tin vào biến session
                 return redirect('/home');
@@ -55,19 +58,22 @@ class UserController extends Controller
 
     public function signup(Request $request)
     {
-        $request->validate([
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-        ], [
-            'username.required' => 'Vui lòng nhập tên người dùng',
-            'username.unique' => 'Tên người dùng đã được sử dụng',
-            'email.required' => 'Vui lòng nhập địa chỉ email',
-            'email.email' => 'Địa chỉ email không hợp lệ',
-            'email.unique' => 'Địa chỉ email đã được sử dụng',
-            'password.required' => 'Vui lòng nhập mật khẩu',
-            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
-        ]);
+        $request->validate(
+            [
+                'username' => 'required|unique:users',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8',
+            ],
+            [
+                'username.required' => 'Vui lòng nhập tên người dùng',
+                'username.unique' => 'Tên người dùng đã được sử dụng',
+                'email.required' => 'Vui lòng nhập địa chỉ email',
+                'email.email' => 'Địa chỉ email không hợp lệ',
+                'email.unique' => 'Địa chỉ email đã được sử dụng',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
+            ],
+        );
 
         $username = $request->input('username');
         $email = $request->input('email');
@@ -85,7 +91,7 @@ class UserController extends Controller
         $user = new User();
         $user->Username = $username;
         $user->Email = $email;
-        $user->ID_role=2;
+        $user->ID_role = 2;
         $user->Password = bcrypt($password); // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
         // Set các thuộc tính khác của người dùng (FullName, DateOfBirth, Address, Gender, UserType, JoinDate, vv.)
         $user->JoinDate = date('Y-m-d H:i:s');
@@ -100,15 +106,14 @@ class UserController extends Controller
     {
         return view('user.fogotPass');
     }
-// Đổi mật khẩu
+    // Đổi mật khẩu
     public function displayUpdatePass()
     {
         return view('user.updatePass');
     }
 
-    
-
-    public function updatePass(Request $request){
+    public function updatePass(Request $request)
+    {
         // Validate form data
         $request->validate([
             'new_password' => 'required|min:8', // New password is required and must be at least 8 characters long
@@ -123,20 +128,21 @@ class UserController extends Controller
         try {
             // Save the updated password to the database
             $user->save();
-            
+
             return redirect('/')->with('success', 'Password updated successfully.');
         } catch (QueryException $e) {
-            
             return redirect()->back()->withErrors('Lỗi chưa thể cập nhật mật khẩu lúc này.');
         }
-
     }
-
 
     public function logout()
     {
+        $username=Session::get('username');
+        $user = User::where('username', $username)->first();
+        $user->count_active_user= 0;
+        $user->save();
         Session::forget('username'); // Xóa biến session 'username'
-
+        
         return redirect('/home');
     }
 
@@ -205,7 +211,7 @@ class UserController extends Controller
         $user = User::where('Email', $request->email)->first();
 
         if (!$user) {
-            return redirect()->back()->withEErrors( 'Email không tồn tại');
+            return redirect()->back()->withEErrors('Email không tồn tại');
             //return $user.'loio';
         }
         // Tạo mã code ngẫu nhiên
@@ -234,7 +240,7 @@ class UserController extends Controller
                 'token' => $code,
                 'created_at' => now(),
             ]);
-            return view('user.verify',['email'=>$request->email,])->with('success', 'Email đã được gửi để đặt lại mật khẩu');
+            return view('user.verify', ['email' => $request->email])->with('success', 'Email đã được gửi để đặt lại mật khẩu');
         } catch (Exception $e) {
             return redirect()
                 ->back()
@@ -244,13 +250,9 @@ class UserController extends Controller
 
     // public function sendResetCodeEmail(Request $request){
     //     $user = User::where('Email', $request->email)->first();
-        
+
     //         Mail::to($user->Email)->send(new VerifyPassword($user));
     //         return back();
 
-        
-
     // }
-
-
 }

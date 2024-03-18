@@ -74,7 +74,12 @@ class User extends Authenticatable
 
     public static function getTotalCountUser()
     {
-        return self::count(); // Lấy tổng số bản ghi của bảng post
+        return self::count(); // Lấy tổng số bản ghi của bảng 
+    }
+
+    public static function getActiveUserCount()
+    {
+        return self::where('count_active_user', 1)->count();
     }
    
 

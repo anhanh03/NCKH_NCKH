@@ -25,15 +25,15 @@
                         <div class="col-12 col-sm-3 border-end  m-0 p-0">
                             <div class="list-group p-0 m-0 ">
                                 <button type="button" id="btn-inforuser" onclick="return onclickinfor()"
-                                    class="list-group-item list-group-item-action border-0 ms-0    ">Thông tin</button>
+                                    class="list-group-item list-group-item-action border-0 ms-0 " style="text-align: center">Thông tin</button>
                                 <button type="button" id="btn-updateuser" onclick="return onclickupdate()"
-                                    class="list-group-item list-group-item-action border-0">Chỉnh sửa</button>
+                                    class=" list-group-item list-group-item-action border-0" style="text-align: center">Chỉnh sửa</button>
                                 <a href="{{ route('displayUpdatePass') }}"
-                                    class="list-group-item list-group-item-action bg-warning border-0">
+                                    class="list-group-item list-group-item-action border-0 ms-0 " style="font-weight: 0;">
                                     Đổi mật khẩu
                                 </a>
                                 <a href="{{ route('logout') }}"
-                                    class="list-group-item list-group-item-action bg-warning border-0">
+                                    class="list-group-item list-group-item-action border-0 ms-0 " style="font-weight: 0;">
                                     Đăng xuất
                                 </a>
                             </div>

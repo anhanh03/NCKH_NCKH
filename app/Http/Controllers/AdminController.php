@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
@@ -32,15 +34,19 @@ class AdminController extends Controller
         // Gọi phương thức tĩnh để lấy tổng số bản ghi
         $totalCountUser = User::getTotalCountUser();
         $totalCountDoc = Documents::getTotalCountDocument();
-        $totalCountPost = Post::getTotalCountPost(); 
+        $totalCountPost = Post::getTotalCountPost();
+        $totalCountActiveUser=User::getActiveUserCount();
 
         // Lưu trữ các giá trị trong session flash
         session()->flash('totalCountUser', $totalCountUser);
         session()->flash('totalCountDoc', $totalCountDoc);
         session()->flash('totalCountPost', $totalCountPost);
+        session()->flash('totalCountActiveUser', $totalCountActiveUser);
 
         
     }
+
+    
     public function manageAdmin($type)
     {
         // Gọi phương thức tĩnh để lấy tổng số bản ghi

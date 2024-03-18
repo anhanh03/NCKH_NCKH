@@ -6,7 +6,7 @@
         <div class="row" style="height: 140px;">
             <div class="col-12 w-75 my-2 bg-success-subtle text-center shadow p-3 rounded">
                 Số bài đăng
-                <h3>100</h3>
+                <h3>{{ session('totalCountPost') }}</h3>
             </div>
             
         </div>
@@ -16,7 +16,7 @@
         <div class="row" style="height: 140px;">
             <div class="col-12 w-75 my-2 bg-info-subtle text-center shadow p-3 rounded">
                 Số thành viên
-                <h3>100</h3>
+                <h3>{{ session('totalCountUser') }}</h3>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
         <div class="row" style="height: 140px;">
             <div class="col-12 w-75 my-2 bg-warning-subtle text-center shadow p-3 rounded">
                 Tổng tài liệu
-                <h3>100</h3>
+                <h3>{{ session('totalCountDoc') }}</h3>
             </div>
             
         </div>
@@ -34,8 +34,8 @@
     <div class="col-sm-3 col-6 ">
         <div class="row" style="height: 140px;">
             <div class="col-12 w-75 my-2 bg-danger-subtle text-center shadow p-3 rounded">
-                Số tương tác %
-                <h3>100</h3>
+                Đang truy cập
+                <h3>{{ session('totalCountActiveUser') }}</h3>
             </div>
         </div>
 

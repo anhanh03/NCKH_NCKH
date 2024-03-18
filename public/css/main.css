@@ -2409,7 +2409,7 @@ a:hover .user-name{
 }
 
 a{  
-    font-weight: 600;
+    /* font-weight: 600; */
     text-align: center;
     color: #bbb;  
     text-decoration: none;
@@ -2436,4 +2436,8 @@ a:hover{
 .quick-chat> a{
     color: #fff;
     align-items: center;
+}
+
+.update-user-fontw{
+    font-weight: 0 !important;
 }
