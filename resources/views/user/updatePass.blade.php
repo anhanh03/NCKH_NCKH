@@ -35,6 +35,7 @@
                     </h3>
                     <form method="GET" action="{{ route('updatePassword') }}">
                         @csrf <!-- CSRF protection -->
+                        <input type="hidden" name="email" value="{{ $email }}">
                         <div class="mb-3">
                             <label for="new_password" class="form-label">New Password</label>
                             <input type="password" class="form-control" id="new_password" name="new_password" aria-describedby="emailHelp">

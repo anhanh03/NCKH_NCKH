@@ -16,13 +16,13 @@ use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Auth;
+use App\Models\PasswordReset;
 use Mail;
 class UserController extends Controller
 {
     //
     public function index()
     {
-        
         return view('user.index');
     }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
             if ($user->ID_role == 2) {
                 // Tài khoản loại 2, chuyển về /home
                 Session::put('username', $username);
-                $user->count_active_user= 1;
+                $user->count_active_user = 1;
                 $user->save();
                 //Session::put('user_id', $user->id);
                 // Lưu thông tin vào biến session
@@ -120,8 +120,17 @@ class UserController extends Controller
             'confirm_password' => 'required|same:new_password', // Confirm password must match new password
         ]);
 
+        $email = $request->input('email');
         $username = $request->session()->get('username');
-        $user = User::where('Username', $username)->first();
+
+        if ($email === null) {
+            $user = User::where('Username', $username)->first();
+        } else {
+            $user = User::where('Email', $email)->first();
+        }
+        if (!$user) {
+            return redirect()->back()->withErrors('Người dùng không tồn tại.');
+        }
 
         // Hash the new password
         $user->Password = bcrypt($request->new_password);
@@ -137,12 +146,12 @@ class UserController extends Controller
 
     public function logout()
     {
-        $username=Session::get('username');
+        $username = Session::get('username');
         $user = User::where('username', $username)->first();
-        $user->count_active_user= 0;
+        $user->count_active_user = 0;
         $user->save();
         Session::forget('username'); // Xóa biến session 'username'
-        
+
         return redirect('/home');
     }
 
@@ -229,17 +238,32 @@ class UserController extends Controller
         $mail->setFrom('21111065662@hunre.edu.vn', '21111065662@hunre.edu.vn');
         $mail->addAddress($user->Email);
         $mail->isHTML(true);
-        $mail->Subject = 'Quên mật khẩu';
+        $mail->Subject = 'Quen mat khau !';
         $mail->Body = 'Đây là mã dùng một lần. Bạn vui lòng không cung cấp cho bất kì ai mã này. Mã của bạn: ' . $code;
 
         try {
             $mail->send();
-            // Lưu mã vào cơ sở dữ liệu
-            DB::table('password_resets')->insert([
-                'email' => $user->Email,
-                'token' => $code,
-                'created_at' => now(),
-            ]);
+            // Kiểm tra xem email đã tồn tại trong bảng password_resets hay chưa
+            $existingRecord = DB::table('password_resets')
+                ->where('email', $user->Email)
+                ->first();
+
+            if ($existingRecord) {
+                // Nếu email đã tồn tại, cập nhật bản ghi
+                DB::table('password_resets')
+                    ->where('email', $user->Email)
+                    ->update([
+                        'token' => $code,
+                        'created_at' => now(),
+                    ]);
+            } else {
+                // Nếu email chưa tồn tại, chèn bản ghi mới
+                DB::table('password_resets')->insert([
+                    'email' => $user->Email,
+                    'token' => $code,
+                    'created_at' => now(),
+                ]);
+            }
             return view('user.verify', ['email' => $request->email])->with('success', 'Email đã được gửi để đặt lại mật khẩu');
         } catch (Exception $e) {
             return redirect()
@@ -248,11 +272,16 @@ class UserController extends Controller
         }
     }
 
-    // public function sendResetCodeEmail(Request $request){
-    //     $user = User::where('Email', $request->email)->first();
+    public function verifyCode(Request $request)
+    {
+        $verifyCode = $request->input('verifyCode');
+        $email = $request->input('email');
+        $verify = PasswordReset::where('email', $email)->first();
 
-    //         Mail::to($user->Email)->send(new VerifyPassword($user));
-    //         return back();
-
-    // }
+        if ($verify->token == $verifyCode) {
+            return view('user.updatePass', ['email' => $email])->with('success', 'Xác thực thành công');
+        } else {
+            return redirect()->back()->withErrors('Mã xác thực chưa đúng chúng tôi đã gửi mã mới, vui lòng kiểm tra email!');
+        }
+    }
 }

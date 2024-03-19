@@ -42,6 +42,8 @@ Route::get('/updatePassword', [UserController::class, 'updatePass'])->name('upda
 
 Route::get('/displayVerify', [UserController::class, 'sendResetCodeEmail'])->name('displayVerify');
 
+Route::get('/verifyCode', [UserController::class, 'verifyCode'])->name('verifyCode');
+
 Route::get('/signinorsignup', [UserController::class, 'index'])->name('signinorsignup');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');

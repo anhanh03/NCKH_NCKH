@@ -9,7 +9,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <title>Fogot Password</title>
 </head>
+@if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
 
 <body class="bg-primary-subtle">
     <div class="container">
@@ -19,16 +31,17 @@
                 {{-- <a class=" text-center" href="#"><img src="img/logo.png" alt="Logo"></a> --}}
                 <h3 class="text-center" style="color: rgb(0, 0, 0)"> <img src="img/logo.png" alt="Logo"> <br>Fogot
                     Password</h3>               
-                <form action="">
+                <form action="{{ route('verifyCode') }}">
                     <div id="code">
                         <div class="mb-3">
                             <label for="" class="form-label">Enter the code sent to your email address:</label>
-                            <input type="text" class="form-control" id="Code" aria-describedby="emailHelp">
+                            <input type="hidden" name="email" value="{{ $email }}">
+                            <input type="text" class="form-control" name="verifyCode" id="Code" aria-describedby="emailHelp">
                         </div>
-                        <a href="#" class="text-decoration-none">
+                        <a href="{{ route('displayVerify') }}" class="text-decoration-none">
                             <p>Gửi lại mã code?</p>
                         </a>
-                        <button type="submit" class="btn btn-primary">Send</button>
+                        <input type="submit" class="btn btn-primary" value="Send">
                     </div>
                 </form>
             </div>
