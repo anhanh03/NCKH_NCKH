@@ -1,4 +1,4 @@
-<div class="row mt-5">
+
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -10,7 +10,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Tác giả</th>
                 <th scope="col">Ngày đăng</th>
-                <th scope="col" colspan="2" class="text-center">Setting</th>
+                <th scope="col">Setting</th>
               </tr>
             </thead>
             <tbody>
@@ -19,8 +19,8 @@
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
-                <td><a href="{{route('dpDocumentUpdate')}}"><button type="button" class="btn btn-info">Update</button></a></td>
-                <td><a href="#"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                <td><a href="{{ route('manageAmin', ['type'=>"updateDocument"]) }}"><button type="button" class="btn btn-info">Update</button></a>
+                &ensp;&ensp;<a href="#"><button type="button" class="btn btn-danger">Delete</button></a></td>
               </tr>
               
             </tbody>

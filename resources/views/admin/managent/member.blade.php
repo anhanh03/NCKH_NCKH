@@ -1,5 +1,4 @@
 
-<div class="row mt-5">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -11,7 +10,7 @@
                 <th scope="col">Tên</th>
                 <th scope="col">Email</th>
                 <th scope="col">Tương tác</th>
-                <th scope="col" colspan="2" class="text-center">Setting</th>
+                <th scope="col">Setting</th>
               </tr>
             </thead>
             <tbody>
@@ -20,8 +19,8 @@
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>99</td>
-                <td><a href="{{route('dpMemberUpdate')}}"><button type="button" class="btn btn-info">Update</button></a></td>
-                <td><a href="#"> <button type="button" class="btn btn-danger">Delete</button></a></td>
+                <td style="align-items: center"><a href="{{ route('manageAmin', ['type'=>"updateMember"]) }}"><button type="button" class="btn btn-info">Update</button></a>
+                  &ensp;&ensp;<a href="#"> <button type="button" class="btn btn-danger">Delete</button></a></td>
               </tr>
             </tbody>
           </table>

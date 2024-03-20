@@ -15,17 +15,17 @@ class AdminController extends Controller
 {
     //
     public function index(Request $request){
-        // return view('admin.index');
+        return view('admin.index');
         // Kiểm tra xem có biến session 'usernameAdmin' được thiết lập không
-        if (Session::has('usernameAdmin')) {
-            // Nếu có, tiếp tục hiển thị trang admin
-            // Lưu trữc giá trị của bản ghi vào sesion
-            $this->totalCount();
-            return view('admin.index');
-        } else {
-            // Nếu không, chuyển hướng người dùng đến trang đăng nhập
-            return redirect('/login')->with('error', 'Bạn phải đăng nhập để truy cập trang admin');
-        }
+        // if (Session::has('usernameAdmin')) {
+        //     // Nếu có, tiếp tục hiển thị trang admin
+        //     // Lưu trữc giá trị của bản ghi vào sesion
+        //     $this->totalCount();
+        //     return view('admin.index');
+        // } else {
+        //     // Nếu không, chuyển hướng người dùng đến trang đăng nhập
+        //     return redirect('/login')->with('error', 'Bạn phải đăng nhập để truy cập trang admin');
+        // }
     }
 
 
@@ -68,6 +68,9 @@ class AdminController extends Controller
     }
     public function dpMemberUpdate(){
         return view('admin.updateform.updateMember');
+    }
+    public function dpUpdateAdmin(){
+        return view('admin.managent.updateadmin');
     }
 
     public function logout()
