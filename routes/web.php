@@ -136,7 +136,9 @@ Route::get('/spp',function(Request $request){
 
 Route::get('/report', [DocumentsController::class, 'report'])->name('report');
 
-
+Route::get('/about',function(Request $request){
+    return view('abouts.about');
+})->name('about');
 
 // -----------------------------------  ADMIN Route ----------------------------------------------
 
