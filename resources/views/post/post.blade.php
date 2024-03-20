@@ -130,7 +130,7 @@
                             <div class="col-md-12">
                                 <div class="post9320-box">
                                     <form action="{{ route('upcomment') }}" method="GET">
-                                        <input type="hidden" name="user_id" value="{{ $post->ID_user }}">
+                                        <input type="hidden" name="user_id" value="{{ session('username') }}">
                                         <input type="hidden" name="post_id" value="{{ $post->ID }}">
                                         <input type="hidden" name="document_id" value="">
                                         <input type="text" class="comment-input219882" placeholder="Enter Your Post"

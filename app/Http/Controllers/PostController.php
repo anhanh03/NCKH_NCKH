@@ -96,12 +96,17 @@ class PostController extends Controller
         $post->content = $content;
         $post->create_date = now();
         $post->count_view = 0;
+        
+        try{
+            // Lưu bản ghi vào cơ sở dữ liệu
+            $post->save();
+            // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
+            return back()->with('success','Thêm bài viết thành công');
 
-        // Lưu bản ghi vào cơ sở dữ liệu
-        $post->save();
-
-        // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
-        return back();
+        }catch(QueryException $e){
+            return back()->withErrors('Lỗi khi thêm bài viết');
+        }
+        
     }
 
     public function editPost(Request $request)
