@@ -2411,7 +2411,7 @@ a:hover .user-name{
 a{  
     /* font-weight: 600; */
     text-align: center;
-    color: #bbb;  
+    color: #000000;  
     text-decoration: none;
 }
 a:hover{

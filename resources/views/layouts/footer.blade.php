@@ -2,16 +2,18 @@
  <div class="footer-search">
      <div class="container">
          <div class="row">
-             <div id="custom-search-input">
-                 <div class="input-group col-md-12"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                     <input type="text" class="  search-query form-control user-control30"
-                         placeholder="Search here...." /> <span class="input-group-btn">
-                         <button class="btn btn-danger" type="button">
-                             <span class=" glyphicon glyphicon-search"></span> </button>
-                     </span>
-                 </div>
-             </div>
-         </div>
+            <form action="{{ route('search') }}">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <input name="keyword" type="text" class="  search-query form-control user-control30"
+                        placeholder="Search here...." /> <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span> </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
      </div>
  </div>
  <section class="footer-part">
@@ -73,22 +75,22 @@
                      <h4>Thống kê trực tuyến</h4>
                      <div class="news-info209">
                          <h5>Số người truy cập: </h5>
-                         <h5>50</h5>
+                         <h5>{{ session('totalCountActiveUser') }}</h5>
                      </div>
 
                      <h4>Thống kê diễn đàn</h4>
                      <div class="news-info209 article statistics">
                          <div class="topic">
-                             <h5>Chủ để: </h5>
-                             <h5>50</h5>
+                             <h5>Tài liệu: </h5>
+                             <h5>{{ session('totalCountDoc') }}</h5>
                          </div>
                          <div class="posts">
                              <h5>Bài viết: </h5>
-                             <h5>50</h5>
+                             <h5>{{ session('totalCountPost') }}</h5>
                          </div>
                          <div class="members">
                              <h5>Thành viên: </h5>
-                             <h5>50</h5>
+                             <h5>{{ session('totalCountUser') }}</h5>
                          </div>
                      </div>
                  </div>

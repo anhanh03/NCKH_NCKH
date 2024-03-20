@@ -29,7 +29,36 @@ class PostController extends Controller
 
     public function displayPost()
     {
+        
         $ID = request()->input('idpost');
+        
+        
+        $post = Post::getPostById($ID);
+
+        $comments = Comment::getCommentByPostId($ID);
+        $commentsWithUsernames = [];
+
+        foreach ($comments as $comment) {
+            $commentWithUsername = $comment;
+            $username = $comment->user->Username; // Lấy tên người dùng từ mô hình User liên quan
+            $commentWithUsername->username = $username; // Thêm tên người dùng vào đối tượng comment
+            $commentsWithUsernames[] = $commentWithUsername;
+        }
+
+        if ($post) {
+            return view('post.post', ['post' => $post, 'comments' => $comments]);
+        } else {
+            return 'null';
+        }
+    }
+    public function show($idPost)
+    {
+        if(!$idPost){
+            $ID = request()->input('idpost');
+        }else{
+            $ID=$idPost;
+        }
+        
         $post = Post::getPostById($ID);
 
         $comments = Comment::getCommentByPostId($ID);
@@ -96,12 +125,17 @@ class PostController extends Controller
         $post->content = $content;
         $post->create_date = now();
         $post->count_view = 0;
+        
+        try{
+            // Lưu bản ghi vào cơ sở dữ liệu
+            $post->save();
+            // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
+            return back()->with('success','Thêm bài viết thành công');
 
-        // Lưu bản ghi vào cơ sở dữ liệu
-        $post->save();
-
-        // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
-        return back();
+        }catch(QueryException $e){
+            return back()->withErrors('Lỗi khi thêm bài viết');
+        }
+        
     }
 
     public function editPost(Request $request)

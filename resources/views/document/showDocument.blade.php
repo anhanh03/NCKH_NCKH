@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -91,7 +92,7 @@
                                     <form action="{{ route('upcomment') }}">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="hidden" name="user_id" value="{{ $document->id_user }}">
+                                                <input type="hidden" name="user_id" value="{{ session('username') }}">
                                                 <input type="hidden" name="post_id" value="">
                                                 <input type="hidden" name="document_id" value="{{ $document->ID }}">
                                                 <input type="text" class="form-control" name="comment" id="comment" placeholder="Viết đánh giá">

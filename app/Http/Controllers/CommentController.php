@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Http\Controllers\UserController;
+use App\Models\User;
+
 class CommentController extends Controller
 {
     // khai bao lop goi den
@@ -26,9 +28,10 @@ class CommentController extends Controller
             $postID = $request->input('post_id');
             $documentID = $request->input('document_id');
 
+            $user=User::where('Username',$userID)->First();
             // Tạo một comment mới
             $newComment = new Comment();
-            $newComment->ID_user = $userID;
+            $newComment->ID_user = $user->ID;
             $newComment->ID_post = $postID;
             $newComment->ID_document = $documentID;
             $newComment->Content = $comment;
