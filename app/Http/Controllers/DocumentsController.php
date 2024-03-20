@@ -83,7 +83,10 @@ class DocumentsController extends Controller
 
     public function showDocument()
     {
+        
+
         $ID_document = request('id');
+        
         $document = Documents::getDocumentById($ID_document);
 
         if ($document) {
@@ -116,6 +119,47 @@ class DocumentsController extends Controller
             return 'null';
         }
     }
+    public function show($idDoc)
+    {
+        if(!$idDoc){
+
+            $ID_document = request('id');
+        }else{
+            $ID_document = $idDoc;
+        }
+        $document = Documents::getDocumentById($ID_document);
+
+        if ($document) {
+            // Tăng giá trị của count_view lên 1 và lưu vào cơ sở dữ liệu
+            $document->count_view += 1;
+            $document->save();
+
+            $id_username = $document->id_user;
+            $user = User::find($id_username);
+            // Lấy tên người dùng
+            $document->uploaded_by = $user->Username;
+        }
+
+        // Sử dụng Query Builder để lấy các comment và sắp xếp chúng theo thứ tự giảm dần của create_date
+        $comments = Comment::where('ID_document', $ID_document)->orderBy('create_date', 'desc')->take(5)->get();
+
+        // Lấy thông tin người dùng cho mỗi comment
+        foreach ($comments as $comment) {
+            $id_user = $comment->ID_user;
+            $user = User::find($id_user);
+            $comment->user_name = $user->Username;
+        }
+
+        if ($document) {
+            return view('document.showDocument', [
+                'document' => $document,
+                'comment' => $comments, // Sửa từ 'comment' thành 'comments'
+            ]);
+        } else {
+            return 'null';
+        }
+    }
+
 
     public function updateDocument(Request $request, $documentId)
     {
@@ -188,4 +232,8 @@ class DocumentsController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'Báo cáo đã được gửi thành công!');
     }
+
+
+
+
 }

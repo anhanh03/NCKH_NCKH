@@ -19,9 +19,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="navbar-serch-right-side">
-                        <form class="navbar-form" role="search">
+                        <form class="navbar-form" role="search" action="{{ route('search') }}">
                             <div class="input-group add-on">
-                                <input class="form-control form-control222" placeholder="Search" id="srch-term"
+                                <input class="form-control form-control222" name="keyword" placeholder="Search" id="srch-term"
                                     type="text">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default btn-default2913" type="button"><i

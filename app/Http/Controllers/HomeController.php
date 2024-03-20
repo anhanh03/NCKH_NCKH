@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\User;
 use App\Models\Documents;
+use App\Models\Post;
+use App\Http\Controllers\AdminController;
 class HomeController extends Controller
 {
     protected $userController;
@@ -33,11 +35,14 @@ class HomeController extends Controller
     //
     public function index()
     {
+        $adminController = new AdminController();
+        $adminController->totalCount();
+
         $topics = Topic::paginate(10); // Thay thế getAllTopics() bằng paginate(10)
 
         return view('home.index', [
             'topics' => $topics,
-        ])->with('success','Teest thoio');
+        ])->with('success', 'Teest thoio');
     }
 
     public function indexD()
@@ -46,5 +51,24 @@ class HomeController extends Controller
         return view('home.indexdoc', [
             'documents' => $documents,
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        // Lấy từ khóa tìm kiếm từ request
+        $keyword = $request->input('keyword');
+
+        // Tìm kiếm trong bảng documents
+        $documents = Documents::where('Document_Name', 'like', '%' . $keyword . '%')
+            ->orWhere('Description', 'like', '%' . $keyword . '%')
+            ->get();
+
+        // Tìm kiếm trong bảng posts
+        $posts = Post::where('title', 'like', '%' . $keyword . '%')
+            ->orWhere('content', 'like', '%' . $keyword . '%')
+            ->get();
+
+        // Trả về view search.blade.php với dữ liệu tìm kiếm
+        return view('search.search', compact('documents', 'posts', 'keyword'));
     }
 }

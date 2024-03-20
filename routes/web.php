@@ -74,6 +74,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/home-D', [HomeController::class, 'indexD'])->name('homeD');
 
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+Route::get('/documents/{id}', [DocumentsController::class, 'show'])->name('documents.show');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
 
 

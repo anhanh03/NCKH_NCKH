@@ -29,7 +29,36 @@ class PostController extends Controller
 
     public function displayPost()
     {
+        
         $ID = request()->input('idpost');
+        
+        
+        $post = Post::getPostById($ID);
+
+        $comments = Comment::getCommentByPostId($ID);
+        $commentsWithUsernames = [];
+
+        foreach ($comments as $comment) {
+            $commentWithUsername = $comment;
+            $username = $comment->user->Username; // Lấy tên người dùng từ mô hình User liên quan
+            $commentWithUsername->username = $username; // Thêm tên người dùng vào đối tượng comment
+            $commentsWithUsernames[] = $commentWithUsername;
+        }
+
+        if ($post) {
+            return view('post.post', ['post' => $post, 'comments' => $comments]);
+        } else {
+            return 'null';
+        }
+    }
+    public function show($idPost)
+    {
+        if(!$idPost){
+            $ID = request()->input('idpost');
+        }else{
+            $ID=$idPost;
+        }
+        
         $post = Post::getPostById($ID);
 
         $comments = Comment::getCommentByPostId($ID);
