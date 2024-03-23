@@ -1,3 +1,8 @@
+@extends('admin.layout.app')
+
+@section('content')
+   
+
 
     <div class="container">
         <div class="row">
@@ -22,3 +27,4 @@
             <div class="col-1 col-sm-4 "></div>
         </div>
     </div>
+    @endsection

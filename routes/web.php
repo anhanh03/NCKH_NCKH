@@ -148,7 +148,17 @@ Route::get('/about',function(Request $request){
 
 
 Route::get('/homeAdmin', [AdminController::class, 'index'])->name('homeAdmin');
-Route::get('/homeAdmin{type}',[AdminController::class, 'manageAdmin'])->name('manageAmin');
+Route::get('/manageAdmin',[AdminController::class, 'manageAdmin'])->name('manageAmin');
+Route::get('/admin/managerMember',[AdminController::class, 'managerMember'])->name('managerMember');
+Route::get('/admin/managerDocument',[AdminController::class, 'managerDocument'])->name('managerDocument');
+Route::get('/admin/managerPost',[AdminController::class, 'managerPost'])->name('managerPost');
+Route::get('/admin/managerTopic',[AdminController::class, 'managerTopic'])->name('managerTopic');
+Route::get('/admin/managerStats',[AdminController::class, 'managerStats'])->name('managerStats');
+
+
+
+
+
 Route::get('/updateTitle',[AdminController::class, 'dpTitleUpdate'])->name('dpTitleUpdate');
 Route::get('/updatePost',[AdminController::class, 'dpPostUpdate'])->name('dpPostUpdate');
 Route::get('/updateDocument',[AdminController::class, 'dpDocumentUpdate'])->name('dpDocumentUpdate');

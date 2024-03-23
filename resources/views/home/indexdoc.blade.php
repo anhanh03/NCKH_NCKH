@@ -22,7 +22,7 @@
                 <div class="col-md-9">
                     <div id="main">
                         <input id="tab1" type="radio" name="tabs">
-                        <label for="tab1"><a href="{{ route('home') }}">Chủ đề</a></label>
+                        <label for="tab1"><a style="color: #bbb" href="{{ route('home') }}">Chủ đề</a></label>
                         <input id="tab2" type="radio" name="tabs" checked>
                         <label for="tab2">Tài liệu</label>
                         {{-- <input id="tab3" type="radio" name="tabs">

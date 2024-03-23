@@ -28,7 +28,7 @@
                         <input id="tab1" type="radio" name="tabs" checked>
                         <label for="tab1">Chủ đề</label>
                         <input id="tab2" type="radio" name="tabs">
-                        <label for="tab2"><a href="{{ route('homeD') }}">Tài liệu</a></label>
+                        <label for="tab2"><a style="color: #bbb" href="{{ route('homeD') }}">Tài liệu</a></label>
                         {{-- <input id="tab3" type="radio" name="tabs">
                         <label for="tab3">Recently Answered</label>
                         <input id="tab4" type="radio" name="tabs">

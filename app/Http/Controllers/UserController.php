@@ -107,9 +107,12 @@ class UserController extends Controller
         return view('user.fogotPass');
     }
     // Đổi mật khẩu
-    public function displayUpdatePass()
+    public function displayUpdatePass(Request $request)
     {
-        return view('user.updatePass');
+        $email = $request->input('email');
+        return view('user.updatePass',[
+            'email'=>$email,
+        ]);
     }
 
     public function updatePass(Request $request)

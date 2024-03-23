@@ -1,4 +1,10 @@
 
+@extends('admin.layout.app')
+
+@section('content')
+
+
+
 <!-- Content Row -->
 
 
@@ -71,4 +77,5 @@
 <!-- /.container-fluid -->
 
 </div>
-<!-- End of Main Content -->
+<!-- End of Main Content -->   
+@endsection
