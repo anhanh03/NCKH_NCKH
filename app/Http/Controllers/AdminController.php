@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Documents;
 use App\Models\Post;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -75,13 +76,16 @@ class AdminController extends Controller
         $docs= Documents::all();
         return view('admin.managent.document',compact('docs'));
     }
+
     public function managerPost()
     {
-        return view('admin.managent.post');
+        $post=Post::all();
+        return view('admin.managent.post',compact('post'));
     }
     public function managerTopic()
     {
-        return view('admin.managent.title');
+        $topic=Topic::all();
+        return view('admin.managent.title',compact('topic'));
     }
     public function managerStats()
     {

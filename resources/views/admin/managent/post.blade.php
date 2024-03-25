@@ -9,23 +9,28 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Title</th>
                             <th scope="col">Tác giả</th>
                             <th scope="col">Ngày đăng</th>
                             <th scope="col">Setting</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td><a href="{{ route('manageAmin', ['type' => 'updatePost']) }}"><button type="button"
-                                        class="btn btn-info">Update</button></a>
-                                &ensp;&ensp;<a href="#"><button type="button"
-                                        class="btn btn-danger">Delete</button></a></td>
-                        </tr>
+                        @foreach($post as $key => $item)
+                            <tr>
+                                <th scope="row">{{ $key + 1 }}</th>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->create_date }}</td>
+                                <td>
+                                    <a href="{{ route('manageAmin', ['id' => $item->id]) }}">
+                                        <button type="button" class="btn btn-info">Update</button>
+                                    </a>
+                                    &ensp;&ensp;
+                                    <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -78,4 +78,40 @@
 
 </div>
 <!-- End of Main Content -->   
+
+
+<script>
+    // Đảm bảo rằng DOM đã được tải hoàn toàn trước khi thao tác trên nó
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lấy thẻ canvas bằng ID
+        var ctx = document.getElementById('myAreaChart').getContext('2d');
+
+        // Tạo biến myAreaChart để lưu trữ biểu đồ
+        var myAreaChart = new Chart(ctx, {
+            type: 'area', // Loại biểu đồ là đường (area chart)
+            data: {
+                labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'], // Nhãn trên trục x
+                datasets: [{
+                    label: 'View', // Nhãn của dữ liệu
+                    data: [10000, 15000, 12000, 18000, 20000, 25000, 22000], // Dữ liệu của biểu đồ
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Màu nền của biểu đồ
+                    borderColor: 'rgba(54, 162, 235, 1)', // Màu viền của biểu đồ
+                    borderWidth: 2, // Độ rộng của viền
+                    fill: true // Đánh dấu vùng dưới đường biểu đồ được tô màu
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Trục y bắt đầu từ 0
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+
+
+
 @endsection

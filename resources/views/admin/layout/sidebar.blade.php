@@ -53,7 +53,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('managerTopic') }}">
                 {{-- <i class="fas fa-fw fa-table"></i> --}}
-                <span>Tiêu đề</span></a>
+                <span>Chủ đề</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('homeAdmin') }}">
