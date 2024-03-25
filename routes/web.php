@@ -163,5 +163,8 @@ Route::get('/updateTitle',[AdminController::class, 'dpTitleUpdate'])->name('dpTi
 Route::get('/updatePost',[AdminController::class, 'dpPostUpdate'])->name('dpPostUpdate');
 Route::get('/updateDocument',[AdminController::class, 'dpDocumentUpdate'])->name('dpDocumentUpdate');
 Route::get('/updateMember',[AdminController::class, 'dpMemberUpdate'])->name('dpMemberUpdate');
+Route::get('/adminUpdateMember',[AdminController::class, 'MemberUpdate'])->name('MemberUpdate');
 Route::get('/addTitle',[AdminController::class, 'dpTitleAdd'])->name('dpTitleAdd');
 Route::get('/addTitle',[AdminController::class, 'dpUpdateAdmin'])->name('dpTitleAdd');
+
+Route::get('/deleteMember',[AdminController::class, 'deleteMember'])->name('deleteMember');

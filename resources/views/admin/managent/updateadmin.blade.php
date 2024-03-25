@@ -13,6 +13,19 @@
     </style>
     <div class="container">
         <div class="row mt-5 pt-5">
+            @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </div>
+    @endif
             <div class="col-sm-1"></div>
             <div class="col-12 col-sm-10">
                 <div id="titleupdate">

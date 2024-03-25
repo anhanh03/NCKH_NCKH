@@ -17,14 +17,17 @@
 
     <!-- Custom styles for this template-->
     <link href="./css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>ADMIN-HOME</title>
 </head>
 
 <body id="page-top">
     <div id="wrapper">
+        
     {{-- <div class="container-fluid"> --}}
         @include('admin.layout.sidebar') 
         @include('admin.layout.header')
+        
         @yield('content')
         @include('admin.layout.footer')
     {{-- </div> --}}

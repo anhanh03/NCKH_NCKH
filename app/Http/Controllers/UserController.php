@@ -99,7 +99,7 @@ class UserController extends Controller
         $user->save();
 
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
-        return redirect('/login')->with('success', 'Đăng ký thành công');
+        return redirect()->back()->with('success', 'Đăng ký thành công');
     }
     // Quên Mật khẩu
     public function displayFogot()

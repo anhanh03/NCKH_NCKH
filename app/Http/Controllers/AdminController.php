@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use PhpParser\Node\Stmt\Catch_;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\Builder;
 
 class AdminController extends Controller
 {
@@ -62,8 +66,6 @@ class AdminController extends Controller
         }
     }
 
- 
-
     public function managerMember()
     {
         // lấy ra toàn bộ bản ghi trong bảng user
@@ -73,26 +75,24 @@ class AdminController extends Controller
 
     public function managerDocument()
     {
-        $docs= Documents::all();
-        return view('admin.managent.document',compact('docs'));
+        $docs = Documents::all();
+        return view('admin.managent.document', compact('docs'));
     }
 
     public function managerPost()
     {
-        $post=Post::all();
-        return view('admin.managent.post',compact('post'));
+        $post = Post::all();
+        return view('admin.managent.post', compact('post'));
     }
     public function managerTopic()
     {
-        $topic=Topic::all();
-        return view('admin.managent.title',compact('topic'));
+        $topic = Topic::all();
+        return view('admin.managent.title', compact('topic'));
     }
     public function managerStats()
     {
         return view('admin.managent.thongke');
     }
-
-
 
     public function dpTitleUpdate()
     {
@@ -110,14 +110,60 @@ class AdminController extends Controller
     {
         return view('admin.updateform.updateDocument');
     }
-    public function dpMemberUpdate()
+    public function dpMemberUpdate(Request $request)
     {
-        return view('admin.updateform.updateMember');
+        $id = $request->input('id');
+        $user = User::find($id);
+        return view('admin.updateform.updateMember', ['id' => $id,'fullName'=>$user->full_name,'email'=>$user->Email]);
     }
+
+    public function MemberUpdate(Request $request)
+    {
+        $id = $request->input('id');
+        $fullName = $request->input('fullName');
+        $email = $request->input('email');
+        $user = User::find($id); // Sử dụng find() để tìm user với id tương ứng
+
+        if ($user) {
+            // Kiểm tra xem user có tồn tại không
+            $user->full_name = $fullName;
+            $user->Email = $email; // Chỉnh sửa lại 'Email' thành 'email' để tuân thủ quy tắc đặt tên của Eloquent
+            $user->save();
+            return redirect()->back()->with('success', 'Cập nhật tài khoản thành công!');
+        } else {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => 'Không tìm thấy người dùng'])
+                ->withInput();
+            // Thêm withInput() để giữ lại dữ liệu trong form sau khi chuyển hướng
+        }
+    }
+
     public function dpUpdateAdmin()
     {
         return view('admin.managent.updateadmin');
     }
+
+    public function deleteMember(Request $request)
+{
+    $id = $request->input('id');
+    $user = User::find($id);
+
+    if ($user) {
+        $user->delete();
+        return redirect()->back()->with('success', 'Xóa thành viên thành công!');
+    } else {
+        return redirect()->back()->withErrors('Không tìm thấy thành viên để xóa.');
+    }
+}
+
+
+
+
+
+
+
+
 
     public function logout()
     {
