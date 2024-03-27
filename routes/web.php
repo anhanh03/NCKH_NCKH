@@ -125,9 +125,9 @@ Route::get('/topic-suggestions', function (Request $request) {
     return response()->json($topics);
 });
 
-Route::get('chinh-sach-rieng-tu', function () {
-    return '<h1>Chinh sach rieng tu</h1>';
-});
+Route::get('chinh-sach-rieng-tu', function (Request $request) {
+    return view('help.privacy');
+})->name("privacy");
 
 
 Route::get('/contact',function(Request $request){
@@ -168,3 +168,6 @@ Route::get('/addTitle',[AdminController::class, 'dpTitleAdd'])->name('dpTitleAdd
 Route::get('/addTitle',[AdminController::class, 'dpUpdateAdmin'])->name('dpTitleAdd');
 
 Route::get('/deleteMember',[AdminController::class, 'deleteMember'])->name('deleteMember');
+Route::get('/deletePost',[AdminController::class, 'deletePost'])->name('deletePost');
+Route::get('/deleteDocument',[AdminController::class, 'deleteDocument'])->name('deleteDocument');
+Route::get('/deleteTopic',[AdminController::class, 'deleteTopic'])->name('deleteTopic');

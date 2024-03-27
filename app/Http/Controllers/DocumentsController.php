@@ -93,27 +93,37 @@ class DocumentsController extends Controller
             // Tăng giá trị của count_view lên 1 và lưu vào cơ sở dữ liệu
             $document->count_view += 1;
             $document->save();
-
+    
             $id_username = $document->id_user;
             $user = User::find($id_username);
             // Lấy tên người dùng
             $document->uploaded_by = $user->Username;
+    
+            // Lấy chủ đề của tài liệu hiện tại
+            $documentTopic = $document->ID_topic;
+    
+            // Tìm các tài liệu khác có cùng chủ đề
+            $relatedDocuments = Documents::where('ID_topic', $documentTopic)
+                                        ->where('id', '!=', $ID_document) // Loại bỏ tài liệu hiện tại
+                                        ->take(5) // Giới hạn số lượng tài liệu liên quan
+                                        ->get();
         }
-
+    
         // Sử dụng Query Builder để lấy các comment và sắp xếp chúng theo thứ tự giảm dần của create_date
         $comments = Comment::where('ID_document', $ID_document)->orderBy('create_date', 'desc')->take(5)->get();
-
+    
         // Lấy thông tin người dùng cho mỗi comment
         foreach ($comments as $comment) {
             $id_user = $comment->ID_user;
             $user = User::find($id_user);
             $comment->user_name = $user->Username;
         }
-
+    
         if ($document) {
             return view('document.showDocument', [
                 'document' => $document,
-                'comment' => $comments, // Sửa từ 'comment' thành 'comments'
+                'comment' => $comments,
+                'relatedDocuments' => $relatedDocuments // Truyền danh sách các tài liệu liên quan vào view
             ]);
         } else {
             return 'null';
@@ -122,43 +132,54 @@ class DocumentsController extends Controller
     public function show($idDoc)
     {
         if(!$idDoc){
-
             $ID_document = request('id');
-        }else{
+        } else {
             $ID_document = $idDoc;
         }
+    
         $document = Documents::getDocumentById($ID_document);
-
+    
         if ($document) {
             // Tăng giá trị của count_view lên 1 và lưu vào cơ sở dữ liệu
             $document->count_view += 1;
             $document->save();
-
+    
             $id_username = $document->id_user;
             $user = User::find($id_username);
             // Lấy tên người dùng
             $document->uploaded_by = $user->Username;
+    
+            // Lấy chủ đề của tài liệu hiện tại
+            $documentTopic = $document->ID_topic;
+    
+            // Tìm các tài liệu khác có cùng chủ đề
+            $relatedDocuments = Documents::where('ID_topic', $documentTopic)
+                                        ->where('id', '!=', $ID_document) // Loại bỏ tài liệu hiện tại
+                                        ->take(5) // Giới hạn số lượng tài liệu liên quan
+                                        ->get();
         }
-
+    
         // Sử dụng Query Builder để lấy các comment và sắp xếp chúng theo thứ tự giảm dần của create_date
         $comments = Comment::where('ID_document', $ID_document)->orderBy('create_date', 'desc')->take(5)->get();
-
+    
         // Lấy thông tin người dùng cho mỗi comment
         foreach ($comments as $comment) {
             $id_user = $comment->ID_user;
             $user = User::find($id_user);
             $comment->user_name = $user->Username;
         }
-
+    
         if ($document) {
             return view('document.showDocument', [
                 'document' => $document,
-                'comment' => $comments, // Sửa từ 'comment' thành 'comments'
+                'comment' => $comments,
+                'relatedDocuments' => $relatedDocuments // Truyền danh sách các tài liệu liên quan vào view
             ]);
         } else {
             return 'null';
         }
     }
+    
 
 
     public function updateDocument(Request $request, $documentId)

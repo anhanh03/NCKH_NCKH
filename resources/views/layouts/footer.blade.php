@@ -34,7 +34,7 @@
              <div class="col-md-3">
                  <div class="info-part-two320 text-center">
                      <h4>Quick Links</h4>
-                     <a href="#">
+                     <a href="{{ route('home') }}">
                          <p>-Home</p>
                      </a>
                      <a href="#">
@@ -55,8 +55,8 @@
                      <a href="#">
                          <p>-Contact Us</p>
                      </a>
-                     <a href="#" class="last-child12892">
-                         <p>-Buy now</p>
+                     <a href="{{ route('privacy') }}" class="last-child12892">
+                         <p>-Privacy Policy</p>
                      </a>
                  </div>
              </div>
