@@ -99,61 +99,113 @@ class AdminController extends Controller
     {
         return view('admin.managent.adaccount');
     }
-    public function dpTitleUpdate()
+    public function dpTitleUpdate(Request $request)
     {
-        return view('admin.updateform.updateTitle');
+        $ID = $request->input('id');
+        $topic = Topic::find($ID);
+
+        return view('admin.updateform.updateTitle', [
+            'id' => $ID,
+            'topic' => $topic,
+        ]);
     }
+
+    public function UpdateTopic(Request $request)
+    {
+        $id = $request->input('id');
+        $TopicName = $request->input('topicName');
+        $description = $request->input('description');
+        $topic = Topic::find($id);
+
+        if ($topic) {
+            $topic->TopicName = $TopicName;
+            $topic->Description = $description;
+            $topic->save();
+            return redirect()->back()->with('success', 'Cập nhật chủ đề thành công!');
+        } else {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => 'Không tìm thấy chủ đề'])
+                ->withInput();
+        }
+    }
+
     public function dpTitleAdd()
     {
         return view('admin.updateform.addTitle');
     }
-    
+
+    public function addTitle(Request $request)
+    {
+        // Validate the input
+        $validatedData = $request->validate([
+            'TopicName' => 'required|string|max:255',
+            'Description' => 'required|string',
+        ]);
+
+        // Create a new Topic instance
+        $topic = new Topic();
+        $topic->TopicName = $request->input('TopicName');
+        $topic->Description = $request->input('Description');
+
+        // Save the Topic to the database
+        if($topic->save()){
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Chủ đề đã được thêm!');
+        }else{
+            return redirect()
+                ->back()
+                ->withErrors(['error' => 'Lỗi, bạn vui lòng thử lại.'])
+                ->withInput();
+
+        }
+        
+    }
+
     public function dpDocumentUpdate(Request $request)
     {
-        $id=$request->input('id');
-        $document=Documents::find($id);
-        
-        return view('admin.updateform.updateDocument',[
-            'id'=>$document->ID,
-            'name'=>$document->Document_Name,
-            'description'=>$document->Description,
-            'author'=>$document->Author,
+        $id = $request->input('id');
+        $document = Documents::find($id);
+
+        return view('admin.updateform.updateDocument', [
+            'id' => $document->ID,
+            'name' => $document->Document_Name,
+            'description' => $document->Description,
+            'author' => $document->Author,
         ]);
     }
     public function documentUpdate(Request $request)
     {
-        $id=$request->input('id');
-        $name=$request->input('name');
-        $author=$request->input('author');
-        $description=$request->input('description');
-        $document=Documents::find($id);
-        
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $author = $request->input('author');
+        $description = $request->input('description');
+        $document = Documents::find($id);
+
         // $topic=Topic::where('ID',$document->ID_topic);
 
-        if($document){
-            $document->Document_Name=$name;
-            $document->Description=$description;
-            $document->Author=$author;
+        if ($document) {
+            $document->Document_Name = $name;
+            $document->Description = $description;
+            $document->Author = $author;
             $document->save();
             return redirect()->back()->with('success', 'Cập nhật tài liệu thành công!');
-
-        }else{
+        } else {
             return redirect()
                 ->back()
                 ->withErrors(['error' => 'Không tìm thấy tài liệu'])
                 ->withInput();
-
         }
     }
 
     public function dpPostUpdate(Request $request)
     {
         $ID = $request->input('id');
-        $post=Post::find($ID);
-        return view('admin.updateform.updatePost',[
-            'post' => $post
+        $post = Post::find($ID);
+        return view('admin.updateform.updatePost', [
+            'post' => $post,
+            'id' => $ID,
         ]);
-
     }
     public function PostUpdate(Request $request)
     {
@@ -165,7 +217,7 @@ class AdminController extends Controller
         if ($post) {
             // Kiểm tra xem Post có tồn tại không
             $post->title = $title;
-            $post->content = $content; 
+            $post->content = $content;
             $post->save();
             return redirect()->back()->with('success', 'Cập nhật bài viết thành công!');
         } else {
@@ -177,18 +229,12 @@ class AdminController extends Controller
         }
     }
 
-
-
     public function dpMemberUpdate(Request $request)
     {
         $id = $request->input('id');
         $user = User::find($id);
-        return view('admin.updateform.updateMember', ['id' => $id,'fullName'=>$user->full_name,'email'=>$user->Email]);
+        return view('admin.updateform.updateMember', ['id' => $id, 'fullName' => $user->full_name, 'email' => $user->Email]);
     }
-
-
-
-    
 
     public function MemberUpdate(Request $request)
     {
@@ -218,72 +264,69 @@ class AdminController extends Controller
     }
 
     public function deleteMember(Request $request)
-{
-    $id = $request->input('id');
-    $user = User::find($id);
+    {
+        $id = $request->input('id');
+        $user = User::find($id);
 
-    if ($user) {
-        $user->delete();
-        return redirect()->back()->with('success', 'Xóa thành viên thành công!');
-    } else {
-        return redirect()->back()->withErrors('Không tìm thấy thành viên để xóa.');
+        if ($user) {
+            $user->delete();
+            return redirect()->back()->with('success', 'Xóa thành viên thành công!');
+        } else {
+            return redirect()->back()->withErrors('Không tìm thấy thành viên để xóa.');
+        }
     }
-}
 
-public function deleteDocument(Request $request)
-{
-    $ID = $request->input('id');
+    public function deleteDocument(Request $request)
+    {
+        $ID = $request->input('id');
 
-    // Xóa các bình luận có ID_document tương ứng với ID của tài liệu
-    Comment::where('ID_document', $ID)->delete();
-    // Xóa các báo cáo có Document_ID tương ứng với ID của tài liệu
-    Report::where('Document_ID', $ID)->delete();
+        // Xóa các bình luận có ID_document tương ứng với ID của tài liệu
+        Comment::where('ID_document', $ID)->delete();
+        // Xóa các báo cáo có Document_ID tương ứng với ID của tài liệu
+        Report::where('Document_ID', $ID)->delete();
 
-    // Sau khi xóa các bình luận, tiến hành xóa tài liệu
-    $docs = Documents::find($ID);
+        // Sau khi xóa các bình luận, tiến hành xóa tài liệu
+        $docs = Documents::find($ID);
 
-    if ($docs) {
-        $docs->delete();
-        return redirect()->back()->with('success', 'Xóa tài liệu thành công!');
-    } else {
-        return redirect()->back()->withErrors('Không tìm thấy tài liệu để xóa.');
+        if ($docs) {
+            $docs->delete();
+            return redirect()->back()->with('success', 'Xóa tài liệu thành công!');
+        } else {
+            return redirect()->back()->withErrors('Không tìm thấy tài liệu để xóa.');
+        }
     }
-}
 
+    public function deletePost(Request $request)
+    {
+        $ID = $request->input('id');
+        $post = Post::find($ID);
+        // Xóa các bình luận có ID_document tương ứng với ID của tài liệu
+        Comment::where('ID_post', $ID)->delete();
+        // Xóa các báo cáo có Document_ID tương ứng với ID của tài liệu
+        Report::where('Post_ID', $ID)->delete();
 
-public function deletePost(Request $request)
-{
-    $ID = $request->input('id');
-    $post = Post::find($ID);
-
-    if ($post) {
-        $post->delete();
-        return redirect()->back()->with('success', 'Xóa bài viết thành công!');
-    } else {
-        return redirect()->back()->withErrors('Không tìm bài viết viên để xóa.');
+        if ($post) {
+            $post->delete();
+            return redirect()->back()->with('success', 'Xóa bài viết thành công!');
+        } else {
+            return redirect()->back()->withErrors('Không tìm bài viết viên để xóa.');
+        }
     }
-}
 
-public function deleteTopic(Request $request)
+    public function deleteTopic(Request $request)
 {
     $ID = $request->input('id');
     $topic = Topic::find($ID);
 
     if ($topic) {
+
+        // Sau khi xóa các tài liệu, kiểm tra thành công trước khi xóa chủ đề
         $topic->delete();
-        return redirect()->back()->with('success', 'Xóa bài viết thành công!');
+        return redirect()->back()->with('success', 'Xóa chủ đề thành công!');
     } else {
-        return redirect()->back()->withErrors('Không tìm bài viết viên để xóa.');
+        return redirect()->back()->withErrors('Không tìm thấy chủ đề để xóa.');
     }
 }
-
-
-
-
-
-
-
-
 
 
     public function logout()

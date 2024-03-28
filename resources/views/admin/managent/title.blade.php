@@ -17,7 +17,7 @@
         </div>
     @endif
             <div class="col-12">
-                <h1>Title &ensp;<a href="{{ route('manageAmin') }}">
+                <h1>Title &ensp;<a href="{{ route('dpTitleAdd') }}">
                     <button type="button" class="btn btn-success">Add</button>
                 </a></h1>
                 
@@ -37,12 +37,11 @@
                                 <td>{{ $topic->TopicName }}</td>
                                 <td>{{ \Illuminate\Support\Str::limit($topic->Description, 31, $end = '...') }}</td>
                                 <td>
-                                    <a href="{{ route('manageAmin', ['id' => $topic->ID]) }}">
+                                    <a href="{{ route('dpTitleUpdate', ['id' => $topic->ID]) }}">
                                         <button type="button" class="btn btn-info">Update</button>
                                     </a>
-
                                     &ensp;&ensp;
-                                    <a href="#">
+                                    <a href="{{ route('deleteTopic', ['id' => $topic->ID]) }}">
                                         <button type="button" class="btn btn-danger">Delete</button>
                                     </a>
                                 </td>

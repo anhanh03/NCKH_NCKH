@@ -2,20 +2,20 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                {{ $error }}<br>
-            @endforeach
-        </div>
-    @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+            </div>
+        @endif
+        <div class="row">
             <div class="col-12">
                 <h1>Post</h1>
                 <table class="table table-striped table-hover">
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($post as $item)
+                        @foreach ($post as $item)
                             <tr>
                                 <th scope="row">{{ $item->ID }}</th>
                                 <td>{{ $item->title }}</td>
@@ -40,7 +40,8 @@
                                         <button type="button" class="btn btn-info">Update</button>
                                     </a>
                                     &ensp;&ensp;
-                                    <a href="{{ route('deletePost', ['id' => $item->id]) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <a href="{{ route('deletePost', ['id' => $item->ID]) }}"><button type="button"
+                                            class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                         @endforeach

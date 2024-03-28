@@ -156,20 +156,26 @@ Route::get('/admin/managerTopic',[AdminController::class, 'managerTopic'])->name
 Route::get('/admin/managerStats',[AdminController::class, 'managerStats'])->name('managerStats');
 Route::get('/admin/accountAdmin',[AdminController::class, 'accountAdmin'])->name('accountAdmin');
 
+//////////////////////
 
+Route::get('/updateTitle',[AdminController::class, 'dpTitleUpdate'])->name('dpTitleUpdate');
 
+Route::get('/updatePost',[AdminController::class, 'dpPostUpdate'])->name('dpPostUpdate');
+Route::get('/adminUpdatePost',[AdminController::class, 'PostUpdate'])->name('PostUpdate');
+Route::get('/deletePost',[AdminController::class, 'deletePost'])->name('deletePost');
+
+Route::get('/updateDocument',[AdminController::class, 'dpDocumentUpdate'])->name('dpDocumentUpdate');
+Route::get('/adminUpdateDocument',[AdminController::class, 'documentUpdate'])->name('documentUpdate');
+Route::get('/deleteDocument',[AdminController::class, 'deleteDocument'])->name('deleteDocument');
+
+Route::get('/updateMember',[AdminController::class, 'dpMemberUpdate'])->name('dpMemberUpdate');
+Route::get('/adminUpdateMember',[AdminController::class, 'MemberUpdate'])->name('MemberUpdate');
+Route::get('/deleteMember',[AdminController::class, 'deleteMember'])->name('deleteMember');
 
 
 Route::get('/updateTitle',[AdminController::class, 'dpTitleUpdate'])->name('dpTitleUpdate');
-Route::get('/updatePost',[AdminController::class, 'dpPostUpdate'])->name('dpPostUpdate');
-Route::get('/updateDocument',[AdminController::class, 'dpDocumentUpdate'])->name('dpDocumentUpdate');
-Route::get('/adminUpdateDocument',[AdminController::class, 'documentUpdate'])->name('documentUpdate');
-Route::get('/updateMember',[AdminController::class, 'dpMemberUpdate'])->name('dpMemberUpdate');
-Route::get('/adminUpdateMember',[AdminController::class, 'MemberUpdate'])->name('MemberUpdate');
 Route::get('/addTitle',[AdminController::class, 'dpTitleAdd'])->name('dpTitleAdd');
-Route::get('/addTitle',[AdminController::class, 'dpUpdateAdmin'])->name('dpTitleAdd');
-
-Route::get('/deleteMember',[AdminController::class, 'deleteMember'])->name('deleteMember');
-Route::get('/deletePost',[AdminController::class, 'deletePost'])->name('deletePost');
-Route::get('/deleteDocument',[AdminController::class, 'deleteDocument'])->name('deleteDocument');
+Route::get('/adminAddTitle',[AdminController::class, 'addTitle'])->name('addTitle');
+Route::get('/adminUpdateTitle',[AdminController::class, 'UpdateTopic'])->name('UpdateTopic');
 Route::get('/deleteTopic',[AdminController::class, 'deleteTopic'])->name('deleteTopic');
+
