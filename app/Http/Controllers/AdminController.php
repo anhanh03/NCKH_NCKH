@@ -95,7 +95,10 @@ class AdminController extends Controller
     {
         return view('admin.managent.thongke');
     }
-
+    public function accountAdmin()
+    {
+        return view('admin.managent.adaccount');
+    }
     public function dpTitleUpdate()
     {
         return view('admin.updateform.updateTitle');

@@ -154,6 +154,7 @@ Route::get('/admin/managerDocument',[AdminController::class, 'managerDocument'])
 Route::get('/admin/managerPost',[AdminController::class, 'managerPost'])->name('managerPost');
 Route::get('/admin/managerTopic',[AdminController::class, 'managerTopic'])->name('managerTopic');
 Route::get('/admin/managerStats',[AdminController::class, 'managerStats'])->name('managerStats');
+Route::get('/admin/accountAdmin',[AdminController::class, 'accountAdmin'])->name('accountAdmin');
 
 
 
