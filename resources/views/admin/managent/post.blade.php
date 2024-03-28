@@ -29,18 +29,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($post as $key => $item)
+                        @foreach($post as $item)
                             <tr>
-                                <th scope="row">{{ $key + 1 }}</th>
+                                <th scope="row">{{ $item->ID }}</th>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->create_date }}</td>
                                 <td>
-                                    <a href="{{ route('manageAmin', ['id' => $item->id]) }}">
+                                    <a href="{{ route('dpPostUpdate', ['id' => $item->ID]) }}">
                                         <button type="button" class="btn btn-info">Update</button>
                                     </a>
                                     &ensp;&ensp;
-                                    <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <a href="{{ route('deletePost', ['id' => $item->id]) }}"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                         @endforeach

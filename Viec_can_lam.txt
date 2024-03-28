@@ -4,3 +4,11 @@ ADMIN:
  quản lý chủ đề
  quản lý TK Admin
  // quanr lý report nữa nhé 
+
+
+// THêm rang buoc
+ALTER TABLE comments
+ADD CONSTRAINT fk_comments_documents FOREIGN KEY (ID_document)
+REFERENCES documents(ID)
+ON DELETE CASCADE;
+

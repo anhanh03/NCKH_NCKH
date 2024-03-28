@@ -38,7 +38,7 @@
                         <td>
                             <a href="{{ route('dpDocumentUpdate', ['id' => $doc->ID]) }}"><button type="button" class="btn btn-info">Update</button></a>
                             &ensp;&ensp;
-                            <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                            <a href="{{ route('deleteDocument', ['id' => $doc->ID]) }}"><button type="button" class="btn btn-danger">Delete</button></a>
                         </td>
                     </tr>
                     @endforeach
