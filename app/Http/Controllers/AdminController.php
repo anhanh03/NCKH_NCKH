@@ -126,7 +126,11 @@ class AdminController extends Controller
     }
     public function accountAdmin()
     {
-        return view('admin.managent.adaccount');
+        
+        $users = User::whereIn('ID_role', [1, 3])->get(); // Lấy danh sách tài khoản admin
+        
+    
+        return view('admin.managent.adaccount',compact('users'));
     }
     public function addAcount(){
         return view('admin.managent.addAcount');
@@ -292,6 +296,21 @@ class AdminController extends Controller
     {
         return view('admin.managent.updateadmin');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function deleteMember(Request $request)
     {
