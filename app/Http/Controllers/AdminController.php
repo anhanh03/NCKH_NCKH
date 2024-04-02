@@ -59,16 +59,16 @@ class AdminController extends Controller
     public function totalCount()
     {
         // Gọi phương thức tĩnh để lấy tổng số bản ghi
-        $totalCountUser = User::getTotalCountUser();
-        $totalCountDoc = Documents::getTotalCountDocument();
-        $totalCountPost = Post::getTotalCountPost();
-        $totalCountActiveUser = User::getActiveUserCount();
+        // $totalCountUser = User::getTotalCountUser();
+        // $totalCountDoc = Documents::getTotalCountDocument();
+        // $totalCountPost = Post::getTotalCountPost();
+        // $totalCountActiveUser = User::getActiveUserCount();
 
-        // Lưu trữ các giá trị trong session flash
-        session()->flash('totalCountUser', $totalCountUser);
-        session()->flash('totalCountDoc', $totalCountDoc);
-        session()->flash('totalCountPost', $totalCountPost);
-        session()->flash('totalCountActiveUser', $totalCountActiveUser);
+        // // Lưu trữ các giá trị trong session flash
+        // session()->flash('totalCountUser', $totalCountUser);
+        // session()->flash('totalCountDoc', $totalCountDoc);
+        // session()->flash('totalCountPost', $totalCountPost);
+        // session()->flash('totalCountActiveUser', $totalCountActiveUser);
     }
 
     public function manageAdmin(Request $request)
@@ -127,6 +127,9 @@ class AdminController extends Controller
     public function accountAdmin()
     {
         return view('admin.managent.adaccount');
+    }
+    public function addAcount(){
+        return view('admin.managent.addAcount');
     }
     public function dpTitleUpdate(Request $request)
     {

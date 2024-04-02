@@ -155,7 +155,7 @@ Route::get('/admin/managerPost',[AdminController::class, 'managerPost'])->name('
 Route::get('/admin/managerTopic',[AdminController::class, 'managerTopic'])->name('managerTopic');
 Route::get('/admin/managerStats',[AdminController::class, 'managerStats'])->name('managerStats');
 Route::get('/admin/accountAdmin',[AdminController::class, 'accountAdmin'])->name('accountAdmin');
-
+Route::get('/admin/addAccount',[AdminController::class,'addAcount'])->name('addAcount');
 //////////////////////
 
 Route::get('/updateTitle',[AdminController::class, 'dpTitleUpdate'])->name('dpTitleUpdate');

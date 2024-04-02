@@ -17,7 +17,13 @@
         </div>
     @endif --}}
         <div class="col-12">
-            <h1>Account_Admin</h1>
+            <div class="row">
+                <div class="col-sm-3 col-12"><h1>Account_Admin</h1></div>
+                <div class="col-sm-6"></div>
+                <div class="col-sm-3 col-12"><a href="{{Route('addAcount')}}"><button type="button" class="btn btn-success">Add-Account</button></a></div>
+            </div>
+            
+           
             <table class="table table-striped table-hover" id="account">
                 <thead>
                     <tr>
