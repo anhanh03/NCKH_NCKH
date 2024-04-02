@@ -23,13 +23,33 @@ class AdminController extends Controller
     //
     public function index(Request $request)
     {
-        // return view('admin.index');
         // Kiểm tra xem có biến session 'usernameAdmin' được thiết lập không
         if (Session::has('usernameAdmin')) {
             // Nếu có, tiếp tục hiển thị trang admin
             // Lưu trữc giá trị của bản ghi vào sesion
+            $startDate = Carbon::now()->subWeek()->startOfWeek(); // Ngày đầu tuần trước
+            $endDate = Carbon::now()->subWeek()->endOfWeek(); // Ngày cuối tuần trước
+    
+            $newAccounts = User::whereBetween('joindate', [$startDate, $endDate])
+                ->selectRaw('DATE(joindate) as join_date, COUNT(*) as count')
+                ->groupBy('join_date')
+                ->get()
+                ->pluck('count')
+                ->toArray();
+    
+            $postCounts = Post::whereBetween('create_date', [$startDate, $endDate])
+                ->selectRaw('DAYOFWEEK(create_date) as day_of_week, COUNT(*) as count')
+                ->groupBy('day_of_week')
+                ->orderBy('day_of_week')
+                ->get()
+                ->pluck('count')
+                ->toArray();
+    
             $this->totalCount();
-            return view('admin.index');
+            return view('admin.index', [
+                'newAccounts' => $newAccounts,
+                'postCounts' => $postCounts,
+            ]);
         } else {
             // Nếu không, chuyển hướng người dùng đến trang đăng nhập
             return redirect('/login')->with('error', 'Bạn phải đăng nhập để truy cập trang admin');
@@ -93,7 +113,16 @@ class AdminController extends Controller
     }
     public function managerStats()
     {
-        return view('admin.managent.thongke');
+        $startDate = Carbon::now()->subWeek()->startOfWeek(); // Ngày đầu tuần trước
+        $endDate = Carbon::now()->subWeek()->endOfWeek(); // Ngày cuối tuần trước
+
+        $newAccounts = User::whereBetween('joindate', [$startDate, $endDate])
+            ->selectRaw('DATE(joindate) as join_date, COUNT(*) as count')
+            ->groupBy('join_date')
+            ->get();
+        return view('admin.managent.thongke', [
+            'newAccounts' => $newAccounts,
+        ]);
     }
     public function accountAdmin()
     {
@@ -149,17 +178,15 @@ class AdminController extends Controller
         $topic->Description = $request->input('Description');
 
         // Save the Topic to the database
-        if($topic->save()){
+        if ($topic->save()) {
             // Redirect back with success message
             return redirect()->back()->with('success', 'Chủ đề đã được thêm!');
-        }else{
+        } else {
             return redirect()
                 ->back()
                 ->withErrors(['error' => 'Lỗi, bạn vui lòng thử lại.'])
                 ->withInput();
-
         }
-        
     }
 
     public function dpDocumentUpdate(Request $request)
@@ -314,20 +341,18 @@ class AdminController extends Controller
     }
 
     public function deleteTopic(Request $request)
-{
-    $ID = $request->input('id');
-    $topic = Topic::find($ID);
+    {
+        $ID = $request->input('id');
+        $topic = Topic::find($ID);
 
-    if ($topic) {
-
-        // Sau khi xóa các tài liệu, kiểm tra thành công trước khi xóa chủ đề
-        $topic->delete();
-        return redirect()->back()->with('success', 'Xóa chủ đề thành công!');
-    } else {
-        return redirect()->back()->withErrors('Không tìm thấy chủ đề để xóa.');
+        if ($topic) {
+            // Sau khi xóa các tài liệu, kiểm tra thành công trước khi xóa chủ đề
+            $topic->delete();
+            return redirect()->back()->with('success', 'Xóa chủ đề thành công!');
+        } else {
+            return redirect()->back()->withErrors('Không tìm thấy chủ đề để xóa.');
+        }
     }
-}
-
 
     public function logout()
     {

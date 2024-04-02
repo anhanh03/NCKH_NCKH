@@ -22,6 +22,7 @@
     <section class="main-content920">
         <div class="container">
             <div class="row">
+                
                 {{-- aloalo --}}
                 <div class="col-md-9">
                     <div id="main">
