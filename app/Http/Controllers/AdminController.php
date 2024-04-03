@@ -29,14 +29,14 @@ class AdminController extends Controller
             // Lưu trữc giá trị của bản ghi vào sesion
             $startDate = Carbon::now()->subWeek()->startOfWeek(); // Ngày đầu tuần trước
             $endDate = Carbon::now()->subWeek()->endOfWeek(); // Ngày cuối tuần trước
-    
+
             $newAccounts = User::whereBetween('joindate', [$startDate, $endDate])
                 ->selectRaw('DATE(joindate) as join_date, COUNT(*) as count')
                 ->groupBy('join_date')
                 ->get()
                 ->pluck('count')
                 ->toArray();
-    
+
             $postCounts = Post::whereBetween('create_date', [$startDate, $endDate])
                 ->selectRaw('DAYOFWEEK(create_date) as day_of_week, COUNT(*) as count')
                 ->groupBy('day_of_week')
@@ -44,7 +44,7 @@ class AdminController extends Controller
                 ->get()
                 ->pluck('count')
                 ->toArray();
-    
+
             $this->totalCount();
             return view('admin.index', [
                 'newAccounts' => $newAccounts,
@@ -58,19 +58,40 @@ class AdminController extends Controller
 
     public function totalCount()
     {
-        // Gọi phương thức tĩnh để lấy tổng số bản ghi
-        // $totalCountUser = User::getTotalCountUser();
-        // $totalCountDoc = Documents::getTotalCountDocument();
-        // $totalCountPost = Post::getTotalCountPost();
-        // $totalCountActiveUser = User::getActiveUserCount();
+        //Gọi phương thức tĩnh để lấy tổng số bản ghi
+        $totalCountUser = User::getTotalCountUser();
+        $totalCountDoc = Documents::getTotalCountDocument();
+        $totalCountPost = Post::getTotalCountPost();
+        $totalCountActiveUser = User::getActiveUserCount();
 
-        // // Lưu trữ các giá trị trong session flash
-        // session()->flash('totalCountUser', $totalCountUser);
-        // session()->flash('totalCountDoc', $totalCountDoc);
-        // session()->flash('totalCountPost', $totalCountPost);
-        // session()->flash('totalCountActiveUser', $totalCountActiveUser);
+        // Lưu trữ các giá trị trong session
+        session()->put('totalCountUser', $totalCountUser);
+        session()->put('totalCountDoc', $totalCountDoc);
+        session()->put('totalCountPost', $totalCountPost);
+        session()->put('totalCountActiveUser', $totalCountActiveUser);
     }
 
+    public function createAdmin(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'username' => 'required|min:8',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+        ]);
+
+        // Create new admin user
+        $user = new User();
+        $user->Username = $request->username;
+        $user->Email = $request->email;
+        $user->password = bcrypt($request->password); // Encrypt password
+        $user->ID_role = 1; // Assuming 1 represents admin role
+        $user->JoinDate = date('Y-m-d H:i:s');
+        $user->save();
+
+        // Redirect with success message
+        return redirect()->route('accountAdmin')->with('success', 'Admin account created successfully.');
+    }
     public function manageAdmin(Request $request)
     {
         $usernameAdmin = $request->session()->get('usernameAdmin'); // Lấy giá trị 'usernameAdmin' từ session
@@ -126,13 +147,12 @@ class AdminController extends Controller
     }
     public function accountAdmin()
     {
-        
         $users = User::whereIn('ID_role', [1, 3])->get(); // Lấy danh sách tài khoản admin
-        
-    
-        return view('admin.managent.adaccount',compact('users'));
+
+        return view('admin.managent.adaccount', compact('users'));
     }
-    public function addAcount(){
+    public function addAcount()
+    {
         return view('admin.managent.addAcount');
     }
     public function dpTitleUpdate(Request $request)
@@ -297,21 +317,6 @@ class AdminController extends Controller
         return view('admin.managent.updateadmin');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function deleteMember(Request $request)
     {
         $id = $request->input('id');
@@ -378,10 +383,14 @@ class AdminController extends Controller
 
     public function logout()
     {
+        $username = Session::get('usernameAdmin');
+        $user = User::where('username', $username)->first();
+        $user->count_active_user = 0;
+        $user->save();
         // Xóa session của tài khoản hiện tại
         Session::forget('usernameAdmin');
 
         // Chuyển hướng người dùng đến trang đăng nhập hoặc trang khác
-        return redirect('/login')->with('message', 'Bạn đã đăng xuất thành công');
+        return redirect('/home')->with('message', 'Bạn đã đăng xuất thành công');
     }
 }

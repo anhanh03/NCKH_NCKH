@@ -47,6 +47,8 @@ class UserController extends Controller
             } elseif ($user->ID_role == 1) {
                 // Tài khoản loại 1, chuyển về /admin
                 Session::put('usernameAdmin', $username);
+                $user->count_active_user = 1;
+                $user->save();
                 //Session::put('user_id', $user->id);
                 // Lưu thông tin  vào biến session
                 return redirect('/homeAdmin');
