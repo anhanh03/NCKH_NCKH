@@ -83,7 +83,7 @@ class DocumentsController extends Controller
 
     public function showDocument()
     {
-        
+        // return view('document.showDocument');
 
         $ID_document = request('id');
         
