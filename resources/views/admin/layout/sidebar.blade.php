@@ -65,6 +65,11 @@
                 {{-- <i class="fas fa-fw fa-table"></i> --}}
                 <span>Thống kê</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('manageReport') }}">
+                {{-- <i class="fas fa-fw fa-table"></i> --}}
+                <span>Báo cáo</span></a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

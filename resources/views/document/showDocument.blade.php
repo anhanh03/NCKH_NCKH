@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -125,8 +124,36 @@
                     <div class="row" style="margin: 20px 0;">
                         <div class="col-md-12" style="">
                             <ul style="float: left;">
-                                <a type="button" href="{{ $document->Storage_Path }}" class="btn btn-success"
-                                    style="margin: 0 8px;"><i class="fa fa-download" aria-hidden="true"></i>Download</a>
+                                {{-- Check nút dowload --}}
+                                
+                                {{-- <a type="button" href="{{ $document->Storage_Path }}" class="btn btn-success"
+                                    style="margin: 0 8px;"><i class="fa fa-download" aria-hidden="true"></i>Download</a> --}}
+                                
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa fa-download" aria-hidden="true"></i>Download
+                                    </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              Hãy tạo bài đăng hoặc đăng thêm tài liệu để có thể tải!
+                                            </div>
+                                            <div class="modal-footer">
+                                              <a href="{{Route('displayAddPost')}}"><button type="button" class="btn btn-warning">Tạo bài đăng</button></a>
+                                              <a href="{{Route('showCreateDocument')}}"><button type="button" class="btn btn-info">Thêm tài liệu</button></a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
                                 <a href="" style="margin: 0 8px;"><i class="fa fa-thumbs-up"
                                         aria-hidden="true"></i>Like</a>
                                 <a href="" style="margin: 0 8px;"><i class="fa fa-save"
@@ -172,7 +199,7 @@
                                     reader.readAsArrayBuffer(docxFile);
                                 };
                                 xhr.send();
-                            </script>
+                            </script> 
                         @endif
                     </div>
 

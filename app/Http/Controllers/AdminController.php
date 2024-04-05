@@ -155,6 +155,9 @@ class AdminController extends Controller
     {
         return view('admin.managent.addAcount');
     }
+    public function manageReport(){
+        return view('admin.managent.report');
+    }
     public function dpTitleUpdate(Request $request)
     {
         $ID = $request->input('id');
