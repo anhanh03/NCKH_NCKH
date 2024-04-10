@@ -17,15 +17,15 @@
         @endif
         <div class="row">
             <div class="col-12">
-                <h1>Post</h1>
+                <h1>Bài đăng</h1>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
+                            <th scope="col">Tiêu đề</th>
                             <th scope="col">Tác giả</th>
                             <th scope="col">Ngày đăng</th>
-                            <th scope="col">Setting</th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,11 +37,11 @@
                                 <td>{{ $item->create_date }}</td>
                                 <td>
                                     <a href="{{ route('dpPostUpdate', ['id' => $item->ID]) }}">
-                                        <button type="button" class="btn btn-info">Update</button>
+                                        <button type="button" class="btn btn-info">Sửa</button>
                                     </a>
                                     &ensp;&ensp;
                                     <a href="{{ route('deletePost', ['id' => $item->ID]) }}"><button type="button"
-                                            class="btn btn-danger">Delete</button></a>
+                                            class="btn btn-danger">Xóa</button></a>
                                 </td>
                             </tr>
                         @endforeach

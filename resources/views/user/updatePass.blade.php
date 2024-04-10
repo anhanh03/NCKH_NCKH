@@ -31,20 +31,20 @@
                 <div class="col-sm-3 col-1"></div>
                 <div class="col-sm-6 col-10 shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h3 class="text-center" style="color: rgb(5, 5, 5)"><img src="img/logo.png" alt="Logo">
-                        <br>Update Password
+                        <br>Cập nhật mật khẩu
                     </h3>
                     <form method="GET" action="{{ route('updatePassword') }}">
                         @csrf <!-- CSRF protection -->
                         <input type="hidden" name="email" value="{{ $email }}">
                         <div class="mb-3">
-                            <label for="new_password" class="form-label">New Password</label>
+                            <label for="new_password" class="form-label">Mật khẩu mới</label>
                             <input type="password" class="form-control" id="new_password" name="new_password" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Confirm</label>
+                            <label for="confirm_password" class="form-label">Xác nhận lại</label>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </form>
                     
                 </div>

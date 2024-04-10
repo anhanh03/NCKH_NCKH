@@ -38,12 +38,12 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('managerMember') }}">
                 {{-- <i class="fas fa-fw fa-table"></i> --}}
-                <span>Member</span></a>
+                <span>Thành viên</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('accountAdmin') }}">
                 {{-- <i class="fas fa-fw fa-table"></i> --}}
-                <span>AccountAdmin</span></a>
+                <span>Tài khoản Admin</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('managerDocument') }}">

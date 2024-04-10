@@ -39,7 +39,7 @@
                             <input type="text" class="form-control" id="exampleInputPassword1" name="author"
                                 value="{{ $author }}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Sửa</button>
                     </form>
 
                 </div>

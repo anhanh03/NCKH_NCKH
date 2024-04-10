@@ -26,7 +26,7 @@
                             <th scope="col">Bài đăng hoặc tài liệu</th>
                             <th scope="col">Nội dung</th>
                             <th scope="col">Thời gian</th>
-                            <th scope="col">Setting</th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +38,7 @@
                             <td>00:00 00-00-0000</td>
                             <td>
                                 <a href="#"><button type="button"
-                                        class="btn btn-danger">Delete</button></a>
+                                        class="btn btn-danger">Xóa</button></a>
                             </td>
                         </tr>
                         {{-- @foreach ($post as $item)

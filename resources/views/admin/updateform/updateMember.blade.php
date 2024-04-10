@@ -23,7 +23,7 @@
             <div class="col-10 col-sm-4 mt-5 text-center">
                 <form action="{{ route('MemberUpdate') }}" class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     <input type="hidden" name="id" value="{{ $id }}">
-                    <h2>Form Member</h2>
+                    <h2>Form Thành viên</h2>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="fullName" id="exampleInputEmail1" value="{{ $fullName }}">
                       </div>
@@ -32,7 +32,7 @@
                         <input type="text" class="form-control" name="email" id="exampleInputPassword1" value="{{ $email }}">
                       </div>
                       
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary">SỬa</button>
                 </form>
                 
             </div>

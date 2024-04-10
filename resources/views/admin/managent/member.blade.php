@@ -17,7 +17,7 @@
         </div>
     @endif
     <div class="col-12">
-      <h1>Member</h1>
+      <h1>Thành viên</h1>
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -25,7 +25,7 @@
             <th scope="col">Tên</th>
             <th scope="col">Email</th>
             <th scope="col">Ngày tham gia</th>
-            <th scope="col">Setting</th>
+            <th scope="col">Thao tác</th>
           </tr>
         </thead>
         <tbody>
@@ -36,9 +36,9 @@
             <td>{{ $user->Email }}</td>
             <td>{{ $user->joindate }}</td>
             <td style="align-items: center">
-              <a href="{{ route('dpMemberUpdate', ['id'=>$user->ID]) }}"><button type="button" class="btn btn-info">Update</button></a>
+              <a href="{{ route('dpMemberUpdate', ['id'=>$user->ID]) }}"><button type="button" class="btn btn-info">Sửa</button></a>
               &ensp;&ensp;
-              <a href="{{ route('deleteMember', ['id' => $user->ID]) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+              <a href="{{ route('deleteMember', ['id' => $user->ID]) }}"><button type="button" class="btn btn-danger">Xóa</button></a>
             </td>
           </tr>
           @endforeach

@@ -15,10 +15,10 @@
     @endif
     <section class="header-descriptin329">
         <div class="container">
-            <h3>Post Details</h3>
+            <h3>Bài đăng chi tiết</h3>
             <ol class="breadcrumb breadcrumb839">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Post Details</a></li>
+                <li><a href="{{Route('home')}}">Home</a></li>
+                <li><a>Chi tiết bài viết</a></li>
                 <li class="active">{{ $post->title }}</li>
             </ol>
         </div>
@@ -38,8 +38,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="post-que-rep-rihght320"> <a href="#"><i class="fa fa-question-circle"
-                                                aria-hidden="true"></i> Question</a> <a href="#"
-                                            class="r-clor10">Report</a> </div>
+                                                aria-hidden="true"></i> Câu hỏi</a> <a href="#"
+                                            class="r-clor10">Báo cáo</a> </div>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                             aria-hidden="true"> 5</i></a> <i class="fa fa-folder folder2"
                                         aria-hidden="true"> wordpress</i> <i class="fa fa-clock-o clock2"
                                         aria-hidden="true"> Thời gian đăng</i> <a href="#"><i
-                                            class="fa fa-commenting commenting2" aria-hidden="true"> 5 answer</i></a> <i
+                                            class="fa fa-commenting commenting2" aria-hidden="true"> 5 trả lời</i></a> <i
                                         class="fa fa-user user2" aria-hidden="true"> {{ $post->count_view }}</i> </div>
                                 <div class="l-rightside39">
                                     <button type="button" class="tolltip-button thumbs-up2" data-toggle="tooltip"
@@ -60,8 +60,8 @@
                                             aria-hidden="true"></i></button>
                                     <button type="button" class="tolltip-button  thumbs-down2" data-toggle="tooltip"
                                         data-placement="bottom" title="Dislike"><i class="fa fa-thumbs-o-down"
-                                            aria-hidden="true"></i></button> <span class="single-question-vote-result">luot
-                                        like</span>
+                                            aria-hidden="true"></i></button> <span class="single-question-vote-result">lượt
+                                        thích</span>
                                 </div>
                             </div>
                         </div>

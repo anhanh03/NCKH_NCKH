@@ -60,12 +60,12 @@
                                                             </i></a>
                                                         {{-- <a href="#"><i class="fa fa-folder" aria-hidden="true"> wordpress</i></a> --}}
                                                         <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
-                                                                ago</i></a>
+                                                                trước</i></a>
                                                         <a href="#"><i class="fa fa-question-circle-o"
                                                                 aria-hidden="true">
-                                                                Question</i></a>
+                                                                Câu hỏi</i></a>
                                                                 <a id="reportLink-{{ $document->ID }}" class="reportLink" href="#">
-                                                                    <i class="fa fa-bug" aria-hidden="true"></i> Report
+                                                                    <i class="fa fa-bug" aria-hidden="true"></i> Báo cáo
                                                                 </a>
                                                             
                                                                 <form id="reportForm-{{ $document->ID }}" class="reportForm" action="{{ route('report') }}" method="GET"
@@ -91,7 +91,7 @@
                                                     <a href="#">
                                                         <button type="button" class="q-type23 button-ques2973">
                                                             <i class="fa fa-user-circle-o" aria-hidden="true">
-                                                                {{ $document->count_view }} view</i>
+                                                                {{ $document->count_view }} lượt xem</i>
                                                         </button>
                                                     </a>
                                                 </div>

@@ -17,10 +17,10 @@
 
     <section class="header-descriptin329">
         <div class="container">
-            <h3>Document</h3>
+            <h3>Tài liệu</h3>
             <ol class="breadcrumb breadcrumb839">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Document</a></li>
+                <li><a href="{{Route('home')}}">Trang chủ</a></li>
+                <li><a href="{{Route('homeD')}}">Tài liệu</a></li>
                 <li class="active">title</li>
             </ol>
         </div>
@@ -38,13 +38,13 @@
                             <td>
                                 <div class="row" style="margin: 10px 0px">
                                     <div class="col-md-12">
-                                        <i class="fa fa-folder" aria-hidden="true" style="margin: 10px 0px">Sourse</i><br>
+                                        <i class="fa fa-folder" aria-hidden="true" style="margin: 10px 0px">Nguồn</i><br>
                                         <a href="#">Tên Sourse</a>
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 10px 0px">
                                     <div class="col-md-12">
-                                        <i class="fa fa-university" aria-hidden="true">University</i><br>
+                                        <i class="fa fa-university" aria-hidden="true">Trường đại học</i><br>
                                         <a href="#">Tên Trường đại học</a>
                                     </div>
                                 </div>
@@ -52,12 +52,12 @@
                         </tr>
                         <tr>
                             <td>
-                                Academic year: <small>2023-2024</small>
+                                Năm học: <small>2023-2024</small>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Upload by:
+                                Đăng lên bởi:
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="left-user12923 left-user12923-repeat">
@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Comment:
+                                Bình luận:
                                 @foreach ($comment as $comment)
                                     <div class="row" style="margin: 10px 0">
                                         <div class="row">
@@ -133,12 +133,12 @@
                                 @if ($remaining_downloads == 1)
                                     <a type="button" href="{{ route('Dowload.Document', ['id' => $document->ID]) }}" class="btn btn-primary"
                                         style="margin: 0 8px;">
-                                        <i class="fa fa-download" aria-hidden="true"></i> Download
+                                        <i class="fa fa-download" aria-hidden="true"></i> Tải về
                                     </a>
                                 @else
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#exampleModal">
-                                        <i class="fa fa-download" aria-hidden="true"></i> Download
+                                        <i class="fa fa-download" aria-hidden="true"></i> Tải về
                                     </button>
                                 @endif
 
@@ -171,11 +171,11 @@
 
 
                                 <a href="" style="margin: 0 8px;"><i class="fa fa-thumbs-up"
-                                        aria-hidden="true"></i>Like</a>
+                                        aria-hidden="true"></i>Thích</a>
                                 <a href="" style="margin: 0 8px;"><i class="fa fa-save"
-                                        aria-hidden="true"></i>Save</a>
+                                        aria-hidden="true"></i>Lưu</a>
                                 <a href="" style="margin: 0 8px;"><i class="fa fa-share"
-                                        aria-hidden="true"></i>Share</a>
+                                        aria-hidden="true"></i>Chia sẻ</a>
                             </ul>
                         </div>
                     </div>

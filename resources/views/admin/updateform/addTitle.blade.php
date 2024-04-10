@@ -25,15 +25,15 @@
             <div class="col-10 col-sm-4 mt-5 text-center">
                 <form action="{{ route('addTitle') }}" method="GET" class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     @csrf
-                    <h2>Form Title</h2>
+                    <h2>Form Chủ đề</h2>
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="topicName" name="TopicName" placeholder="Topic Name">
+                        <input type="text" class="form-control" id="topicName" name="TopicName" placeholder="Tên chủ đề">
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" id="description" name="Description"
                             placeholder="Description">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
                 </form>
 
 
