@@ -114,6 +114,8 @@ Route::post('/addDocument', [DocumentsController::class, 'createDocument'])->nam
 //trang tải tài liệu
 Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name('showDocument');
 
+Route::get('/DowloadDocument', [DocumentsController::class, 'DowloadDocument'])->name('Dowload.Document');
+
 Route::get('/editDocument', [DocumentsController::class, 'editDocument'])->name('editDocument');
 
 Route::get('/deleteDocument', [DocumentsController::class, 'deleteDocument'])->name('deleteDocument');

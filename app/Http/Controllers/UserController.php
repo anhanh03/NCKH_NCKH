@@ -95,6 +95,7 @@ class UserController extends Controller
         $user->Email = $email;
         $user->ID_role = 2;
         $user->Password = bcrypt($password); // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+        $user->active_dowload=0;
         // Set các thuộc tính khác của người dùng (FullName, DateOfBirth, Address, Gender, UserType, JoinDate, vv.)
         $user->JoinDate = date('Y-m-d H:i:s');
         // Lưu tài khoản mới vào cơ sở dữ liệu

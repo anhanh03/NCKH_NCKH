@@ -38,6 +38,7 @@ class User extends Authenticatable
         'countcomment',
         'ID_role',
         'joindate',
+        'active_dowload',
     ];
 
     /**

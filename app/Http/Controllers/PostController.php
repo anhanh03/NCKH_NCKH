@@ -29,10 +29,8 @@ class PostController extends Controller
 
     public function displayPost()
     {
-        
         $ID = request()->input('idpost');
-        
-        
+
         $post = Post::getPostById($ID);
 
         $comments = Comment::getCommentByPostId($ID);
@@ -53,12 +51,12 @@ class PostController extends Controller
     }
     public function show($idPost)
     {
-        if(!$idPost){
+        if (!$idPost) {
             $ID = request()->input('idpost');
-        }else{
-            $ID=$idPost;
+        } else {
+            $ID = $idPost;
         }
-        
+
         $post = Post::getPostById($ID);
 
         $comments = Comment::getCommentByPostId($ID);
@@ -108,34 +106,36 @@ class PostController extends Controller
 
     public function addPost(Request $request)
     {
-        // Lấy dữ liệu từ request
-        $title = $request->input('Document_Name');
-        $content = $request->input('Description');
-        $topicId = $request->input('ID_topic');
-        // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
+        if ($this->userController->isLoggedIn()) {
+            // Lấy dữ liệu từ request
+            $title = $request->input('Document_Name');
+            $content = $request->input('Description');
+            $topicId = $request->input('ID_topic');
+            // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
 
-        // Tạo bản ghi mới trong bảng "post"
-        $username = $request->session()->get('username');
-        $user = User::where('Username', $username)->first();
+            // Tạo bản ghi mới trong bảng "post"
+            $username = $request->session()->get('username');
+            $user = User::where('Username', $username)->first();
 
-        $post = new Post();
-        $post->ID_user = $user->ID; // Gán ID_user từ người dùng hiện tại
-        $post->ID_topic = $topicId;
-        $post->title = $title;
-        $post->content = $content;
-        $post->create_date = now();
-        $post->count_view = 0;
-        
-        try{
-            // Lưu bản ghi vào cơ sở dữ liệu
-            $post->save();
-            // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
-            return back()->with('success','Thêm bài viết thành công');
+            $post = new Post();
+            $post->ID_user = $user->ID; // Gán ID_user từ người dùng hiện tại
+            $post->ID_topic = $topicId;
+            $post->title = $title;
+            $post->content = $content;
+            $post->create_date = now();
+            $post->count_view = 0;
 
-        }catch(QueryException $e){
-            return back()->withErrors('Lỗi khi thêm bài viết');
+            try {
+                // Lưu bản ghi vào cơ sở dữ liệu
+                $post->save();
+                // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
+                return back()->with('success', 'Thêm bài viết thành công');
+            } catch (QueryException $e) {
+                return back()->withErrors('Lỗi khi thêm bài viết');
+            }
+        } else {
+            return back()->withErrors('Bạn phải đăng nhập!');
         }
-        
     }
 
     public function editPost(Request $request)
@@ -145,18 +145,22 @@ class PostController extends Controller
 
     public function deletePost(Request $request)
     {
-        $postId = $request->id;
+        if ($this->userController->isLoggedIn()) {
+            $postId = $request->id;
 
-        // Xóa các bản ghi con trong bảng comments
-        DB::table('comments')->where('ID_post', $postId)->delete();
+            // Xóa các bản ghi con trong bảng comments
+            DB::table('comments')->where('ID_post', $postId)->delete();
 
-        // Tiếp tục xóa bản ghi cha trong bảng post
-        $result = DB::table('post')->where('ID', $postId)->delete();
+            // Tiếp tục xóa bản ghi cha trong bảng post
+            $result = DB::table('post')->where('ID', $postId)->delete();
 
-        if ($result) {
-            return back()->with('success', 'Bài viết đã được xóa');
+            if ($result) {
+                return back()->with('success', 'Bài viết đã được xóa');
+            } else {
+                return back()->withErrors('Xóa bài viết không thành công');
+            }
         } else {
-            return back()->withErrors('Xóa bài viết không thành công');
+            return back()->withErrors('Bạn phải đăng nhập!');
         }
     }
 }
