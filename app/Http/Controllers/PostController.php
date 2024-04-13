@@ -19,11 +19,15 @@ class PostController extends Controller
     public function displayTitlePost()
     {
         $ID_topic = request('id');
-        $posts = Post::getPostsByTopic($ID_topic);
-        if ($posts) {
-            return view('post.posttitle', ['posts' => $posts]);
+
+        
+        $customQuery = DB::table('post')->select('*')->where('ID_topic',$ID_topic);
+        $paginatedPosts = $customQuery->paginate(10);
+
+        if ($paginatedPosts) {
+            return view('post.posttitle', ['posts' => $paginatedPosts]);
         } else {
-            return 'null';
+            return 'lỗi rồi';
         }
     }
 

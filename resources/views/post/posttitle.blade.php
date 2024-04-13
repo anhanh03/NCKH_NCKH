@@ -96,23 +96,29 @@
 
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
+                            <!-- Liên kết trang trước -->
                             <li>
-                                <a href="#" aria-label="Previous">
+                                <a href="{{ $posts->previousPageUrl() ? $posts->previousPageUrl().'&id='.request('id') : '' }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                    
+                            <!-- Liên kết của từng trang -->
+                            @for ($i = 1; $i <= $posts->lastPage(); $i++)
+                                <li class="{{ $posts->currentPage() == $i ? 'active' : '' }}">
+                                    <a href="{{ route('displayTitlePost', ['id' => request('id'), 'page' => $i]) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                    
+                            <!-- Liên kết trang tiếp theo -->
                             <li>
-                                <a href="#" aria-label="Next">
+                                <a href="{{ $posts->nextPageUrl() ? $posts->nextPageUrl().'&id='.request('id') : '' }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                         </ul>
                     </nav>
+                     
                     {{-- </section> --}}
                 </div>
                 @include('layouts.sidebar')
