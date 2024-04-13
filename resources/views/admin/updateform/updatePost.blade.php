@@ -29,7 +29,7 @@
                     <div class="mb-3">
                         <textarea class="form-control" id="exampleInputPassword1" name="content">{{ $post->content }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Sửa</button>
                 </form>
                 
 

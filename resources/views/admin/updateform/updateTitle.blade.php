@@ -25,7 +25,7 @@
             </div>
             <div class="col-10 col-sm-4 mt-5 text-center">
                 <form action="{{ route('UpdateTopic') }}" class="shadow p-3 mb-5 bg-body-tertiary rounded">
-                    <h2>Form Title</h2>
+                    <h2>Form Chủ đề</h2>
                     <input type="hidden" name="id" value="{{ $id }}">
                     <div class="mb-3">
                         <input type="text" class="form-control" id="exampleInputEmail1" name="topicName"
@@ -34,7 +34,7 @@
                     <div class="mb-3">
                         <textarea type="text" class="form-control" id="exampleInputPassword1" name="description">{{ $topic->Description }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Sửa</button>
                 </form>
 
 

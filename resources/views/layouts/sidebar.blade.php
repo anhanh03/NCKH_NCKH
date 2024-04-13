@@ -4,7 +4,7 @@
         <h4>Lối tắt</h4>
         <ul>
             <li><a href="{{route('displayAddPost')}}">Tạo bài đăng</a></li>
-            <li><a href="{{route('showCreateDocument')}}">Up tài liệu</a></li>
+            <li><a href="{{route('showCreateDocument')}}">Đăng tài liệu</a></li>
             
         </ul>
     </div>
@@ -15,52 +15,52 @@
     <div class="categori-part329">
         <h4>Danh mục</h4>
         <ul>
-            <li><a href="#">web developer</a></li>
-            <li><a href="#">Andriod developer</a></li>
-            <li><a href="#">grapics developer</a></li>
-            <li><a href="#">web developer</a></li>
+            <li><a href="#">Phát triển nền tảng web</a></li>
+            <li><a href="#">Phát triển ứng dụng android</a></li>
+            <li><a href="#">Thiết kế đồ họa</a></li>
+            <li><a href="#">Phát triển ứng dụng máy tính</a></li>
         </ul>
     </div>
     <!--             social part -->
     <div class="social-part2189">
-        <h4>Find us</h4>
+        <h4>Tìm tới chúng tôi</h4>
         <li class="rss-one">
             <a href="#" target="_blank"> <strong>
-                    <span>Subscribe</span>
+                    <span>Theo dõi</span>
                     <i class="fa fa-rss" aria-hidden="true"></i>
 
                     <br>
-                    <small>To RSS Feed</small>
+                    <small>tại RSS</small>
 
                 </strong> </a>
         </li>
         <li class="facebook-two">
             <a href="https://www.facebook.com/profile.php?id=61556959966968" target="_blank"> <strong>
-                    <span>Subscribe</span>
+                    <span>Theo dõi</span>
                     <i class="fa fa-facebook" aria-hidden="true"></i>
 
                     <br>
-                    <small>To Facebook Feed</small>
+                    <small>trang Facebook</small>
 
                 </strong> </a>
         </li>
         <li class="twitter-three">
             <a href="#" target="_blank"> <strong>
-                    <span>Subscribe</span>
+                    <span>Liên hệ</span>
                     <i class="fa fa-twitter" aria-hidden="true"></i>
 
                     <br>
-                    <small>To twitter Feed</small>
+                    <small>tới twitter</small>
 
                 </strong> </a>
         </li>
         <li class="youtube-four">
-            <a href="#" target="_blank"> <strong>
+            <a href="https://www.youtube.com/channel/UCf_c4fVqg5M9NumY5qysV3g" target="_blank"> <strong>
                     <span>Subscribe</span>
                     <i class="fa fa-youtube" aria-hidden="true"></i>
 
                     <br>
-                    <small>To youtube Feed</small>
+                    <small>kênh youtube</small>
 
                 </strong> </a>
         </li>

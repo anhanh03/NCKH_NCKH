@@ -34,14 +34,14 @@
                 <form action="{{ route('verifyCode') }}">
                     <div id="code">
                         <div class="mb-3">
-                            <label for="" class="form-label">Enter the code sent to your email address:</label>
+                            <label for="" class="form-label">Nhập mã code đã được gửi tới email của bạn:</label>
                             <input type="hidden" name="email" value="{{ $email }}">
                             <input type="text" class="form-control" name="verifyCode" id="Code" aria-describedby="emailHelp">
                         </div>
                         <a href="{{ route('displayVerify') }}" class="text-decoration-none">
                             <p>Gửi lại mã code?</p>
                         </a>
-                        <input type="submit" class="btn btn-primary" value="Send">
+                        <input type="submit" class="btn btn-primary" value="Gửi">
                     </div>
                 </form>
             </div>

@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <div class="col-sm-3 col-12"><h1>Account_Admin</h1></div>
+                <div class="col-sm-3 col-12"><h1>Tài khoản Admin</h1></div>
                 <div class="col-sm-6"></div>
                 <div class="col-sm-3 col-12"><a href="{{Route('addAcount')}}"><button type="button" class="btn btn-success">Add-Account</button></a></div>
             </div>
@@ -28,11 +28,11 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Username</th>
+                        <th scope="col">Họ tên</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Setting</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,9 +44,9 @@
                         <td>{{ $user->sex }}</td>
                         <td>{{ $user->address }}</td>
                         <td>
-                            <button type="button" class="btn btn-info" onclick="return onclickupdate({{ $user->ID }})">Update</button>
+                            <button type="button" class="btn btn-info" onclick="return onclickupdate({{ $user->ID }})">Cập nhật</button>
                             &ensp;&ensp;
-                            <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                            <a href="#"><button type="button" class="btn btn-danger">Xóa</button></a>
                         </td>
                     </tr>
                     @endforeach
@@ -56,12 +56,12 @@
                 <form action="" method="get">
                     <table class="table">
                         <tr>
-                            <th><label for="Fullname">Fullname:</label></th>
+                            <th><label for="Fullname">Họ tên:</label></th>
                             <td><input type="text" class="input-field" value="" name="Fullname" id="username"
                                     placeholder=""></td>
                         </tr>
                         <tr>
-                            <th><label for="gender">Gender:</label></th>
+                            <th><label for="gender">Giới tính:</label></th>
                             <td>
                                 <input type="radio" name="Sex" value="nam" id="gender-male" checked>
                                 <label for="gender-male">Nam</label>
@@ -76,16 +76,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><label for="address">Address:</label></th>
+                            <th><label for="address">Địa chỉ:</label></th>
                             <td><input type="text" name="Address" id="address" value="" placeholder="address"
                                     class="input-field"></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td rowspan="2"><button type="submit" class="btn btn-primary"
-                                    name="Update">Update</button>
+                                    name="Update">Sửa</button>
                                 <button type="button" class="btn btn-danger" onclick="return onclickBack()"
-                                    name="Update">Back</button>
+                                    name="Update">trở lại</button>
                             </td>
                         </tr>
                     </table>

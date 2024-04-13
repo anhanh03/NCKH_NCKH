@@ -17,7 +17,7 @@
         </div>
     @endif
         <div class="col-12">
-            <h1>Document</h1>
+            <h1>Tài liệu</h1>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -25,7 +25,7 @@
                         <th scope="col">Tên Tài liệu</th>
                         <th scope="col">Tác giả</th>
                         <th scope="col">Ngày đăng</th>
-                        <th scope="col">Setting</th>
+                        <th scope="col">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,9 +36,9 @@
                         <td>{{ $doc->Author }}</td>
                         <td>{{ $doc->create_date }}</td>
                         <td>
-                            <a href="{{ route('dpDocumentUpdate', ['id' => $doc->ID]) }}"><button type="button" class="btn btn-info">Update</button></a>
+                            <a href="{{ route('dpDocumentUpdate', ['id' => $doc->ID]) }}"><button type="button" class="btn btn-info">Sửa</button></a>
                             &ensp;&ensp;
-                            <a href="{{ route('deleteDocument', ['id' => $doc->ID]) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+                            <a href="{{ route('deleteDocument', ['id' => $doc->ID]) }}"><button type="button" class="btn btn-danger">Xóa</button></a>
                         </td>
                     </tr>
                     @endforeach

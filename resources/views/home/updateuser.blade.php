@@ -42,11 +42,11 @@
                             <div id="displayinfor" class="inforuser w-100">
                                 <table class="table">
                                     <tr>
-                                        <th>Fullname: </th>
+                                        <th>Họ tên: </th>
                                         <td>{{ $full_name }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Gender: </th>
+                                        <th>Giới tính: </th>
                                         <td>{{ $sex }}</td>
                                     </tr>
                                     <tr>
@@ -58,7 +58,7 @@
                                         <td>{{ $phone }}</td>
                                     </tr> --}}
                                     <tr>
-                                        <th>Address: </th>
+                                        <th>Địa chỉ: </th>
                                         <td>{{ $address }}</td>
                                     </tr>
                                 </table>
@@ -68,12 +68,12 @@
                                     <table class="table">
 
                                         <tr>
-                                            <th><label for="Fullname">Fullname:</label></th>
+                                            <th><label for="Fullname">Họ tên:</label></th>
                                             <td><input type="text" class="input-field" value="{{ $full_name }}"
                                                     name="Fullname" id="username" placeholder="{{ $full_name }}"></td>
                                         </tr>
                                         <tr>
-                                            <th><label for="gender">Gender:</label></th>
+                                            <th><label for="gender">Giới tính:</label></th>
                                             <td>
                                                 <input type="radio" name="Sex" value="nam" id="gender-male">
                                                 <label for="gender-male">Nam</label>
@@ -93,7 +93,7 @@
                                                     placeholder="Số điện thoại" class="input-field"></td>
                                         </tr> --}}
                                         <tr>
-                                            <th><label for="address">Address:</label></th>
+                                            <th><label for="address">Địa chỉ:</label></th>
                                             <td><input type="text" name="Address" id="address"
                                                     value="{{ $address }}" placeholder="{{ $address }}"
                                                     class="input-field"></td>
@@ -101,7 +101,7 @@
                                         <tr>
                                             <td></td>
                                             <td rowspan="2"><button type="submit" class="btn btn-primary"
-                                                    name="Update">Update</button></td>
+                                                    name="Update">Sửa</button></td>
                                         </tr>
                                     </table>
                                 </form>

@@ -66,9 +66,9 @@
                                                     <a href="#"><i class="fa fa-folder" aria-hidden="true">
                                                             wordpress</i></a>
                                                     <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
-                                                            ago</i></a>
+                                                            trước</i></a>
                                                     <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
-                                                            Question</i></a>
+                                                            Câu hỏi</i></a>
                                                     {{-- <a id="reportLink" href="#">
                                                         <i class="fa fa-bug" aria-hidden="true"></i> Report
                                                     </a> --}}

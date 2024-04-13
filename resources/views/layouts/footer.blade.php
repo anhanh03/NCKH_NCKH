@@ -23,7 +23,7 @@
                  <div class="info-part-one320">
                      <!-- <h4>Where We Are ?</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu.</p> -->
-                     <h4>Address :</h4>
+                     <h4>Địa chỉ :</h4>
                      <p>Trường Đại Học Tài Nguyên và Môi Trường Hà Nội</p>
                      <h4>Hỗ trợ :</h4>
                      <p>Số điện thoại liên hệ : (+84)12345678</p>
@@ -33,30 +33,30 @@
              </div>
              <div class="col-md-3">
                  <div class="info-part-two320 text-center">
-                     <h4>Quick Links</h4>
+                     <h4>Đường dẫn nhanh</h4>
                      <a href="{{ route('home') }}">
                          <p>-Home</p>
                      </a>
                      <a href="#">
-                         <p>-Ask Question</p>
+                         <p>-Yêu cầu</p>
                      </a>
                      <a href="#">
-                         <p>-Questions</p>
+                         <p>-Câu hỏi</p>
                      </a>
                      <a href="#">
-                         <p>-Users</p>
+                         <p>-Người dùng</p>
                      </a>
                      <a href="#">
-                         <p>-Edit Profile</p>
+                         <p>-Chỉnh sửa hồ sơ</p>
                      </a>
                      <a href="#">
-                         <p>-Page</p>
+                         <p>-Trang</p>
                      </a>
                      <a href="#">
-                         <p>-Contact Us</p>
+                         <p>-Liên hệ chúng tôi</p>
                      </a>
                      <a href="{{ route('privacy') }}" class="last-child12892">
-                         <p>-Privacy Policy</p>
+                         <p>-Chính sách bảo mật</p>
                      </a>
                  </div>
              </div>
@@ -141,7 +141,7 @@ Themehttps://t.co/urb3LgsOCi</a></p> <small>about 2 weeks ago</small> </div> -->
      <div class="container">
          <div class="row">
              <div class="col-md-6">
-                 <p>Copyright 2024 NCKH | <strong>HIHI</strong></p>
+                 <p>Bản quyền 2024 NCKH | <strong>HIHI</strong></p>
              </div>
              <div class="col-md-6">
                  <div class="social-right2389"> <a href="#"><i class="fa fa-twitter-square"

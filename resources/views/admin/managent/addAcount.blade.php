@@ -16,19 +16,19 @@
                                 <h1 class="fw-bold text-center" id="title">Thêm tài khoản Admin</h1>
                             </div>
                             <div class="mb-3">
-                                <label for="Username" class="form-label">Username</label>
+                                <label for="Username" class="form-label">Họ tên</label>
                                 <input type="Username" name="username" class="form-control" id="Username" aria-describedby="UsernameHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
+                                <label for="email" class="form-label">Địa chỉ email</label>
                                 <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">Mật khẩu</label>
                                 <input type="password" name="password" class="form-control" id="password">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Add</button>  
+                                <button type="submit" class="btn btn-primary">Thêm</button>  
                             </div>
                         </form>
                     </div>

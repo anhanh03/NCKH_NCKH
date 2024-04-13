@@ -53,11 +53,11 @@
                         <div id="displayinfor" class="inforuser w-100">
                             <table class="table">
                                 <tr>
-                                    <th>Fullname: </th>
+                                    <th>Họ và tên: </th>
                                     <td>{{ session('full_name') }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Gender: </th>
+                                    <th>Giới tính: </th>
                                     <td>{{ session('sex') }}</td>
                                 </tr>
                                 <tr>
@@ -65,7 +65,7 @@
                                     <td>{{ session('email') }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Address: </th>
+                                    <th>Địa chỉ: </th>
                                     <td>{{ session('address') }}</td>
                                 </tr>
                             </table>
@@ -74,12 +74,12 @@
                             <form action="{{ route('updateInforUser') }}" method="get">
                                 <table class="table">
                                     <tr>
-                                        <th><label for="Fullname">Fullname:</label></th>
+                                        <th><label for="Fullname">Họ tên:</label></th>
                                         <td><input type="text" class="input-field" value="{{ session('full_name') }}"
                                                 name="Fullname" id="username" placeholder=""></td>
                                     </tr>
                                     <tr>
-                                        <th><label for="gender">Gender:</label></th>
+                                        <th><label for="gender">Giới tính:</label></th>
                                         <td>
                                             <input type="radio" name="Sex" value="nam" id="gender-male"
                                                 {{ session('sex') === 'nam' ? 'checked' : '' }}>
@@ -96,7 +96,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th><label for="address">Address:</label></th>
+                                        <th><label for="address">Địa chỉ:</label></th>
                                         <td><input type="text" name="Address" id="address"
                                                 value="{{ session('address') }}" placeholder="address"
                                                 class="input-field"></td>
@@ -104,7 +104,7 @@
                                     <tr>
                                         <td></td>
                                         <td rowspan="2"><button type="submit" class="btn btn-primary"
-                                                name="Update">Update</button></td>
+                                                name="Update">Sửa</button></td>
                                     </tr>
                                 </table>
                             </form>
