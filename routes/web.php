@@ -160,6 +160,7 @@ Route::get('/admin/accountAdmin',[AdminController::class, 'accountAdmin'])->name
 Route::get('/admin/addAccount',[AdminController::class,'addAcount'])->name('addAcount');
 Route::get('/admin/createAccount',[AdminController::class,'createAdmin'])->name('createAccount');
 Route::get('/admin/Report',[AdminController::class,'manageReport'])->name('manageReport');
+Route::post('/admin/Report/Delete/{id}',[AdminController::class,'manageReportDelete'])->name('manageReportDelete');
 Route::get('/admin/logout',[AdminController::class, 'logout'])->name('logoutadmin');
 
 

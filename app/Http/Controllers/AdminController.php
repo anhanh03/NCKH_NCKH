@@ -156,7 +156,21 @@ class AdminController extends Controller
         return view('admin.managent.addAcount');
     }
     public function manageReport(){
-        return view('admin.managent.report');
+        $reports = Report::all();
+        return view('admin.managent.report', compact('reports'));
+    }
+
+
+    public function manageReportDelete($id)
+    {
+        // Tìm báo cáo cần xóa
+        $report = Report::findOrFail($id);
+
+        // Xóa báo cáo
+        $report->delete();
+
+        // Chuyển hướng về trang danh sách báo cáo với thông báo
+        return redirect()->route('manageReport')->with('success', 'Báo cáo đã được xóa thành công.');
     }
     public function dpTitleUpdate(Request $request)
     {
@@ -168,6 +182,7 @@ class AdminController extends Controller
             'topic' => $topic,
         ]);
     }
+
 
     public function UpdateTopic(Request $request)
     {

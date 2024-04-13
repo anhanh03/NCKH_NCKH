@@ -30,33 +30,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th >1</th>
-                            <td><a href="#">Dẫn đến trang người dùng</a></td>
-                            <td><a href="#">Title dẫn đến bài đăng hoặc báo cáo</a></td>
-                            <td>Vi phạm bản quyền</td>
-                            <td>00:00 00-00-0000</td>
-                            <td>
-                                <a href="#"><button type="button"
-                                        class="btn btn-danger">Delete</button></a>
-                            </td>
-                        </tr>
-                        {{-- @foreach ($post as $item)
+                        @foreach ($reports as $report)
                             <tr>
-                                <th scope="row">{{ $item->ID }}</th>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->user->name }}</td>
-                                <td>{{ $item->create_date }}</td>
+                                <th>{{ $report->id }}</th>
+                                <td>{{ $report->User_ID }}</td>
+                                <td><a href="{{ route('documents.show', ['id' => $report->Document_ID]) }}">{{ $report->Document_ID }}</a></td>
+                                <td>{{ $report->Report_Content }}</td>
+                                <td>{{ $report->Report_Time }}</td>
                                 <td>
-                                    <a href="{{ route('dpPostUpdate', ['id' => $item->ID]) }}">
-                                        <button type="button" class="btn btn-info">Update</button>
-                                    </a>
-                                    &ensp;&ensp;
-                                    <a href="{{ route('deletePost', ['id' => $item->ID]) }}"><button type="button"
-                                            class="btn btn-danger">Delete</button></a>
+                                    <form action="{{ route('manageReportDelete', $report->ID) }}" method="POST">
+                                        @csrf    
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form>
+                                    <form action="{{ route('deleteDocument') }}" method="GET">
+                                        @csrf    
+                                        <input type="hidden" name="id" value="{{ $report->Document_ID }}">
+                                        <button type="submit" class="btn btn-danger">Xóa bài</button>
+                                    </form>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
