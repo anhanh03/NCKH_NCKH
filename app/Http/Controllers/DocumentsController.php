@@ -36,11 +36,19 @@ class DocumentsController extends Controller
     {
         if ($this->userController->isLoggedIn()) {
             $request->validate([
-                'document_file' => 'required|mimes:pdf|max:1024',
+                'document_file' => 'required|mimes:pdf|max:10240',
                 'ID_topic' => 'required',
                 'Document_Name' => 'required',
                 'Description' => 'required',
                 'Author' => 'required',
+            ], [
+                'document_file.required' => 'File tài liệu là bắt buộc.',
+                'document_file.mimes' => 'Vui lòng chỉ chấp nhận các file PDF.',
+                'document_file.max' => 'Dung lượng file không được vượt quá 1024KB.',
+                'ID_topic.required' => 'Chủ đề là bắt buộc.',
+                'Document_Name.required' => 'Tên tài liệu là bắt buộc.',
+                'Description.required' => 'Mô tả là bắt buộc.',
+                'Author.required' => 'Tác giả là bắt buộc.',
             ]);
 
             // Lưu trữ tệp tin

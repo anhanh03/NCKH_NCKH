@@ -33,16 +33,14 @@ class HomeController extends Controller
         }
     }
     //
-    public function index()
+    public function homeTopic()
     {
-        $adminController = new AdminController();
-        $adminController->totalCount();
 
         $topics = Topic::paginate(10); // Thay thế getAllTopics() bằng paginate(10)
 
-        return view('home.index', [
+        return view('home.indexTopic', [
             'topics' => $topics,
-        ])->with('success', 'Teest thoio');
+        ]);
     }
 
     public function indexD()
@@ -53,6 +51,16 @@ class HomeController extends Controller
         ]);
     }
 
+    public function index(){
+        $adminController = new AdminController();
+        $adminController->totalCount();
+
+        $posts = Post::paginate(10); // Thay thế getAllposts() bằng paginate(10)
+
+        return view('home.index', [
+            'posts' => $posts,
+        ]);
+    }
     public function search(Request $request)
     {
         // Lấy từ khóa tìm kiếm từ request

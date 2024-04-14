@@ -25,7 +25,7 @@
             <div class="form-group row">
                 <label for="ID_topic" class="col-sm-2 col-form-label">Chủ đề:</label>
                 <div class="col-sm-10">
-                    <input type="text" id="query" class="form-control" placeholder="Enter a topic">
+                    <input type="text" id="query" class="form-control" placeholder="Nhập chủ đề. Nếu không có chủ đề hãy nhập 'Khác'">
                     <ul id="suggestions" class="list-group">
                     </ul>
                 </div>

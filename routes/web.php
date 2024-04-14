@@ -87,6 +87,7 @@ Route::get('/updateInforUser', [UserController::class, 'updateInforUser'])->name
 
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/topic', [HomeController::class, 'homeTopic'])->name('homeTopic');
 // hiển thị các bài viết trong chủ đề
 Route::get('/tpost', [PostController::class, 'displayTitlePost'])->name('displayTitlePost');
 //bài viết

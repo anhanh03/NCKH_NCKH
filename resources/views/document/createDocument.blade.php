@@ -30,7 +30,7 @@
         <div class="form-group row">
             <label for="ID_topic" class="col-sm-2 col-form-label">Chủ đề:</label>
             <div class="col-sm-10">
-                <input type="text" id="query" class="form-control" placeholder="Enter a query">
+                <input type="text" id="query" class="form-control" placeholder="Nhập chủ đề. Nếu là tài liệu học phần hãy chọn 'Học phần' hoặc Khác">
                 <ul id="suggestions" class="list-group">
                 </ul>
             </div>
@@ -40,7 +40,7 @@
         <div class="form-group row">
             <label for="Document_Name" class="col-sm-2 col-form-label">Tên tài liệu:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="Document_Name" name="Document_Name">
+                <input type="text" class="form-control" id="Document_Name" name="Document_Name" placeholder="Hãy nhập đủ 'Tên tài liệu'">
             </div>
         </div>
 

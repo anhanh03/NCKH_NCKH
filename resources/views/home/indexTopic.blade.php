@@ -27,11 +27,11 @@
                 <div class="col-md-9">
                     <div id="main">
                         <input id="tab1" type="radio" name="tabs" checked>
-                        <label for="tab1">Bài viết</label>
+                        <label for="tab1"><a style="color: #bbb" href="{{ route('home') }}">Bài viết</a></label>
                         <input id="tab2" type="radio" name="tabs">
                         <label for="tab2"><a style="color: #bbb" href="{{ route('homeD') }}">Tài liệu</a></label>
                         <input id="tab3" type="radio" name="tabs">
-                        <label for="tab3"><a style="color: #bbb" href="{{ route('homeTopic') }}">Chủ đề</a></label>
+                        <label for="tab3">Chủ đề</label>
                         {{-- <input id="tab4" type="radio" name="tabs">
                         <label for="tab4">No Answer</label>
                         <input id="tab5" type="radio" name="tabs">
@@ -40,7 +40,7 @@
 
                         <section style="display: block;" id="content1">
                             <!--Recent Question Content Section -->
-                            @foreach ($posts as $post)
+                            @foreach ($topics as $topic)
                                 <div class="question-type2033">
                                     <div class="row">
                                         <div class="col-md-1">
@@ -53,18 +53,18 @@
                                             <div class="right-description893">
                                                 <div id="que-hedder2983">
                                                     {{-- Title --}}
-                                                    <h3><a href="{{ route('displayPost', ['idpost' => $post->ID]) }}"
-                                                            target="_blank">{{ $post->title }}</a></h3>
+                                                    <h3><a href="{{ route('displayTitlePost', ['id' => $topic->ID]) }}"
+                                                            target="_blank">{{ $topic->TopicName }}</a></h3>
                                                 </div>
                                                 <div class="ques-details10018">
                                                     {{-- Description --}}
-                                                    <p>{{ $post->content }}</p>
+                                                    <p>{{ $topic->Description }}</p>
                                                 </div>
                                                 <hr>
                                                 <div class="ques-icon-info3293">
                                                     <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i> </a>
                                                     <a href="#"><i class="fa fa-folder" aria-hidden="true">
-                                                            DiendanIT</i></a>
+                                                            wordpress</i></a>
                                                     <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
                                                             trước</i></a>
                                                     <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
@@ -88,7 +88,7 @@
                                                 </a> --}}
                                                 {{-- <a href="#">
                                                     <button type="button" class="q-type23 button-ques2973"> <i
-                                                            class="fa fa-user-circle-o" aria-hidden="true"> {{ $posts->count_view }}
+                                                            class="fa fa-user-circle-o" aria-hidden="true"> {{ $topic->count_view }}
                                                             lượt xem</i></button>
                                                 </a> --}}
                                             </div>
@@ -101,21 +101,21 @@
                                 <ul class="pagination">
                                     <!-- Liên kết trang trước -->
                                     <li>
-                                        <a href="{{ $posts->previousPageUrl() }}" aria-label="Previous">
+                                        <a href="{{ $topics->previousPageUrl() }}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
 
                                     <!-- Liên kết của từng trang -->
-                                    @for ($i = 1; $i <= $posts->lastPage(); $i++)
-                                        <li class="{{ $posts->currentPage() == $i ? 'active' : '' }}">
-                                            <a href="{{ $posts->url($i) }}">{{ $i }}</a>
+                                    @for ($i = 1; $i <= $topics->lastPage(); $i++)
+                                        <li class="{{ $topics->currentPage() == $i ? 'active' : '' }}">
+                                            <a href="{{ $topics->url($i) }}">{{ $i }}</a>
                                         </li>
                                     @endfor
 
                                     <!-- Liên kết trang tiếp theo -->
                                     <li>
-                                        <a href="{{ $posts->nextPageUrl() }}" aria-label="Next">
+                                        <a href="{{ $topics->nextPageUrl() }}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>

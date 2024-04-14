@@ -22,12 +22,12 @@
                 <div class="col-md-9">
                     <div id="main">
                         <input id="tab1" type="radio" name="tabs">
-                        <label for="tab1"><a style="color: #bbb" href="{{ route('home') }}">Chủ đề</a></label>
+                        <label for="tab1"><a style="color: #bbb" href="{{ route('home') }}">Bài viết</a></label>
                         <input id="tab2" type="radio" name="tabs" checked>
                         <label for="tab2">Tài liệu</label>
-                        {{-- <input id="tab3" type="radio" name="tabs">
-                        <label for="tab3">Recently Answered</label>
-                        <input id="tab4" type="radio" name="tabs">
+                        <input id="tab3" type="radio" name="tabs">
+                        <label for="tab3"><a style="color: #bbb" href="{{ route('homeTopic') }}">Chủ đề</a></label>
+                        {{-- <input id="tab4" type="radio" name="tabs">
                         <label for="tab4">No Answer</label>
                         <input id="tab5" type="radio" name="tabs">
                         <label for="tab5">Recent Post</label> --}}
