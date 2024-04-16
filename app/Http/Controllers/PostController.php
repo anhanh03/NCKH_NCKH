@@ -20,8 +20,7 @@ class PostController extends Controller
     {
         $ID_topic = request('id');
 
-        
-        $customQuery = DB::table('post')->select('*')->where('ID_topic',$ID_topic);
+        $customQuery = DB::table('post')->select('*')->where('ID_topic', $ID_topic);
         $paginatedPosts = $customQuery->paginate(10);
 
         if ($paginatedPosts) {
@@ -109,38 +108,42 @@ class PostController extends Controller
     // }
 
     public function addPost(Request $request)
-    {
-        if ($this->userController->isLoggedIn()) {
-            // Lấy dữ liệu từ request
-            $title = $request->input('Document_Name');
-            $content = $request->input('Description');
-            $topicId = $request->input('ID_topic');
-            // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
+{
+    if ($this->userController->isLoggedIn()) {
+        // Lấy dữ liệu từ request
+        $title = $request->input('Document_Name');
+        $content = $request->input('Description');
+        $topicId = $request->input('ID_topic');
+        // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
 
-            // Tạo bản ghi mới trong bảng "post"
-            $username = $request->session()->get('username');
-            $user = User::where('Username', $username)->first();
+        // Tạo bản ghi mới trong bảng "post"
+        $username = $request->session()->get('username');
+        $user = User::where('Username', $username)->first();
 
-            $post = new Post();
-            $post->ID_user = $user->ID; // Gán ID_user từ người dùng hiện tại
-            $post->ID_topic = $topicId;
-            $post->title = $title;
-            $post->content = $content;
-            $post->create_date = now();
-            $post->count_view = 0;
-
-            try {
-                // Lưu bản ghi vào cơ sở dữ liệu
-                $post->save();
-                // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
-                return back()->with('success', 'Thêm bài viết thành công');
-            } catch (QueryException $e) {
-                return back()->withErrors('Lỗi khi thêm bài viết');
-            }
-        } else {
-            return back()->withErrors('Bạn phải đăng nhập!');
+        if ($this->checkContent($content)==false){
+            return back()->withErrors('Nội dung chứa từ không hợp lệ');
         }
+
+        $post = new Post();
+        $post->ID_user = $user->ID; // Gán ID_user từ người dùng hiện tại
+        $post->ID_topic = $topicId;
+        $post->title = $title;
+        $post->content = $content;
+        $post->create_date = now();
+        $post->count_view = 0;
+        
+        try {
+            // Lưu bản ghi vào cơ sở dữ liệu
+            $post->save();
+            // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
+            return back()->with('success', 'Thêm bài viết thành công');
+        } catch (QueryException $e) {
+            return back()->withErrors('Lỗi khi thêm bài viết');
+        }
+    } else {
+        return back()->withErrors('Bạn phải đăng nhập!');
     }
+}
 
     public function editPost(Request $request)
     {
@@ -167,4 +170,21 @@ class PostController extends Controller
             return back()->withErrors('Bạn phải đăng nhập!');
         }
     }
+
+    public function checkContent(String $content){
+         // Đường dẫn đến file blacklist.txt
+         $blacklistPath = public_path('blacklists.txt');
+
+         // Đọc nội dung của file
+         $blacklist = file($blacklistPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+ 
+         // Kiểm tra nội dung 
+         foreach ($blacklist as $word) {
+             if (strpos($content, $word) !== false) {
+                 return false;
+             }
+         }
+ 
+    }
+
 }

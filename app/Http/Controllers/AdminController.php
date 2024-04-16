@@ -411,4 +411,7 @@ class AdminController extends Controller
         // Chuyển hướng người dùng đến trang đăng nhập hoặc trang khác
         return redirect('/home')->with('message', 'Bạn đã đăng xuất thành công');
     }
+
+    
+
 }

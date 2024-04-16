@@ -12,10 +12,13 @@ class CommentController extends Controller
     // khai bao lop goi den
     // o day goi UserController
     protected $userController;
-    public function __construct(UserController $userController)
+    protected $postController;
+    public function __construct(UserController $userController,PostController $postController)
     {
         $this->userController = $userController;
+        $this->postController = $postController;
     }
+
 
     //
     public function upComment(Request $request)
@@ -27,7 +30,10 @@ class CommentController extends Controller
             $userID = $request->input('user_id');
             $postID = $request->input('post_id');
             $documentID = $request->input('document_id');
-
+            
+            if ($this->postController->checkContent($comment)==false){
+                return back()->withErrors('Nội dung chứa từ không hợp lệ');
+            }
             $user=User::where('Username',$userID)->First();
             // Tạo một comment mới
             $newComment = new Comment();
