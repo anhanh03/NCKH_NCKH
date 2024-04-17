@@ -111,6 +111,14 @@ class PostController extends Controller
 {
     if ($this->userController->isLoggedIn()) {
         // Lấy dữ liệu từ request
+        $request->validate([
+            'Document_Name' => 'required',
+            'Description' => 'required',
+        ],[
+            'Document_Name.required'=>'Cần nhập tên bài đăng',
+            'Description.required'=>'Cần nhập mô tả',
+        ]);
+
         $title = $request->input('Document_Name');
         $content = $request->input('Description');
         $topicId = $request->input('ID_topic');
@@ -171,20 +179,28 @@ class PostController extends Controller
         }
     }
 
-    public function checkContent(String $content){
-         // Đường dẫn đến file blacklist.txt
-         $blacklistPath = public_path('blacklists.txt');
-
-         // Đọc nội dung của file
-         $blacklist = file($blacklistPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
- 
-         // Kiểm tra nội dung 
-         foreach ($blacklist as $word) {
-             if (strpos($content, $word) !== false) {
-                 return false;
-             }
-         }
- 
+    public function checkContent(string $content) {
+        // Đường dẫn đến file blacklist.txt
+        $blacklistPath = public_path('blacklists.txt');
+    
+        // Đọc nội dung của file
+        $blacklist = file($blacklistPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    
+        // Tách nội dung thành các từ
+        $words = preg_split('/\s+/', $content);
+    
+        // Kiểm tra nội dung
+        foreach ($words as $contentWord) {
+            foreach ($blacklist as $word) {
+                if (strpos($contentWord, $word) !== false) {
+                    return false;
+                }
+            }
+        }
+    
+        return true;
     }
+    
+    
 
 }

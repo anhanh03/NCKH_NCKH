@@ -3,15 +3,9 @@ Lồn
 Địt
 Đụ
 Cứt
-Mẹ
 Con đĩ
-Cụ
 Lồn cái
-Má
 Phò
-Cờ lê
-Thúi
-Lính
 Bướm
 Đậu má
 Rẻ rách
@@ -20,44 +14,30 @@ Rắc rối
 Điếm
 Láu cá
 Điếng
-Đạn
 Lỗ lồn
 Đĩ
 Đầu lồn
 Rối
-Thằng
 Thằng chó
 Thằng khốn
-Môi giới
 Đĩ mõm
 Cái lồn
 Cái mẹ
 Buồi
 Đái dầm
-Chó
-Lươn
 Lừa
 Phò mã
-Rạc
 Quần áo rách
-Xơi
-Cô bé
 Cặc to
 Đụ má
 Đậu
 Bê đê
 Điếc
-Tát
-Cú
 Cuối đời
-Nút
-Đỡ
-Điếng
 Rượu nồng
 Nút lưỡi
 Rẻ tiền
 Xấu
-Địt mẹ
 Chó chết
 Lồn bỏng
 Đen
@@ -74,129 +54,47 @@ Lắm mồm
 Đại gia
 Lịch sự
 Đái ra
-Tổng thống
 Đái vào
 Chích
-Điếc
-Chỉa
 Chó chết
 Lồn ngựa
 Vỡ lồn
-Mất mồm
-Lịch sự
-Đau lồn
-Đau bổng
-Đau ớn
-Lồn rách
-Chó má
-Cái chết
-Bia đỡ
-Đít nhau
-Mặc cả
-Đứa con
-Địt cha
-Địt mẹ
-Đỉa
 Đụ má mày
 Cặc
 Lồn
 Địt
 Đụ
 Cứt
-Mẹ
 Con đĩ
-Cụ
 Lồn cái
-Má
 Phò
-Cờ lê
 Thúi
-Lính
 Bướm
 Đậu má
 Rẻ rách
 Đái
 Rắc rối
 Điếm
-Láu cá
-Điếng
-Đạn
 Lỗ lồn
 Đĩ
 Đầu lồn
-Rối
-Thằng
 Thằng chó
 Thằng khốn
-Môi giới
 Đĩ mõm
 Cái lồn
 Cái mẹ
 Buồi
 Đái dầm
-Chó
-Lươn
-Lừa
-Phò mã
-Rạc
 Quần áo rách
-Xơi
-Cô bé
 Cặc to
 Đụ má
-Đậu
 Bê đê
-Điếc
-Tát
-Cú
-Cuối đời
-Nút
-Đỡ
-Điếng
-Rượu nồng
 Nút lưỡi
-Rẻ tiền
-Xấu
 Địt mẹ
-Chó chết
-Lồn bỏng
-Đen
-Cà vạt
-Xẻng
-Tạt
-Tăng
-Cóc
-Dạ dày
-Đầu lưỡi
-Đầu óc
-Nấm lồn
-Lắm mồm
-Đại gia
-Lịch sự
-Đái ra
-Tổng thống
-Đái vào
-Chích
-Điếc
-Chỉa
-Chó chết
-Lồn ngựa
-Vỡ lồn
-Mất mồm
-Lịch sự
-Đau lồn
 Đau bổng
-Đau ớn
-Lồn rách
-Chó má
-Cái chết
-Bia đỡ
 Đít nhau
 Mặc cả
-Đứa con
 Địt cha
-Địt mẹ
-Đỉa
 Đụ má mày
 Bắc kỳ
 Nam kỳ
@@ -226,7 +124,6 @@ ily
 ngl
 imo
 smdh
-m
 cl
 dkm
 cmnr
@@ -237,7 +134,6 @@ cc
 ccc
 đm
 dmcl
-l
 ccđ
 vđ
 dmđ
