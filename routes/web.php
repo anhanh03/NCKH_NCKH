@@ -141,7 +141,8 @@ Route::get('/spp',function(Request $request){
     return view('help.suppost');
 })->name('suppost');
 
-Route::get('/report', [DocumentsController::class, 'report'])->name('report');
+Route::get('/postreport', [PostController::class, 'report'])->name('postReport');
+Route::get('/document/report', [DocumentsController::class, 'report'])->name('report');
 
 Route::get('/about',function(Request $request){
     return view('abouts.about');
@@ -161,6 +162,7 @@ Route::get('/admin/accountAdmin',[AdminController::class, 'accountAdmin'])->name
 Route::get('/admin/addAccount',[AdminController::class,'addAcount'])->name('addAcount');
 Route::get('/admin/createAccount',[AdminController::class,'createAdmin'])->name('createAccount');
 Route::get('/admin/Report',[AdminController::class,'manageReport'])->name('manageReport');
+Route::get('/admin/Report/Post',[AdminController::class,'manageReportPost'])->name('manageReportPost');
 Route::post('/admin/Report/Delete/{id}',[AdminController::class,'manageReportDelete'])->name('manageReportDelete');
 Route::get('/admin/logout',[AdminController::class, 'logout'])->name('logoutadmin');
 

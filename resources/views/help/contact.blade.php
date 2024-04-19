@@ -12,28 +12,22 @@
             <div class="col-md-6">
                 <h1>Bản đồ</h1>
                 <div id="map" style="height: 400px;"></div>
+                
             </div>
         </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
     <script>
-        function initMap() {
-            
-            var myLatLng = {lat: 21.046543259246523, lng: 105.76221362392573}; // Tọa độ của địa chỉ, có thể thay đổi
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: 'Địa chỉ của bạn'
-            });
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz3x7KKEssYTk_Dj9rh-oT4uKFI9FwD4E&callback=initMap">
+        var map = L.map('map').setView([21.047096, 105.762677], 13);
+        L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey={apikey}', {
+        maxZoom: 19,
+        apikey: '78b3037de72240598a6020d6a4f79536',
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+        var marker = L.marker([21.047096, 105.762677]).addTo(map);
+        marker.bindPopup("<b>Xin chào!</b><br>Bạn có thể tìm chúng tôi tại đây.").openPopup();
     </script>
 @endsection

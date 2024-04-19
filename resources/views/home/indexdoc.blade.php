@@ -65,7 +65,7 @@
                                                                 aria-hidden="true">
                                                                 Câu hỏi</i></a>
                                                                 <a id="reportLink-{{ $document->ID }}" class="reportLink" href="#">
-                                                                    <i class="fa fa-bug" aria-hidden="true"></i> Báo cáo
+                                                                    <i class="fa fa-bug" aria-hidden="true">Báo cáo</i> 
                                                                 </a>
                                                             
                                                                 <form id="reportForm-{{ $document->ID }}" class="reportForm" action="{{ route('report') }}" method="GET"

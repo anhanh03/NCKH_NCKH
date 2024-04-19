@@ -68,7 +68,12 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('manageReport') }}">
                 {{-- <i class="fas fa-fw fa-table"></i> --}}
-                <span>Báo cáo</span></a>
+                <span>Báo cáo tài liệu</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('manageReportPost') }}">
+                {{-- <i class="fas fa-fw fa-table"></i> --}}
+                <span>Báo cáo bài đăng</span></a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

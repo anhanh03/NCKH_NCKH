@@ -22,7 +22,7 @@
     <section class="main-content920">
         <div class="container">
             <div class="row">
-                
+
                 {{-- aloalo --}}
                 <div class="col-md-9">
                     <div id="main">
@@ -69,11 +69,25 @@
                                                             trước</i></a>
                                                     <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
                                                             Câu hỏi</i></a>
+                                                    <a id="reportLink-{{ $post->ID }}" class="reportLink"
+                                                        href="#">
+                                                        <i class="fa fa-bug" aria-hidden="true">Báo cáo</i>
+                                                    </a>
+                                                    <form id="reportForm-{{ $post->ID }}" class="reportForm"
+                                                        action="{{ route('postReport') }}" method="GET"
+                                                        style="display: none;">
+                                                        @csrf
+                                                        <input type="hidden" name="post_id"
+                                                            value="{{ $post->ID }}">
+                                                        <label for="reason">Lý do báo cáo:</label>
+                                                        <textarea name="reason" id="reason" cols="30" rows="5"></textarea>
+                                                        <input type="submit" value="Gửi báo cáo">
+                                                    </form>
                                                     {{-- <a id="reportLink" href="#">
                                                         <i class="fa fa-bug" aria-hidden="true"></i> Report
                                                     </a> --}}
 
-                                                    
+
 
 
 
@@ -135,3 +149,21 @@
 
     </section>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+     const reportLinks = document.querySelectorAll('.reportLink');
+ 
+     reportLinks.forEach(function(reportLink) {
+         reportLink.addEventListener('click', function(event) {
+             event.preventDefault();
+             const document_id = this.id.split('-')[1];
+             const reportForm = document.getElementById(`reportForm-${document_id}`);
+             if (reportForm) {
+                 reportForm.style.display = 'block';
+             }
+         });
+     });
+ });
+ 
+ 
+ </script>

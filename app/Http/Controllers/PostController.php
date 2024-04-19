@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\Report;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 class PostController extends Controller
@@ -199,6 +200,34 @@ class PostController extends Controller
         }
     
         return true;
+    }
+
+
+    public function report(Request $request)
+    {
+        if ($this->userController->isLoggedIn()) {
+            // Validate the request data
+            $request->validate([
+                'post_id' => 'required|exists:post,ID',
+                'reason' => 'required|string|max:255',
+            ]);
+
+            // Tạo bản ghi mới trong bảng "post"
+            $username = $request->session()->get('username');
+            $user = User::where('Username', $username)->first();
+            // Tạo một bản ghi mới trong bảng Report
+            $report = new Report();
+            $report->User_ID = $user->ID;
+            $report->Post_ID = $request->post_id;
+            $report->Report_Content = $request->reason;
+            $report->Report_Time = now();
+            $report->save();
+
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Báo cáo đã được gửi thành công!');
+        } else {
+            return back()->withErrors('Bạn phải đăng nhập!');
+        }
     }
     
     

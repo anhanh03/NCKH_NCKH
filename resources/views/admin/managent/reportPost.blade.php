@@ -23,7 +23,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Người dùng</th>
-                            <th scope="col">Tài liệu</th>
+                            <th scope="col">Bài đăng</th>
                             <th scope="col">Nội dung</th>
                             <th scope="col">Thời gian</th>
                             <th scope="col">Thao tác</th>
@@ -34,7 +34,7 @@
                             <tr>
                                 <th>{{ $report->id }}</th>
                                 <td>{{ $report->User_ID }}</td>
-                                <td><a href="{{ route('documents.show', ['id' => $report->Document_ID]) }}">{{ $report->Document_ID }}</a></td>
+                                <td><a href="{{ route('posts.show', ['id' => $report->Post_ID]) }}">{{ $report->Post_ID }}</a></td>
                                 <td>{{ $report->Report_Content }}</td>
                                 <td>{{ $report->Report_Time }}</td>
                                 <td class="d-flex align-items-center">
@@ -42,12 +42,13 @@
                                         @csrf    
                                         <button type="submit" class="btn btn-danger mr-2">Xóa</button>
                                     </form>
-                                    <form action="{{ route('deleteDocument') }}" method="GET">
+                                    <form action="{{ route('deletePost') }}" method="GET">
                                         @csrf    
-                                        <input type="hidden" name="id" value="{{ $report->Document_ID }}">
+                                        <input type="hidden" name="id" value="{{ $report->Post_ID }}">
                                         <button type="submit" class="btn btn-danger">Xóa bài</button>
                                     </form>
                                 </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>

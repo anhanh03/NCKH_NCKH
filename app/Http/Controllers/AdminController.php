@@ -156,8 +156,13 @@ class AdminController extends Controller
         return view('admin.managent.addAcount');
     }
     public function manageReport(){
-        $reports = Report::all();
+        $reports = Report::whereNotNull('Document_ID')->get();
         return view('admin.managent.report', compact('reports'));
+    }
+
+    public function manageReportPost(){
+        $reports = Report::whereNotNull('Post_ID')->get();
+        return view('admin.managent.reportPost', compact('reports'));
     }
 
 
@@ -170,7 +175,7 @@ class AdminController extends Controller
         $report->delete();
 
         // Chuyển hướng về trang danh sách báo cáo với thông báo
-        return redirect()->route('manageReport')->with('success', 'Báo cáo đã được xóa thành công.');
+        return redirect()->back()->with('success', 'Báo cáo đã được xóa thành công.');
     }
     public function dpTitleUpdate(Request $request)
     {
