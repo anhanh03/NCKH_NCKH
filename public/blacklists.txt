@@ -1,22 +1,3 @@
-Cặc
-Lồn
-Địt
-Đụ
-Cứt
-Con đĩ
-Lồn cái
-Phò
-Bướm
-Đậu má
-Rẻ rách
-Đái
-Rắc rối
-Điếm
-Láu cá
-Điếng
-Lỗ lồn
-Đĩ
-Đầu lồn
 Rối
 Thằng chó
 Thằng khốn
@@ -147,3 +128,22 @@ tnc
 th
 tm
 cđ
+Cặc
+Lồn
+Địt
+Đụ
+Cứt
+Con đĩ
+Lồn cái
+Phò
+Bướm
+Đậu má
+Rẻ rách
+Đái
+Rắc rối
+Điếm
+Láu cá
+Điếng
+Lỗ lồn
+Đĩ
+Đầu lồn
