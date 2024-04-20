@@ -9,9 +9,12 @@
         </ul>
     </div>
     <div class="status-part3821">
-        <h4>Thống kê</h4> <a href="#"><i class="fa fa-question-circle" aria-hidden="true">
-                Câu hỏi (20)</i></a> <i class="fa fa-comment" aria-hidden="true"> Trả lời (50)</i>
+        <h4>Thống kê</h4> 
+        <a href="#"><i class="fa fa-question-circle" aria-hidden="true">
+            Câu hỏi ({{ session('postCount', 0) }})</i></a> 
+        <i class="fa fa-comment" aria-hidden="true"> Trả lời ({{ session('commentCount', 0) }})</i>
     </div>
+    
     <div class="categori-part329">
         <h4>Danh mục</h4>
         <ul>

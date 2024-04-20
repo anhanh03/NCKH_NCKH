@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\User;
 use App\Models\Documents;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Session;
+
 class HomeController extends Controller
 {
     protected $userController;
@@ -16,6 +19,21 @@ class HomeController extends Controller
         $this->userController = $userController;
     }
 
+    public function showStatistics()
+    {
+        // Lấy số lượng bản ghi trong bảng Post
+        $postCount = Post::count();
+
+        // Lấy số lượng bản ghi trong bảng Comment
+        $commentCount = Comment::count();
+
+        // Lưu trữ số lượng bản ghi trong session
+        Session::put('postCount', $postCount);
+        Session::put('commentCount', $commentCount);
+
+        // Trả về view với thông tin thống kê
+        return true;
+    }
     public function displayInfor(Request $request)
     {
         $username = $request->session()->get('username'); // Lấy giá trị 'username' từ session
@@ -36,6 +54,7 @@ class HomeController extends Controller
     public function homeTopic()
     {
 
+        $this->showStatistics();
         $topics = Topic::paginate(10); // Thay thế getAllTopics() bằng paginate(10)
 
         return view('home.indexTopic', [
@@ -45,6 +64,7 @@ class HomeController extends Controller
 
     public function indexD()
     {
+        $this->showStatistics();
         $documents = Documents::paginate(10); // Thay thế getAllDocuments() bằng paginate(10)
         return view('home.indexdoc', [
             'documents' => $documents,
@@ -52,6 +72,8 @@ class HomeController extends Controller
     }
 
     public function index(){
+        $this->showStatistics();
+        
         $adminController = new AdminController();
         $adminController->totalCount();
 
