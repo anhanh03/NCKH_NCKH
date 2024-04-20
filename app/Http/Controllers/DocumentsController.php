@@ -259,7 +259,39 @@ class DocumentsController extends Controller
     // Cần sửa lại hàm này
     public function editDocument(Request $request)
     {
-        return back();
+        $id = $request->input('id');
+        $document = Documents::find($id);
+
+        return view('document.update', [
+            'id' => $document->ID,
+            'name' => $document->Document_Name,
+            'description' => $document->Description,
+            'author' => $document->Author,
+        ]);
+    }
+
+    public function documentUpdate(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $author = $request->input('author');
+        $description = $request->input('description');
+        $document = Documents::find($id);
+
+        // $topic=Topic::where('ID',$document->ID_topic);
+
+        if ($document) {
+            $document->Document_Name = $name;
+            $document->Description = $description;
+            $document->Author = $author;
+            $document->save();
+            return redirect()->back()->with('success', 'Cập nhật tài liệu thành công!');
+        } else {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => 'Không tìm thấy tài liệu'])
+                ->withInput();
+        }
     }
 
     public function getDocuments()

@@ -102,6 +102,7 @@ Route::get('/displayManage', [UserController::class, 'manage'])->name('manage');
 //Hiển thị form thêm bài đăng
 Route::get('/addPost', [PostController::class, 'addPost'])->name('addPost');
 Route::get('/displayAddPosst', [PostController::class, 'displayAddPost'])->name('displayAddPost');
+Route::get('/userUpdatePost',[PostController::class, 'PostUpdate'])->name('PostUserUpdate');
 // show comment
 Route::get('/comment', [CommentController::class, 'commentshow'])->name('commentshow');
 // đăng coment
@@ -112,12 +113,15 @@ Route::get('/createdocument', [DocumentsController::class, 'showCreate'])->name(
 
 Route::post('/addDocument', [DocumentsController::class, 'createDocument'])->name('addDocument');
 
+
+
 //trang tải tài liệu
 Route::get('/ShowDocument', [DocumentsController::class, 'showDocument'])->name('showDocument');
 
 Route::get('/DowloadDocument', [DocumentsController::class, 'DowloadDocument'])->name('Dowload.Document');
 
 Route::get('/editDocument', [DocumentsController::class, 'editDocument'])->name('editDocument');
+Route::get('/UpdateUserDocument',[DocumentsController::class, 'documentUpdate'])->name('documentUserUpdate');
 
 Route::get('/deleteDocument', [DocumentsController::class, 'deleteDocument'])->name('deleteDocument');
 // gợi ý chủ đề

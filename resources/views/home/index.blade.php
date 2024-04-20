@@ -1,3 +1,8 @@
+{{-- Import Carbon --}}
+@php
+    use Carbon\Carbon;
+@endphp
+
 @extends('layouts.app')
 @section('content')
 
@@ -65,8 +70,9 @@
                                                     <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i> </a>
                                                     <a href="#"><i class="fa fa-folder" aria-hidden="true">
                                                             DiendanIT</i></a>
-                                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
-                                                            trước</i></a>
+                                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true">
+                                                        {{ Carbon::parse($post->create_date)->diffForHumans() }}
+                                                    </i></a>
                                                     <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
                                                             Câu hỏi</i></a>
                                                     <a id="reportLink-{{ $post->ID }}" class="reportLink"

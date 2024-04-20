@@ -65,8 +65,8 @@
                                                     <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i> </a>
                                                     <a href="#"><i class="fa fa-folder" aria-hidden="true">
                                                             wordpress</i></a>
-                                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
-                                                            trước</i></a>
+                                                    {{-- <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min
+                                                            trước</i></a> --}}
                                                     <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true">
                                                             Câu hỏi</i></a>
                                                     {{-- <a id="reportLink" href="#">

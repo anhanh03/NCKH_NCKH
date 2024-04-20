@@ -55,8 +55,8 @@ class HomeController extends Controller
         $adminController = new AdminController();
         $adminController->totalCount();
 
-        $posts = Post::paginate(10); // Thay thế getAllposts() bằng paginate(10)
-
+        //$posts = Post::paginate(10); // Thay thế getAllposts() bằng paginate(10)
+        $posts = Post::orderBy('create_date', 'desc')->paginate(5);
         return view('home.index', [
             'posts' => $posts,
         ]);

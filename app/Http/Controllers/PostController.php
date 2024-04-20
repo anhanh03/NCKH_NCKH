@@ -109,54 +109,87 @@ class PostController extends Controller
     // }
 
     public function addPost(Request $request)
-{
-    if ($this->userController->isLoggedIn()) {
-        // Lấy dữ liệu từ request
-        $request->validate([
-            'Document_Name' => 'required',
-            'Description' => 'required',
-        ],[
-            'Document_Name.required'=>'Cần nhập tên bài đăng',
-            'Description.required'=>'Cần nhập mô tả',
-        ]);
+    {
+        if ($this->userController->isLoggedIn()) {
+            // Lấy dữ liệu từ request
+            $request->validate(
+                [
+                    'Document_Name' => 'required',
+                    'Description' => 'required',
+                ],
+                [
+                    'Document_Name.required' => 'Cần nhập tên bài đăng',
+                    'Description.required' => 'Cần nhập mô tả',
+                ],
+            );
 
-        $title = $request->input('Document_Name');
-        $content = $request->input('Description');
-        $topicId = $request->input('ID_topic');
-        // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
+            $title = $request->input('Document_Name');
+            $content = $request->input('Description');
+            $topicId = $request->input('ID_topic');
+            // Lấy ID_user từ đăng nhập hoặc thông tin người dùng hiện tại
 
-        // Tạo bản ghi mới trong bảng "post"
-        $username = $request->session()->get('username');
-        $user = User::where('Username', $username)->first();
+            // Tạo bản ghi mới trong bảng "post"
+            $username = $request->session()->get('username');
+            $user = User::where('Username', $username)->first();
 
-        if ($this->checkContent($content)==false){
-            return back()->withErrors('Nội dung chứa từ không hợp lệ');
+            if ($this->checkContent($content) == false) {
+                return back()->withErrors('Nội dung chứa từ không hợp lệ');
+            }
+
+            $post = new Post();
+            $post->ID_user = $user->ID; // Gán ID_user từ người dùng hiện tại
+            $post->ID_topic = $topicId;
+            $post->title = $title;
+            $post->content = $content;
+            $post->create_date = now();
+            $post->count_view = 0;
+
+            try {
+                // Lưu bản ghi vào cơ sở dữ liệu
+                $post->save();
+                // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
+                return back()->with('success', 'Thêm bài viết thành công');
+            } catch (QueryException $e) {
+                return back()->withErrors('Lỗi khi thêm bài viết');
+            }
+        } else {
+            return back()->withErrors('Bạn phải đăng nhập!');
         }
-
-        $post = new Post();
-        $post->ID_user = $user->ID; // Gán ID_user từ người dùng hiện tại
-        $post->ID_topic = $topicId;
-        $post->title = $title;
-        $post->content = $content;
-        $post->create_date = now();
-        $post->count_view = 0;
-        
-        try {
-            // Lưu bản ghi vào cơ sở dữ liệu
-            $post->save();
-            // Điều hướng người dùng đến trang thành công hoặc trang khác tùy ý
-            return back()->with('success', 'Thêm bài viết thành công');
-        } catch (QueryException $e) {
-            return back()->withErrors('Lỗi khi thêm bài viết');
-        }
-    } else {
-        return back()->withErrors('Bạn phải đăng nhập!');
     }
-}
 
     public function editPost(Request $request)
     {
-        return back();
+        $id = $request->input('id');
+        $post = Post::find($id);
+        return view('post.update',[
+            'post'=>$post,
+            'id'=>$id,
+        ]);
+    }
+    public function PostUpdate(Request $request)
+    {
+        if ($this->userController->isLoggedIn()) {
+            $id = $request->input('id');
+            $title = $request->input('title');
+            $content = $request->input('content');
+            $post = Post::find($id); // Sử dụng find() để tìm Post với id tương ứng
+
+            if ($post) {
+                // Kiểm tra xem Post có tồn tại không
+                $post->title = $title;
+                $post->content = $content;
+                $post->save();
+                return redirect()->back()->with('success', 'Cập nhật bài viết thành công!');
+            } else {
+                return redirect()
+                    ->back()
+                    ->withErrors(['error' => 'Không tìm thấy bài viết'])
+                    ->withInput();
+                // Thêm withInput() để giữ lại dữ liệu trong form sau khi chuyển hướng
+            }
+        } else {
+            return back()->withErrors('Bạn phải đăng nhập!');
+        }
     }
 
     public function deletePost(Request $request)
@@ -180,16 +213,17 @@ class PostController extends Controller
         }
     }
 
-    public function checkContent(string $content) {
+    public function checkContent(string $content)
+    {
         // Đường dẫn đến file blacklist.txt
         $blacklistPath = public_path('blacklists.txt');
-    
+
         // Đọc nội dung của file
         $blacklist = file($blacklistPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    
+
         // Tách nội dung thành các từ
         $words = preg_split('/\s+/', $content);
-    
+
         // Kiểm tra nội dung
         foreach ($words as $contentWord) {
             foreach ($blacklist as $word) {
@@ -198,10 +232,9 @@ class PostController extends Controller
                 }
             }
         }
-    
+
         return true;
     }
-
 
     public function report(Request $request)
     {
@@ -229,7 +262,4 @@ class PostController extends Controller
             return back()->withErrors('Bạn phải đăng nhập!');
         }
     }
-    
-    
-
 }

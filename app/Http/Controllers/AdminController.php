@@ -70,7 +70,17 @@ class AdminController extends Controller
         session()->put('totalCountPost', $totalCountPost);
         session()->put('totalCountActiveUser', $totalCountActiveUser);
     }
+    public function isLoggedIn()
+    {
+        // Kiểm tra xem biến session 'usernameAdmin' đã tồn tại hay không
+        if (Session::has('usernameAdmin')) {
+            // Người dùng đã đăng nhập
+            return true;
+        }
 
+        // Người dùng chưa đăng nhập
+        return false;
+    }
     public function createAdmin(Request $request)
     {
         // Validate request
@@ -286,6 +296,8 @@ class AdminController extends Controller
     }
     public function PostUpdate(Request $request)
     {
+        if ($this->isLoggedIn()) {
+        
         $id = $request->input('id');
         $title = $request->input('title');
         $content = $request->input('content');
@@ -304,6 +316,9 @@ class AdminController extends Controller
                 ->withInput();
             // Thêm withInput() để giữ lại dữ liệu trong form sau khi chuyển hướng
         }
+    } else {
+        return back()->withErrors('Bạn phải đăng nhập!');
+    }
     }
 
     public function dpMemberUpdate(Request $request)
