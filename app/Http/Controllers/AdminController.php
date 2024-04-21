@@ -17,44 +17,65 @@ use PhpParser\Node\Stmt\Catch_;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\Builder;
+use App\Charts\memberUser;
+use App\Charts\postNew;
 
 class AdminController extends Controller
 {
     //
     public function index(Request $request)
-    {
-        // Kiểm tra xem có biến session 'usernameAdmin' được thiết lập không
-        if (Session::has('usernameAdmin')) {
-            // Nếu có, tiếp tục hiển thị trang admin
-            // Lưu trữc giá trị của bản ghi vào sesion
-            $startDate = Carbon::now()->subWeek()->startOfWeek(); // Ngày đầu tuần trước
-            $endDate = Carbon::now()->subWeek()->endOfWeek(); // Ngày cuối tuần trước
+{
+    // Kiểm tra xem có biến session 'usernameAdmin' được thiết lập không
+    if (Session::has('usernameAdmin')) {
+        // Nếu có, tiếp tục hiển thị trang admin
+        // Lưu trữ giá trị của bản ghi vào session
+        $name = 'Thành viên';
+        $type = 'bar';
+        $weekDays = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+        $newAccounts = [0, 0, 0, 0, 0, 0, 0];
+        $postCounts = [0, 0, 0, 0, 0, 0, 0];
 
-            $newAccounts = User::whereBetween('joindate', [$startDate, $endDate])
-                ->selectRaw('DATE(joindate) as join_date, COUNT(*) as count')
-                ->groupBy('join_date')
-                ->get()
-                ->pluck('count')
-                ->toArray();
-
-            $postCounts = Post::whereBetween('create_date', [$startDate, $endDate])
-                ->selectRaw('DAYOFWEEK(create_date) as day_of_week, COUNT(*) as count')
-                ->groupBy('day_of_week')
-                ->orderBy('day_of_week')
-                ->get()
-                ->pluck('count')
-                ->toArray();
-
-            $this->totalCount();
-            return view('admin.index', [
-                'newAccounts' => $newAccounts,
-                'postCounts' => $postCounts,
-            ]);
-        } else {
-            // Nếu không, chuyển hướng người dùng đến trang đăng nhập
-            return redirect('/login')->with('error', 'Bạn phải đăng nhập để truy cập trang admin');
+        foreach ($weekDays as $index => $day) {
+            // Lấy ngày hiện tại trong tuần
+            $currentDay = Carbon::now()->startOfWeek()->addDays($index);
+            
+            // Truy vấn cơ sở dữ liệu cho ngày hiện tại
+            $newAccountCount = User::whereDate('joindate', $currentDay)->count();
+            $postCount = Post::whereDate('create_date', $currentDay)->count();
+            
+            // Cập nhật giá trị trong mảng nếu có dữ liệu
+            $newAccounts[$index] = $newAccountCount;
+            $postCounts[$index] = $postCount;
         }
+
+        $chart = new memberUser();
+        $chart->labels($weekDays);
+        $chart->dataset($name, $type, $newAccounts)
+        ->color("rgba(255, 99, 132, 0.2)")
+        ->backgroundcolor("rgba(255, 99, 132, 0.2)");
+
+        $postNew = new postNew();
+        $postNew->loaderColor("rgba(255, 99, 132, 0.2)");
+        $postNew->labels($weekDays);
+        $postNew->dataset('Bài viết mới', $type, $postCounts)
+        ->color("rgba(255, 99, 132, 0.2)")
+        ->backgroundcolor("rgba(255, 99, 132, 0.2)");;
+
+        $this->totalCount();
+        return view('admin.index', [
+            'chart' => $chart,
+            'postNew' => $postNew,
+        ]);
+    } else {
+        // Nếu không, chuyển hướng người dùng đến trang đăng nhập
+        return redirect('/login')->with('error', 'Bạn phải đăng nhập để truy cập trang admin');
     }
+}
+
+
+
+
+
 
     public function totalCount()
     {
@@ -165,16 +186,17 @@ class AdminController extends Controller
     {
         return view('admin.managent.addAcount');
     }
-    public function manageReport(){
+    public function manageReport()
+    {
         $reports = Report::whereNotNull('Document_ID')->get();
         return view('admin.managent.report', compact('reports'));
     }
 
-    public function manageReportPost(){
+    public function manageReportPost()
+    {
         $reports = Report::whereNotNull('Post_ID')->get();
         return view('admin.managent.reportPost', compact('reports'));
     }
-
 
     public function manageReportDelete($id)
     {
@@ -197,7 +219,6 @@ class AdminController extends Controller
             'topic' => $topic,
         ]);
     }
-
 
     public function UpdateTopic(Request $request)
     {
@@ -297,28 +318,27 @@ class AdminController extends Controller
     public function PostUpdate(Request $request)
     {
         if ($this->isLoggedIn()) {
-        
-        $id = $request->input('id');
-        $title = $request->input('title');
-        $content = $request->input('content');
-        $post = Post::find($id); // Sử dụng find() để tìm Post với id tương ứng
+            $id = $request->input('id');
+            $title = $request->input('title');
+            $content = $request->input('content');
+            $post = Post::find($id); // Sử dụng find() để tìm Post với id tương ứng
 
-        if ($post) {
-            // Kiểm tra xem Post có tồn tại không
-            $post->title = $title;
-            $post->content = $content;
-            $post->save();
-            return redirect()->back()->with('success', 'Cập nhật bài viết thành công!');
+            if ($post) {
+                // Kiểm tra xem Post có tồn tại không
+                $post->title = $title;
+                $post->content = $content;
+                $post->save();
+                return redirect()->back()->with('success', 'Cập nhật bài viết thành công!');
+            } else {
+                return redirect()
+                    ->back()
+                    ->withErrors(['error' => 'Không tìm thấy bài viết'])
+                    ->withInput();
+                // Thêm withInput() để giữ lại dữ liệu trong form sau khi chuyển hướng
+            }
         } else {
-            return redirect()
-                ->back()
-                ->withErrors(['error' => 'Không tìm thấy bài viết'])
-                ->withInput();
-            // Thêm withInput() để giữ lại dữ liệu trong form sau khi chuyển hướng
+            return back()->withErrors('Bạn phải đăng nhập!');
         }
-    } else {
-        return back()->withErrors('Bạn phải đăng nhập!');
-    }
     }
 
     public function dpMemberUpdate(Request $request)
@@ -432,6 +452,30 @@ class AdminController extends Controller
         return redirect('/home')->with('message', 'Bạn đã đăng xuất thành công');
     }
 
-    
+    public function memberUserChart()
+    {
+        $name = 'Thành viên';
+        $type = 'bar';
+        $startDate = Carbon::now()->subWeek()->startOfWeek(); // Ngày đầu tuần trước
+        $endDate = Carbon::now()->subWeek()->endOfWeek(); // Ngày cuối tuần trước
 
+        $newAccounts = User::whereBetween('joindate', [$startDate, $endDate])
+            ->selectRaw('DATE(joindate) as join_date, COUNT(*) as count')
+            ->groupBy('join_date')
+            ->get()
+            ->pluck('count')
+            ->toArray();
+
+        $postCounts = Post::whereBetween('create_date', [$startDate, $endDate])
+            ->selectRaw('DAYOFWEEK(create_date) as day_of_week, COUNT(*) as count')
+            ->groupBy('day_of_week')
+            ->orderBy('day_of_week')
+            ->get()
+            ->pluck('count')
+            ->toArray();
+        $chart = new memberUser();
+        $chart->labels(['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật']);
+        $chart->dataset($name, $type, $newAccounts);
+
+    }
 }
