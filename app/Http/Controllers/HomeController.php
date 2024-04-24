@@ -36,6 +36,7 @@ class HomeController extends Controller
     }
     public function displayInfor(Request $request)
     {
+        
         $username = $request->session()->get('username'); // Lấy giá trị 'username' từ session
         $user = User::where('Username', $username)->first();
 
@@ -53,7 +54,7 @@ class HomeController extends Controller
     //
     public function homeTopic()
     {
-
+        $this->showTopic();
         $this->showStatistics();
         $topics = Topic::paginate(10); // Thay thế getAllTopics() bằng paginate(10)
 
@@ -64,6 +65,7 @@ class HomeController extends Controller
 
     public function indexD()
     {
+        $this->showTopic();
         $this->showStatistics();
         $documents = Documents::paginate(10); // Thay thế getAllDocuments() bằng paginate(10)
         return view('home.indexdoc', [
@@ -73,6 +75,7 @@ class HomeController extends Controller
 
     public function index(){
         $this->showStatistics();
+        $this->showTopic();
         
         $adminController = new AdminController();
         $adminController->totalCount();
@@ -83,6 +86,13 @@ class HomeController extends Controller
             'posts' => $posts,
         ]);
     }
+
+
+    public function showTopic()
+    {
+        $topics=Topic::take(4)->get();
+        Session::put('topics', $topics);
+    }    
     public function search(Request $request)
     {
         // Lấy từ khóa tìm kiếm từ request
