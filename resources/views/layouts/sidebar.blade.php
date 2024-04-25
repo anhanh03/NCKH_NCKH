@@ -18,10 +18,9 @@
     <div class="categori-part329">
         <h4>Danh mục</h4>
         <ul>
-            <li><a href="#">Phát triển nền tảng web</a></li>
-            <li><a href="#">Phát triển ứng dụng android</a></li>
-            <li><a href="#">Thiết kế đồ họa</a></li>
-            <li><a href="#">Phát triển ứng dụng máy tính</a></li>
+            @foreach(session('topics') as $topic)
+                <li><a href="{{ route('displayTitlePost', ['id' => $topic->ID]) }}" target="_blank">{{ $topic->TopicName }}</a></li>
+            @endforeach
         </ul>
     </div>
     <!--             social part -->
