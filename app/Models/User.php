@@ -39,6 +39,7 @@ class User extends Authenticatable
         'ID_role',
         'joindate',
         'active_dowload',
+        'google_id',
     ];
 
     /**

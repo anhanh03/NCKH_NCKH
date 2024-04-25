@@ -26,11 +26,11 @@
                 {{-- aloalo --}}
                 <div class="col-md-9">
                     <div id="main">
-                        <input id="tab1" type="radio" name="tabs" checked>
+                        <input id="tab1" type="radio" name="tabs" >
                         <label for="tab1"><a style="color: #bbb" href="{{ route('home') }}">Bài viết</a></label>
                         <input id="tab2" type="radio" name="tabs">
                         <label for="tab2"><a style="color: #bbb" href="{{ route('homeD') }}">Tài liệu</a></label>
-                        <input id="tab3" type="radio" name="tabs">
+                        <input id="tab3" type="radio" name="tabs" checked>
                         <label for="tab3">Chủ đề</label>
                         {{-- <input id="tab4" type="radio" name="tabs">
                         <label for="tab4">No Answer</label>

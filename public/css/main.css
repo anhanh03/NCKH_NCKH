@@ -463,7 +463,7 @@ hr {
     cursor: pointer;
 }
 
-/* #main>input:checked + label {
+#main>input:checked + label {
     color: #555;
     border: 1px solid #FF7361;
     border-top: 2px solid #FF7361;
@@ -471,6 +471,7 @@ hr {
     background-color: #FF7361;
 }
 
+/*
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
 #tab3:checked ~ #content3,
