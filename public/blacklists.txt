@@ -56,9 +56,7 @@ Rẻ rách
 Đái
 Rắc rối
 Điếm
-Lỗ lồn
 Đĩ
-Đầu lồn
 Thằng chó
 Thằng khốn
 Đĩ mõm
@@ -125,7 +123,6 @@ dmcm
 dmcs
 cmt
 tnc
-th
 tm
 cđ
 Cặc
@@ -144,6 +141,106 @@ Rắc rối
 Điếm
 Láu cá
 Điếng
-Lỗ lồn
 Đĩ
 Đầu lồn
+
+cặc
+lồn
+địt
+đụ
+cứt
+con đĩ
+lồn cái
+phò
+bướm
+đậu má
+rẻ rách
+đái
+rắc rối
+điếm
+láu cá
+điếng
+lỗ lồn
+đĩ
+rối
+thằng chó
+thằng khốn
+đĩ mõm
+cái lồn
+cái mẹ
+buồi
+đái dầm
+lừa
+phò mã
+quần áo rách
+cặc to
+đụ má
+đậu
+bê đê
+điếc
+cuối đời
+rượu nồng
+nút lưỡi
+rẻ tiền
+xấu
+chó chết
+lồn bỏng
+đen
+cà vạt
+xẻng
+tạt
+tăng
+cóc
+dạ dày
+đầu lưỡi
+đầu óc
+nấm lồn
+lắm mồm
+đại gia
+lịch sự
+đái ra
+đái vào
+chích
+chó chết
+lồn ngựa
+vỡ lồn
+đụ má mày
+cặc
+lồn
+địt
+đụ
+cứt
+con đĩ
+lồn cái
+phò
+thúi
+bướm
+đậu má
+rẻ rách
+đái
+rắc rối
+điếm
+lỗ lồn
+đĩ
+đầu lồn
+thằng chó
+thằng khốn
+đĩ mõm
+cái lồn
+cái mẹ
+buồi
+đái dầm
+quần áo rách
+cặc to
+đụ má
+bê đê
+nút lưỡi
+địt mẹ
+đau bổng
+đít nhau
+mặc cả
+địt cha
+đụ má mày
+bắc kỳ
+nam kỳ
+trung kỳ

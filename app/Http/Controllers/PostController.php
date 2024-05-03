@@ -33,7 +33,7 @@ class PostController extends Controller
 
     public function displayPost()
     {
-        $this->showTopic();
+        // $this->showTopic();
         $ID = request()->input('idpost');
 
         $post = Post::getPostById($ID);

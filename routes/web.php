@@ -53,15 +53,12 @@ Route::get('/signup', [UserController::class, 'signup'])->name('signup');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 // đăng nhập đăng ký FB, Google
-Route::get('/auth/facebook/callback', function () {
-    return 'callback login fb';
-});
 
 Route::get('//auth/facebook/callback', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/auth/facebook', function () {
-//     return Socialite::driver('facebook')->redirect();
-// })->name('fblogin');
+Route::get('/auth/facebook', function () {
+    return Socialite::driver('facebook')->redirect();
+})->name('fblogin');
 
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
