@@ -19,8 +19,8 @@
         <div class="container">
             <h3>Tài liệu</h3>
             <ol class="breadcrumb breadcrumb839">
-                <li><a href="{{Route('home')}}">Trang chủ</a></li>
-                <li><a href="{{Route('homeD')}}">Tài liệu</a></li>
+                <li><a href="{{ Route('home') }}">Trang chủ</a></li>
+                <li><a href="{{ Route('homeD') }}">Tài liệu</a></li>
                 <li class="active">title</li>
             </ol>
         </div>
@@ -38,14 +38,14 @@
                             <td>
                                 <div class="row" style="margin: 10px 0px">
                                     <div class="col-md-12">
-                                        <i class="fa fa-folder" aria-hidden="true" style="margin: 10px 0px">Nguồn</i><br>
-                                        <a href="#">Tên Sourse</a>
+                                        <i class="fa fa-folder" aria-hidden="true" style="margin: 10px 0px"> Tác Giả</i><br>
+                                        <a href="#">{{ $document->Author }}</a>
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 10px 0px">
                                     <div class="col-md-12">
-                                        <i class="fa fa-university" aria-hidden="true">Trường đại học</i><br>
-                                        <a href="#">Tên Trường đại học</a>
+                                        <i class="fa fa-university" aria-hidden="true"> Mô tả</i><br>
+                                        <a href="#">{{ $document->Description }}</a>
                                     </div>
                                 </div>
                             </td>
@@ -131,8 +131,8 @@
                                 </a> --}}
 
                                 @if ($remaining_downloads == 1)
-                                    <a type="button" href="{{ route('Dowload.Document', ['id' => $document->ID]) }}" class="btn btn-primary"
-                                        style="margin: 0 8px;">
+                                    <a type="button" href="{{ route('Dowload.Document', ['id' => $document->ID]) }}"
+                                        class="btn btn-primary" style="margin: 0 8px;">
                                         <i class="fa fa-download" aria-hidden="true"></i> Tải về
                                     </a>
                                 @else
@@ -170,12 +170,31 @@
 
 
 
-                                <a href="" style="margin: 0 8px;"><i class="fa fa-thumbs-up"
+                                <a href="#" style="margin: 0 8px;"><i class="fa fa-thumbs-up"
                                         aria-hidden="true"></i>Thích</a>
-                                <a href="" style="margin: 0 8px;"><i class="fa fa-save"
+                                <a href="#" style="margin: 0 8px;"><i class="fa fa-save"
                                         aria-hidden="true"></i>Lưu</a>
-                                <a href="" style="margin: 0 8px;"><i class="fa fa-share"
-                                        aria-hidden="true"></i>Chia sẻ</a>
+                                <!-- Nút chia sẻ -->
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::url()) }}"
+                                    style="margin: 0 8px;" target="_blank">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i> Chia sẻ Facebook
+                                </a>
+
+                                <!-- Nút sao chép liên kết -->
+                                <a href="javascript:void(0)" onclick="copyLink()" style="margin: 0 8px;">
+                                    <i class="fa fa-copy" aria-hidden="true"></i> Sao chép link
+                                </a>
+                                
+                                <script>
+                                function copyLink() {
+                                    var url = window.location.href; // Lấy đường dẫn hiện tại của trang
+                                    navigator.clipboard.writeText(url); // Sao chép liên kết vào clipboard
+                                    alert("Đã sao chép liên kết!");
+                                }
+                                </script>
+                                
+
+
                             </ul>
                         </div>
                     </div>
