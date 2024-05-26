@@ -37,6 +37,8 @@ class PostController extends Controller
         $ID = request()->input('idpost');
 
         $post = Post::getPostById($ID);
+        $post->count_view += 1;
+        $post->save();
 
         $comments = Comment::getCommentByPostId($ID);
         $commentsWithUsernames = [];

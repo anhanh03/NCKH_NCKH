@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@php
+    use Carbon\Carbon;
+@endphp
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -51,8 +54,8 @@
                                 <div class="l-side2023"> <i class="fa fa-check check2" aria-hidden="true"> (kiểm duyệt)</i> <a href="#"><i class="fa fa-star star2"
                                             aria-hidden="true"> 5</i></a> <i class="fa fa-folder folder2"
                                         aria-hidden="true"> wordpress</i> <i class="fa fa-clock-o clock2"
-                                        aria-hidden="true"> Thời gian đăng</i> <a href="#"><i
-                                            class="fa fa-commenting commenting2" aria-hidden="true"> 5 trả lời</i></a> <i
+                                        aria-hidden="true"> Thời gian đăng  {{ Carbon::parse($post->create_date)->diffForHumans() }}</i> <a href="#"><i
+                                            class="fa fa-commenting commenting2" aria-hidden="true"> </i></a> <i
                                         class="fa fa-user user2" aria-hidden="true"> {{ $post->count_view }}</i> </div>
                                 <div class="l-rightside39">
                                     <button type="button" class="tolltip-button thumbs-up2" data-toggle="tooltip"

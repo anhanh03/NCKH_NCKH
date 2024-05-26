@@ -46,6 +46,12 @@
                                 <div id="documentList">
                                     <div class="question-type2033">
                                         <div class="row">
+                                            <div class="col-md-1">
+                                                <div class="left-user12923 left-user12923-repeat">
+                                                    <a href="#"><img src="img/images.png" alt="image"> </a> <a
+                                                        href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
                                             <div class="col-md-9">
                                                 <div class="right-description893">
                                                     <div id="que-hedder2983">
