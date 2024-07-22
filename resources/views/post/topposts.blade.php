@@ -17,11 +17,15 @@
         </div>
     @endif
     <section class="main-content920">
-        <div class="container">
-            <div class="row">
+        <div class="container" >
+            <div class="row" >
+                
                 <div class="col-md-9">
                     {{-- <section id="content1"> --}}
                     <!--Recent Question Content Section -->
+                    <div class="" style="height: 7em">
+                        <label for="" style="font-size: 40px; color: rgb(59, 48, 48)">Top bài viết    <i class="fa fa-free-code-camp" aria-hidden="true"></i></label>
+                    </div>
                     @if ($posts)
                             @foreach ($posts as $post)
                             <div class="question-type2033">

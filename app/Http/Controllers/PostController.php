@@ -31,6 +31,21 @@ class PostController extends Controller
         }
     }
 
+    public function topPost()
+    {
+        // Truy vấn để lấy các bài đăng có lượt view cao nhất, giới hạn 10 bài
+        $customQuery = DB::table('post')->select('*')->orderBy('count_view', 'desc');
+        $paginatedPosts = $customQuery->paginate(10);
+
+        if ($paginatedPosts) {
+            return view('post.topposts', ['posts' => $paginatedPosts]);
+        } else {
+            return 'lỗi rồi';
+        }
+
+       
+    }
+
     public function displayPost()
     {
         // $this->showTopic();

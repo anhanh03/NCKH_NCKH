@@ -12,21 +12,26 @@ use App\Models\Comment;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use App\Http\Controllers\HomeController;
 
 class DocumentsController extends Controller
 {
     protected $userController;
-    public function __construct(UserController $userController)
+    protected $homeController;
+    public function __construct(UserController $userController,HomeController $homeController)
     {
         $this->userController = $userController;
+        $this->homeController = $homeController;
     }
 
+    
     public function getByTopicId($topicId)
     {
         $documents = Documents::getByTopicId($topicId);
         return response()->json($documents);
     }
 
+    
     public function showCreate()
     {
         return view('document.createDocument');
@@ -299,7 +304,7 @@ class DocumentsController extends Controller
         $documents = Documents::paginate(10);
         return response()->json($documents);
     }
-
+    
     public function report(Request $request)
     {
         if ($this->userController->isLoggedIn()) {
@@ -354,5 +359,21 @@ class DocumentsController extends Controller
 
         // Redirect đến đường dẫn lưu trữ của tài liệu để bắt đầu quá trình tải xuống
         return view('document.checkDowload',['document'=>$document]);
+    }
+
+    public function topDocument()
+    {
+        $this->homeController->showTopic();
+        $this->homeController->showStatistics();
+
+        // Truy vấn để lấy các bài đăng có lượt view cao nhất, giới hạn 10 bài
+        $customQuery = DB::table('documents')->select('*')->orderBy('count_view', 'desc');
+        $documents = $customQuery->paginate(10);
+
+        if ($documents) {
+            return view('document.document', ['documents' => $documents]);
+        } else {
+            return 'lỗi rồi';
+        }
     }
 }

@@ -131,6 +131,20 @@ Route::get('/topic-suggestions', function (Request $request) {
     return response()->json($topics);
 });
 
+
+Route::get('top-post',function (Request $request){
+
+});
+Route::get('top-document',function (Request $request){
+    
+});
+Route::get('/top-post', [PostController::class, 'topPost'])->name('toppost');
+Route::get('/top-document', [DocumentsController::class, 'topDocument'])->name('topdocument');
+
+
+
+
+
 Route::get('chinh-sach-rieng-tu', function (Request $request) {
     return view('help.privacy');
 })->name("privacy");

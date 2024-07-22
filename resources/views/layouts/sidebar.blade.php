@@ -5,7 +5,8 @@
         <ul>
             <li><a href="{{route('displayAddPost')}}">Tạo bài đăng</a></li>
             <li><a href="{{route('showCreateDocument')}}">Đăng tài liệu</a></li>
-            
+            <li><a href="{{route('toppost')}}">Top bài viết</a></li>
+            <li><a href="{{route('topdocument')}}">Top tài liệu</a></li>
         </ul>
     </div>
     <div class="status-part3821">
